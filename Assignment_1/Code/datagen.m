@@ -1,8 +1,8 @@
-sigma = 0.1; % Need to set this
+function [train,val,test] = datagen(sigma,N)
 
-train = zeros(100,2);
-val = zeros(50,2);
-test = zeros(50,2);
+train = zeros(floor(N/2),2);
+val = zeros(floor(N/4),2);
+test = zeros(floor(N/4),2);
 
 for i = 1:size(train,1)
     x = rand();

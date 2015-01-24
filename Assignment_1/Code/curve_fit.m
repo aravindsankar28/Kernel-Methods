@@ -1,16 +1,17 @@
 function coeffs = curve_fit(train,M,lambda)
 
-x = zeros(size(train,1),M+1);
+x = zeros(size(train,1),M);
 
 for i = 1:size(train,1)
-    for j = 1:(M+1)
+    for j = 1:M
         x(i,j) = train(i,1)^(M+1-j);
     end
 end
 
+%The final result has the coefficients in the reversed order, first x^M,
+%then x^M-1 and so on till the constant term
+w = ridge(train(:,2),x,lambda,0);
+w0 = w(1);
+w = vec2mat(w,size(w,1));
+coeffs = [w(2:size(w,2)),w0];
 
-b = ridge(train(:,2),x,lambda,0);
-% Note that b(1) includes a constant term in itself.. So we add it our
-% term.
-coeffs = b(2:length(b))';
-coeffs(end) = coeffs(end) + b(1);
