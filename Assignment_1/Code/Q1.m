@@ -22,12 +22,12 @@ M_values = [0,1,3,9,15,200];
 for i = 1:length(M_values)
     
     coeffs = curve_fit(train_100,M_values(i),lambda);  
-    x1 = 0:.001:1;     
+    x = 0:.001:1;     
     y1 = exp(cos(2*pi*x1));
     y2 = polyval(coeffs,x1);
     figure
     
-    plot(train_100(:,1),train_100(:,2),'go',x1,y1,'b',x1,y2,'r'), axis([0,1,0,3]);
+    plot(train_100(:,1),train_100(:,2),'go',x,y1,'b',x,y2,'r'), axis([0,1,0,3]);
 end
 
 %coeffs = curve_fit([0:0.1:1],3);
