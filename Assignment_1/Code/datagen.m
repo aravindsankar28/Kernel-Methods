@@ -1,5 +1,7 @@
 function [train,val,test] = datagen(sigma,N)
 
+%N represents the size of the training dataset
+
 train = zeros(floor(N/2),2);
 val = zeros(floor(N/4),2);
 test = zeros(floor(N/4),2);
