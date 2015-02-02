@@ -27,5 +27,5 @@ if (index == 3)
 end
 
 
-Plot_fn = 0;
+Plot_fn_1 = 0;
 

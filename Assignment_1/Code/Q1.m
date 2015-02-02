@@ -19,7 +19,7 @@ train_1000 = samplePoints(sigma,1000);
 %fplot(fn,[0,1]);
 
 lambda = 0.0;
-M_values = [0,1,3,9,15,200];
+M_values = [2,3,5,7,10,15];
 
 
 % Plots on varying M - note lambda = 0 here
@@ -75,7 +75,77 @@ end
 
 val_error
 %}
-
+%{
 for i=1:length(lambda_values)
     Plot_fn_1(train_20,M,lambda_values(i),3);
 end
+%}
+
+
+
+
+
+%%%%%%%%%%%%RMS ERROR PLOTS%%%%%%%%%
+
+
+
+%for train_20
+
+cc = hsv(length(M_values));
+train_rms = [];
+test_rms = [];
+val_rms = [];
+%figrms_test = figure('Name','RMS error on test set for train_20');
+for i=1:length(M_values)
+    
+    for j=1:length(lambda_values)
+        [rtrain,rtest,rval] = rmserr_Q1(train_20,testSet,validationSet,M_values(i),lambda_values(j));
+        train_rms = [train_rms,rtrain];
+        test_rms = [test_rms,rtest];
+        val_rms = [val_rms,rval];
+    end        
+end
+
+train_rms = vec2mat(train_rms,length(lambda_values));
+test_rms = vec2mat(test_rms,length(lambda_values));
+val_rms = vec2mat(val_rms,length(lambda_values));
+
+figure(1)
+hold on;
+for var = 1:size(train_rms,1)
+plot(lambda_values,train_rms(var,:),'color',cc(var,:),'DisplayName',int2str(M_values(var)));
+end
+hold off;
+title('RMSE on train data of 20 pts, plots for different complexities')
+ylabel('RMS error');
+xlabel('Regularization parameter');
+legend('show');
+saveas(gcf,'Plots_1/RMS/20_train.png');
+clf;
+
+figure(1)
+hold on;
+for var = 1:size(test_rms,1)
+plot(lambda_values,test_rms(var,:),'color',cc(var,:),'DisplayName',int2str(M_values(var)));
+end
+hold off;
+title('RMSE on test data,model trained on 20 pts, plots for different complexities')
+ylabel('RMS error');
+xlabel('Regularization parameter');
+legend('show');
+saveas(gcf,'Plots_1/RMS/20_test.png');
+clf;
+
+
+
+figure(1)
+hold on;
+for var = 1:size(val_rms,1)
+plot(lambda_values,val_rms(var,:),'color',cc(var,:),'DisplayName',int2str(M_values(var)));
+end
+hold off;
+title('RMSE on validation data,model trained on 20 pts, plots for different complexities')
+ylabel('RMS error');
+xlabel('Regularization parameter');
+legend('show');
+saveas(gcf,'Plots_1/RMS/20_val.png');
