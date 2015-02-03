@@ -22,31 +22,40 @@ lambda = 0.0;
 %M_values = [2,3,5,7,10,15];
 M_values = [0,1,3,9,15];
 
-cc = hsv(length(M_values));
+cc = hsv(length(M_values)+2);
+a = cc(1,:);
+cc(1,:) = cc(3,:);
+cc(3,:) = a;
 % Plots on varying M - note lambda = 0 here
-k = 0;
-colorstring = 'krmcy';
-legend_names=cell(1,2);
-for i = 1:length(M_values)
-    
-    % Use Plot_fn as pass 1 as the last param
-    %Plot_fn_1(train_20,M_values(i),lambda,1);
-    
+
+% legend_names=cell(1,4);
+% x = 0:.001:1;       
+% y1 = exp(cos(2*pi*x));
+% plot(train_100(:,1),train_100(:,2),'o','color',cc(1,:));
+% hold on;
+% plot(x,y1,'color',cc(2,:));
+% hold on;
+% legend_names{1} = 'Data points';
+% legend_names{2} = 'Target function';
+% for i = 1:length(M_values)    
 %      coeffs = curve_fit(train_100,M_values(i),lambda);  
 %      x = 0:.001:1;       
 %      y1 = exp(cos(2*pi*x));
 %      y2 = polyval(coeffs,x);
-% %     fig1 = figure;
-%      plot(train_100(:,1),train_100(:,2),'go',x,y1,'b',x,y2,colorstring(i)), axis([0,1,0,3]);
-%      xlabel('x');
-%      hold on;
+% 
+%      plot(x,y2,'color',cc(i+2,:)), axis([0,1,0,3]);
+%       xlabel('x');
+%       hold on;  
+%      legend_names{i+2} = strcat('M = ',int2str(M_values(i)));
 %      
-%     legend_names{i} = int2str(M_values(i));
-%     % Set appropriate legend here
-     %legend('Data points','t','y(x,w)');
+%  end
+% legend(legend_names);
 
-    
-end
+
+
+%for i = 1:length(M_values)
+%    Plot_fn_1(train_1000,M_values(i),lambda,1);
+%end
 
 
 %
@@ -57,10 +66,10 @@ end
 % Change M for different set  - use Plot_fn function and pass 2 as the last
 % param
 M = 15;
-
-%Plot_fn_1(train_20,M,0,2);
-%Plot_fn_1(train_100,M,0,2);
-%Plot_fn_1(train_1000,M,0,2);
+% 
+% Plot_fn_1(train_20,M,0,2);
+% Plot_fn_1(train_100,M,0,2);
+% Plot_fn_1(train_1000,M,0,2);
 
 
 % Todo - varying lambda .
