@@ -4,7 +4,7 @@
 % M           - model complexity
 % lambda      - array of values to test for regularization
 
-lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,2,5];
+lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1];
 sigma = 0.1;
 
 validationSet = samplePoints(sigma,50);
@@ -19,38 +19,48 @@ train_1000 = samplePoints(sigma,1000);
 %fplot(fn,[0,1]);
 
 lambda = 0.0;
-M_values = [2,3,5,7,10,15];
+%M_values = [2,3,5,7,10,15];
+M_values = [0,1,3,9,15];
 
-
+cc = hsv(length(M_values));
 % Plots on varying M - note lambda = 0 here
+k = 0;
+colorstring = 'krmcy';
+legend_names=cell(1,2);
 for i = 1:length(M_values)
     
     % Use Plot_fn as pass 1 as the last param
-    %Plot_fn_1(train_1000,M_values(i),lambda,1);
+    %Plot_fn_1(train_20,M_values(i),lambda,1);
     
-%     coeffs = curve_fit(train_100,M_values(i),lambda);  
-%     x = 0:.001:1;       
-%     y1 = exp(cos(2*pi*x));
-%     y2 = polyval(coeffs,x);
-%     fig1 = figure;
-%     
-%     plot(train_100(:,1),train_100(:,2),'go',x,y1,'b',x,y2,'r'), axis([0,1,0,3]);
-%     xlabel('x');
+%      coeffs = curve_fit(train_100,M_values(i),lambda);  
+%      x = 0:.001:1;       
+%      y1 = exp(cos(2*pi*x));
+%      y2 = polyval(coeffs,x);
+% %     fig1 = figure;
+%      plot(train_100(:,1),train_100(:,2),'go',x,y1,'b',x,y2,colorstring(i)), axis([0,1,0,3]);
+%      xlabel('x');
+%      hold on;
+%      
+%     legend_names{i} = int2str(M_values(i));
 %     % Set appropriate legend here
-%     legend('Data points','t','y(x,w)');
-%     saveas(fig1,strcat('Plots_1/Varying_M_',int2str(M_values(i)),'.png')); 
+     %legend('Data points','t','y(x,w)');
+
     
 end
+
+
+%
+%saveas(gcf,strcat('Plots_1/Varying_M/',int2str(length(train_20)),'.png'));
 
 % On varying train set size for some value of M - note lambda = 0 here
 
 % Change M for different set  - use Plot_fn function and pass 2 as the last
 % param
-M = 9;
+M = 15;
 
-% Plot_fn_1(train_20,M,0,2);
-% Plot_fn_1(train_100,M,0,2);
-% Plot_fn_1(train_1000,M,0,2);
+%Plot_fn_1(train_20,M,0,2);
+%Plot_fn_1(train_100,M,0,2);
+%Plot_fn_1(train_1000,M,0,2);
 
 
 % Todo - varying lambda .
@@ -75,15 +85,18 @@ end
 
 val_error
 %}
-%{
+
+
+M = 9;
+
 for i=1:length(lambda_values)
     Plot_fn_1(train_20,M,lambda_values(i),3);
 end
-%}
 
 
 
 
+return;
 
 %%%%%%%%%%%%RMS ERROR PLOTS%%%%%%%%%
 
