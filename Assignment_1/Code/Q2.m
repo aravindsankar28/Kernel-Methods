@@ -1,5 +1,6 @@
-N = 20; % training set size
-M = 5;  % no of basis functions
+N_values = [20,100,1000]; % training set size
+M_values = [3,9,15,200];  % no of basis functions
+lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,2,5]; % regularization parameter
 
 % read in training dataset 
 fId = fopen(strcat('../Data/group2/bivariateData/group2_train',num2str(N),'.txt'),'r');
@@ -19,24 +20,19 @@ sizeTest = [200 3];
 testSet = fscanf(fId,'%f %f %f',sizeTest);
 fclose(fId);
 
-% perform k-means clustering
-[idx,centroids] = kmeans(trainSet(:,1:2),M);
+% Plots on varying M - note lambda = 0 here
+N_values = [20]; % training set size
+M_values = [3,9,15,200];  % no of basis functions
 
-% setting width parameter: 
-% http://chem-eng.utoronto.ca/~datamining/dmc/artificial_neural_network_rbf.htm
-[IDX,D] = knnsearch(centroids,centroids,'K',3);
-widthParam = (D(:,2)+D(:,3))/2; % s is set to be the average distance from the two nearest neighboring cluster centers
-
-% constructing design matrix
-designMat = zeros(N,M);
-for i=1:N
-    for j=1:M
-        designMat(i,j) = exp(-norm(trainSet(i,1:2)-centroids(j,:))^2)/widthParam(j,1);
+target_output = trainSet(:,3);
+for i = 1:length(N_values)
+    for j = 1:length(M_values)
+        [coeffs,designMat,centroids,widthParam] = surface_fit(trainSet,N_values(i),M_values(j),0);
+        model_output = designMat*coeffs;
+        
+        fig1 = figure;
+        plot3(trainSet(:,1),trainSet(:,2),trainSet(:,3),'ro',trainSet(:,1),trainSet(:,2),trainSet(:,3),'bo');
+        %, axis([-90,130,-20,150,-10,80]
+        legend('t','y(x,w)');
     end
 end
-
-% estimating coefficients
-coeffs = pinv(designMat)*trainSet(:,3);
-
-model_output = designMat*coeffs;
-target_output = trainSet(:,3);
