@@ -6,6 +6,7 @@ function [coeffs,designMat,centroids,widthParam] = surface_fit(trainSet,N,M,lamb
 % setting width parameter: 
 % http://chem-eng.utoronto.ca/~datamining/dmc/artificial_neural_network_rbf.htm
 [IDX,D] = knnsearch(centroids,centroids,'K',3);
+
 widthParam = (D(:,2)+D(:,3))/2; % s is set to be the average distance from the two nearest neighboring cluster centers
 
 % constructing design matrix
@@ -17,4 +18,8 @@ for i=1:N
 end
 
 % estimating coefficients
-coeffs = pinv(designMat)*trainSet(:,3);
+if lambda ==0
+    coeffs = pinv(designMat)*trainSet(:,3);
+else
+    coeffs = inv((designMat'*designMat)+(lambda*eye(M)))*designMat'*trainSet(:,3);
+end

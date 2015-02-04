@@ -1,13 +1,21 @@
 N_values = [20,100,1000]; % training set size
-M_values = [3,9,15,200];  % no of basis functions
+M_values = [3,5,7,9,11,15,30,50];  % no of basis functions
 lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,2,5]; % regularization parameter
 
-N = 100;
+% read in training datasets 
+fId = fopen('../Data/group2/bivariateData/group2_train20.txt','r');
+sizeTrain = [20 3];
+trainSet_20 = fscanf(fId,'%f %f %f',sizeTrain);
+fclose(fId);
 
-% read in training dataset 
-fId = fopen(strcat('../Data/group2/bivariateData/group2_train',num2str(N),'.txt'),'r');
-sizeTrain = [N 3];
-trainSet = fscanf(fId,'%f %f %f',sizeTrain);
+fId = fopen('../Data/group2/bivariateData/group2_train100.txt','r');
+sizeTrain = [100 3];
+trainSet_100 = fscanf(fId,'%f %f %f',sizeTrain);
+fclose(fId);
+
+fId = fopen('../Data/group2/bivariateData/group2_train1000.txt','r');
+sizeTrain = [1000 3];
+trainSet_1000 = fscanf(fId,'%f %f %f',sizeTrain);
 fclose(fId);
 
 % read in validation dataset 
@@ -22,6 +30,7 @@ sizeTest = [200 3];
 testSet = fscanf(fId,'%f %f %f',sizeTest);
 fclose(fId);
 
+%{
 % Plots on varying M - note lambda = 0 here
 N_values = [100]; % training set size
 M_values = [5];  % no of basis functions
@@ -51,3 +60,60 @@ for i = 1:length(N_values)
         %legend('t','y(x,w)');
     end
 end
+%}
+
+%%%%%%%%%%%%RMS ERROR PLOTS%%%%%%%%%
+
+% RMSE vs complexity 
+
+%{
+train_rms = [];
+test_rms = [];
+val_rms = [];
+
+for i=1:length(M_values)
+    [rtrain,rtest,rval] = rmserr_Q2_M(trainSet_1000,testSet,valSet,M_values(i),lambda_values);
+    train_rms = [train_rms,rtrain];
+    test_rms = [test_rms,rtest];
+    val_rms = [val_rms,rval];        
+end
+
+figure(1)
+hold on;
+plot(M_values,train_rms,'color','b','DisplayName','train');
+plot(M_values,test_rms,'color','r','DisplayName','test');
+plot(M_values,val_rms,'color','g','DisplayName','val');
+hold off;
+title('RMSE vs complexity')
+ylabel('RMS error');
+xlabel('Model Complexity');
+legend('show');
+saveas(gcf,'Plots_2/RMS/RMS_complexity_1000.png');
+%}
+
+% RMSE vs lambda
+
+train_rms = [];
+test_rms = [];
+val_rms = [];
+for i=1:length(lambda_values)
+    [rtrain,rtest,rval] = rmserr_Q2_lambda(trainSet_1000,testSet,valSet,M_values,lambda_values(i));
+    train_rms = [train_rms,rtrain];
+    test_rms = [test_rms,rtest];
+    val_rms = [val_rms,rval];        
+end
+
+figure(1)
+hold on;
+log_lambda_values = log(lambda_values);
+
+plot(log_lambda_values,train_rms,'color','b','DisplayName','train');
+plot(log_lambda_values,test_rms,'color','r','DisplayName','test');
+plot(log_lambda_values,val_rms,'color','g','DisplayName','val');
+hold off;
+title('RMSE vs log(lambda)')
+ylabel('RMS error');
+xlabel('log(lambda)');
+legend('show');
+saveas(gcf,'Plots_2/RMS/RMS_lambda_1000.png');
+
