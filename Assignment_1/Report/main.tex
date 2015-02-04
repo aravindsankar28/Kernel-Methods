@@ -351,11 +351,171 @@ The plots below show the scatter plots obtained on varying $\lambda$, for $N = 2
 \section{Dataset 2}
 
 \subsection{Generation}
-
+Here, we are given the dataset which is bivariate (2 input variables and 1 output variable). 3 different training sets are present, of sizes 20, 100 and 1000. The test and validation sets are of size 200 and 300 respectively.
 \subsection{Model creation}
+
+TODO - Do we need to put formulas ?
+
+
 \subsection{Results}
 
-\subsection{Plots of approximated functions}
 
+\subsection{Surface Plots of approximated functions - Question 2}
+\begin{flushleft}
+The Surface plots depict the variation of the surface fit obtained on varying the model complexity ($M$ - No. of basis functions), on the training dataset of size 100. Each plot shows the data points and the fitted surface obtained by linear model of regression on Gaussian Basis functions.
+
+\end{flushleft}
+\begin{figure}[H]
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{D2/VaryingM_N100M10}
+\caption{N = 100 M = 10}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{D2/VaryingM_N100M40}
+\caption{N = 100 M = 40}
+\end{subfigure}
+
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{D2/VaryingM_N100M80}
+\caption{N = 100 M = 80}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{D2/VaryingM_N100M100}
+\caption{N = 100 M = 100}
+\end{subfigure}
+
+
+\end{figure}
+
+\textbf{Observations : \newline}
+\begin{itemize}
+\item TODO
+\end{itemize}
+
+
+\begin{flushleft}
+The next set of surface plots show the variation surface fit on using training datasets of different sizes. Each of these plots are shown for a model complexity of $M = 100$. The training set size is varied as - 100,200,400,700 and 1000. The plot $N =100$ is excluded below, as it has been shown earlier.
+
+\end{flushleft}
+\begin{figure}[H]
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{D2/VaryingN_N200M100}
+\caption{N = 200 M = 100}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{D2/VaryingN_N400M100}
+\caption{N = 400 M = 100}
+\end{subfigure}
+
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{D2/VaryingN_N700M100}
+\caption{N = 700 M = 100}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{D2/VaryingN_N1000M100}
+\caption{N = 1000 M = 100}
+\end{subfigure}
+
+
+
+\end{figure}
+
+
+\textbf{Observations :}
+
+\begin{itemize}
+\item TODO
+\end{itemize}
+
+\begin{flushleft}
+Next, we look at the effect of the regularization parameter $\lambda$ on the surface fits obtained. The plots shown below are for $N = 100$ and $M = 100$. The reason we choose $M$ to be high, is to demonstrate the effect of overfitting.
+
+\end{flushleft}
+
+\begin{figure}[H]
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{D2/Varyinglambda_N100M100lambda1e-06}
+\caption{$\lambda$ = $10^{-6}$}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{D2/Varyinglambda_N100M100lambda0_01}
+\caption{$\lambda$ = 0.01}
+\end{subfigure}
+
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{D2/Varyinglambda_N100M100lambda1}
+\caption{$\lambda$ = 1}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{D2/Varyinglambda_N100M100lambda10}
+\caption{$\lambda$ = $10$}
+\end{subfigure}
+
+
+
+\end{figure}
+
+
+\textbf{Observations :}
+
+\begin{itemize}
+\item TODO
+\end{itemize}
+
+
+\subsection{Plots of RMS Error - Question 3}
+
+In this section , we show the variation of RMS error, w.r.t model complexity $M$. The plots shown below are for datasets of size 100 and 1000.
+Again, as earlier, for each set of plots generated on varying 1 parameter (say $M$) , the optimal value of the other parameter (say $\lambda$) is obtained by cross-validation. 
+The errors have been shown on all 3 datasets for each case (test, train and validation). 
+
+\begin{figure}[H]
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{D2/RMS_complexity_100}
+\caption{Varying M, Optimal $\lambda$, 100 train size}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+%\includegraphics[width=\linewidth]{D2/RMS_complexity_1000}
+\caption{Varying M, Optimal $\lambda$, ? train size}
+\end{subfigure}
+
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{D2/RMS_lambda_100}
+\caption{Optimal M, Varying $\lambda$, 100 train size}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+%\includegraphics[width=\linewidth]{D2/RMS_lambda_1000}
+\caption{Optimal M, Varying $\lambda$, ? train size}
+\end{subfigure}
+
+
+\textbf{Observations :}
+
+\begin{itemize}
+\item TODO
+\end{itemize}
+
+
+\end{figure}
+
+
+
+\subsection{Scatter plots of target and model output - Question 4}
 
 \end{document}
