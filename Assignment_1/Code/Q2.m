@@ -1,6 +1,6 @@
 N_values = [20,100,1000]; % training set size
 M_values = [3,5,7,9,11,15,30,50,90,99];  % no of basis functions
-lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,2,5]; % regularization parameter
+lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,10]; % regularization parameter
 
 % read in training datasets 
 fId = fopen('../Data/group2/bivariateData/group2_train20.txt','r');
@@ -11,6 +11,21 @@ fclose(fId);
 fId = fopen('../Data/group2/bivariateData/group2_train100.txt','r');
 sizeTrain = [100 3];
 trainSet_100 = fscanf(fId,'%f %f %f',sizeTrain);
+fclose(fId);
+
+fId = fopen('../Data/group2/bivariateData/group2_train200.txt','r');
+sizeTrain = [200 3];
+trainSet_200 = fscanf(fId,'%f %f %f',sizeTrain);
+fclose(fId);
+
+fId = fopen('../Data/group2/bivariateData/group2_train400.txt','r');
+sizeTrain = [400 3];
+trainSet_400 = fscanf(fId,'%f %f %f',sizeTrain);
+fclose(fId);
+
+fId = fopen('../Data/group2/bivariateData/group2_train700.txt','r');
+sizeTrain = [700 3];
+trainSet_700 = fscanf(fId,'%f %f %f',sizeTrain);
 fclose(fId);
 
 fId = fopen('../Data/group2/bivariateData/group2_train1000.txt','r');
@@ -37,7 +52,7 @@ fclose(fId);
 %{
 
 N_values = [100]; % training set size
-M_values = [100];  % no of basis functions
+M_values = [10,40,80,100];  % no of basis functions
 
 for i = 1:length(N_values)
     for j = 1:length(M_values)
@@ -78,17 +93,16 @@ end
 
 %}
 
-
 % Plots on varying N - note lambda = 0 here
 
 %{
-
-N_values = [100]; % training set size
+N_values = [100,200,400,700,1000]; % training set size
 M_values = [100];  % no of basis functions
 
 for i = 1:length(N_values)
     for j = 1:length(M_values)
         eval(sprintf('trainSet = trainSet_%d;',N_values(i)));
+        size(trainSet,1)
         [coeffs,designMat,centroids,widthParam] = surface_fit(trainSet,N_values(i),M_values(j),0);
         model_output = designMat*coeffs;
             
@@ -125,8 +139,9 @@ end
 
 %}
 
-
 % Plots on varying lambda
+
+%{
 
 N = 100; % training set size
 M = 100;  % no of basis functions
@@ -169,17 +184,21 @@ for i = 1:length(lambda_values)
     saveas(fig1,strcat('Plots_2/Varying_lambda/Varyinglambda_N',int2str(N),'M',int2str(M),'lambda',num2str(lambda),'.png'));    
 end
 
+%}
+
 %%%%%%%%%%%%RMS ERROR PLOTS%%%%%%%%%
 
 % RMSE vs complexity 
 
-%{
+M_values = [10,20,30,40,50,60,70,80,90,100];  % no of basis functions
+lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,10];
+
 train_rms = [];
 test_rms = [];
 val_rms = [];
 
 for i=1:length(M_values)
-    [rtrain,rtest,rval] = rmserr_Q2_M(trainSet_1000,testSet,valSet,M_values(i),lambda_values);
+    [rtrain,rtest,rval] = rmserr_Q2_M(trainSet_100,testSet,valSet,M_values(i),lambda_values);
     train_rms = [train_rms,rtrain];
     test_rms = [test_rms,rtest];
     val_rms = [val_rms,rval];        
@@ -195,8 +214,7 @@ title('RMSE vs complexity')
 ylabel('RMS error');
 xlabel('Model Complexity');
 legend('show');
-saveas(gcf,'Plots_2/RMS/RMS_complexity_1000.png');
-%}
+saveas(gcf,'Plots_2/RMS/RMS_complexity_100.png');
 
 % RMSE vs lambda
 

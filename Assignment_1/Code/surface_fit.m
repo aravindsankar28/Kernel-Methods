@@ -1,9 +1,9 @@
 function [coeffs,designMat,centroids,widthParam] = surface_fit(trainSet,N,M,lambda)
 
 % perform k-means clustering
-[idx,centroids] = kmeans(trainSet(:,1:2),M,'replicate',50);
+[idx,centroids] = kmeans(trainSet(:,1:2),M,'replicate',20,'EmptyAction','drop');
 
-scatter(trainSet(:,2),trainSet(:,1),[],idx);
+%scatter(trainSet(:,2),trainSet(:,1),[],idx);
 
 % setting width parameter: 
 % http://chem-eng.utoronto.ca/~datamining/dmc/artificial_neural_network_rbf.htm
