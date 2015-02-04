@@ -1,0 +1,219 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage[colorlinks]{hyperref}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{subcaption}
+\usepackage{float}
+
+\begin{document}
+\title{\textbf{CS6011: Kernel Methods for Pattern Analysis}
+\\
+\textbf{Programming Assignment 1}
+}
+\author{Aravind Sankar CS11B033 \\
+Ramnandan SK CS11B061 \\
+Adit Krishnan CS11B063 \\[0.2in]
+Group 2
+}
+\floatplacement{figure}{H}
+\maketitle
+\tableofcontents 
+\newpage
+\section{Objective of the assignment}
+The basic goal of this assignment is to use linear models of regression to do 2 Function Approximation tasks, namely Polynomial Curve fitting on Dataset 1 (univariate) and Surface Fitting using Gaussian Basis functions for Dataset 2 (bivariate). Here, the means of the Gaussians used are the centers of clusters obtained using K-means clustering of the training data. The experimental results obtained are to be summarized using plots obtained on varying different model parameters.
+\section{Dataset 1}
+
+\subsection{Generation}
+The given function to be approximated is shown below :
+
+\[ f(x) = e^{\cos(2 \pi x)} \]
+\[ x \in (0,1) \]
+
+\begin{flushleft}
+To generate points from this function, we randomly generated points $x \in (0,1)$ and found the function value $f(x)$ at each point, and added to it Gaussian Noise with mean $\mu = 0$ and standard deviation $\sigma = 0.1$. 3 different training sets were generated, of sizes 20, 100 and 1000. The size of the validation and test set generated were 50 each.
+\end{flushleft}
+
+\subsection{Model creation}
+\begin{flushleft}
+As the goal is to fit a polynomial function to the given data, we need to decide on the degree $M$ of the polynomial which decides the model complexity. 
+
+Through the plots, we show the variation of model outputs and RMS errors on varying different 
+parameters and our analysis of the results to choose the best model.
+
+\end{flushleft}
+\newpage
+\subsection{Results}
+
+\subsubsection{Plots of approximated functions}
+
+The following plots showing variation of the polynomial w.r.t degree of polynomial $M$, for training dataset of size $N = 20$. Each plot shows the data points \textcolor{green}{x}, the target function \textcolor{blue}{$f(x)$}  and the approximated polynomial \textcolor{red}{$y(x,\bar{w})$} 
+\begin{figure}[H]
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{VaryingM_N20M1}
+\caption{N = 20 M = 1}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{VaryingM_N20M3}
+\caption{N = 20 M = 3}
+\end{subfigure}
+
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{VaryingM_N20M9}
+\caption{N = 20 M = 9}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{VaryingM_N20M15}
+\caption{N = 20 M = 15}
+\end{subfigure}
+
+
+
+\end{figure}
+
+\textbf{Observations: \newline}
+\begin{itemize}
+\item We choose the 20 point train data to clearly show the overfitting problem in the absence of regularization. 
+\item Notice that the model with complexity 3 is very close to the true function.
+\item For complexities 9 and 15, The overfitting to the small number of training data points leads to significant deviation from the underlying target function.
+
+\end{itemize}
+\newpage
+\begin{flushleft}
+The following plots show the different polynomials obtained on varying the training dataset size $N$. Each of these plots are shown for 2 values of $M$, 9 and 15.
+The plots for N = 20 and these values of M has already been plotted above. So the following plots correspond to dataset sizes of 100 and 1000. 
+\end{flushleft}
+\begin{figure}[H]
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{VaryingN_N100M9}
+\caption{N = 100 M = 9}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{VaryingN_N100M15}
+\caption{N = 100 M = 15}
+\end{subfigure}
+
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{VaryingN_N1000M9}
+\caption{N = 1000 M = 9}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{VaryingN_N1000M15}
+\caption{N = 1000 M = 15}
+\end{subfigure}
+
+
+
+\end{figure}
+
+\textbf{Observations: \newline}
+\begin{itemize}
+\item Note that Model complexity M=9 almost matches the target function for both datasets since there are sufficient samples.
+\item However complexity M=15 leads to slight overfitting and hence some deviation in case of N = 100.
+\item However for the 1000 sample dataset(N = 1000) both models are almost overlapping with the target function due to the sufficiency of training points.
+\item Next we look at the effect of regularization.
+\end{itemize}
+\newpage
+
+\begin{flushleft}
+The following plots show the effects of varying the regularization parameter $\lambda$ on the curve fit. Since the overfitting effect is pronounced only for a small training set, these plots correspond to the 20 point training set and model complexity 9.
+\end{flushleft}
+\begin{figure}[H]
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{Varyinglambda_N20M9lambda0}
+\caption{$\lambda$ = 0}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{Varyinglambda_N20M9lambda1}
+\caption{$\lambda$ = 1}
+\end{subfigure}
+
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{Varyinglambda_N20M9lambda01}
+\caption{$\lambda$ = 0.1}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{Varyinglambda_N20M9lambda1e-05}
+\caption{$\lambda$ = $10^{-5}$}
+\end{subfigure}
+
+
+
+\end{figure}
+
+
+\textbf{Observations: \newline}
+\begin{itemize}
+\item We can clearly notice the overfitting when regularization is not applied($\lambda$ = 0) in the first plot.
+\item At the same time, $\lambda$ = 1 in the second plot is a very high penalization of weights again leading to a relatively poor fit since less weightage is given to the error on the training points. 
+\item The third plot corresponds to $\lambda$ = 0.1. While this leads to a better fit than either of the above, it is still a high value penalization.
+\item The last plot corresponds to $\lambda$ = $10^{-5}$. This provides the closest approximation to the true function among these 4 plots. Thus typically small values of $\lambda$ are investigated to minimize the overall error and produce the best fit, using the validation dataset. 
+\end{itemize}
+\newpage
+\begin{flushleft}
+The following plots show the RMS Error obtained on training models of different complexities and different regularization parameters on training sets of different sizes. The errors have been shown on all 3 datasets for each case (test, train and validation). The plots for 20 size training set undergo lot of variation for every new sampling due to the small size of the dataset, and have been added only for the sake of completion.
+\end{flushleft}
+\begin{figure}[H]
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{RMS_complexity_20}
+\caption{Varying M, Optimal $\lambda$, 20 train size}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{RMS_lambda_20}
+\caption{Optimal M, Varying $\lambda$, 20 train size}
+\end{subfigure}
+
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{RMS_complexity_100}
+\caption{Varying M, Optimal $\lambda$, 100 train size}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{RMS_lambda_100}
+\caption{Optimal M, Varying $\lambda$, 100 train size}
+\end{subfigure}
+
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{RMS_complexity_1000}
+\caption{Varying M, Optimal $\lambda$, 1000 train size}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{RMS_lambda_1000}
+\caption{Optimal M, Varying $\lambda$, 1000 train size}
+\end{subfigure}
+
+
+
+\end{figure}
+
+
+
+\section{Dataset 2}
+
+\subsection{Generation}
+
+\subsection{Model creation}
+\subsection{Results}
+
+\subsection{Plots of approximated functions}
+
+
+\end{document}
