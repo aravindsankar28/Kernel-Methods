@@ -58,10 +58,10 @@ cc(3,:) = a;
 % legend(legend_names);
 
 
-
-%for i = 1:length(M_values)
-%    Plot_fn_1(train_1000,M_values(i),lambda,1);
-%end
+M_values = [15];
+for i = 1:length(M_values)
+   Plot_fn_1(train_1000,M_values(i),0.0,1,validationSet,testSet);
+end
 
 
 %
@@ -136,57 +136,57 @@ end
 %test_rms = vec2mat(test_rms,length(lambda_values));
 %val_rms = vec2mat(val_rms,length(lambda_values));
 
-figure(1)
-hold on;
-%for var = 1:size(train_rms,1)
-%plot(lambda_values,train_rms(var,:),'color',cc(var,:),'DisplayName',int2str(M_values(var)));
-%end
-plot(M_values,train_rms,'color','b','DisplayName','train');
-plot(M_values,test_rms,'color','r','DisplayName','test');
-plot(M_values,val_rms,'color','g','DisplayName','val');
-hold off;
-title('RMSE vs complexity')
-ylabel('RMS error');
-xlabel('Model Complexity');
-legend('show');
-saveas(gcf,'Plots_1/RMS/RMS_complexity_20.png');
-clf;
+% figure(1)
+% hold on;
+% %for var = 1:size(train_rms,1)
+% %plot(lambda_values,train_rms(var,:),'color',cc(var,:),'DisplayName',int2str(M_values(var)));
+% %end
+% plot(M_values,train_rms,'color','b','DisplayName','train');
+% plot(M_values,test_rms,'color','r','DisplayName','test');
+% plot(M_values,val_rms,'color','g','DisplayName','val');
+% hold off;
+% title('RMSE vs complexity')
+% ylabel('RMS error');
+% xlabel('Model Complexity');
+% legend('show');
+% saveas(gcf,'Plots_1/RMS/RMS_complexity_20.png');
+% clf;
+% 
+% 
+% 
 
 
-
-
-
-
-train_rms = [];
-test_rms = [];
-val_rms = [];
-%figrms_test = figure('Name','RMS error on test set for train_20');
-for i=1:length(lambda_values)
-    [rtrain,rtest,rval] = rmserr_Q1_lambda(train_20,testSet,validationSet,M_values,lambda_values(i));
-    train_rms = [train_rms,rtrain];
-    test_rms = [test_rms,rtest];
-    val_rms = [val_rms,rval];        
-end
-
-%train_rms = vec2mat(train_rms,length(lambda_values));
-%test_rms = vec2mat(test_rms,length(lambda_values));
-%val_rms = vec2mat(val_rms,length(lambda_values));
-
-figure(1)
-hold on;
-%for var = 1:size(train_rms,1)
-%plot(lambda_values,train_rms(var,:),'color',cc(var,:),'DisplayName',int2str(M_values(var)));
-%end
-log_lambda_values = log(lambda_values);
-
-plot(log_lambda_values,train_rms,'color','b','DisplayName','train');
-plot(log_lambda_values,test_rms,'color','r','DisplayName','test');
-plot(log_lambda_values,val_rms,'color','g','DisplayName','val');
-hold off;
-title('RMSE vs log(lambda)')
-ylabel('RMS error');
-xlabel('log(lambda)');
-legend('show');
-saveas(gcf,'Plots_1/RMS/RMS_lambda_20.png');
-clf;
+% 
+% train_rms = [];
+% test_rms = [];
+% val_rms = [];
+% %figrms_test = figure('Name','RMS error on test set for train_20');
+% for i=1:length(lambda_values)
+%     [rtrain,rtest,rval] = rmserr_Q1_lambda(train_20,testSet,validationSet,M_values,lambda_values(i));
+%     train_rms = [train_rms,rtrain];
+%     test_rms = [test_rms,rtest];
+%     val_rms = [val_rms,rval];        
+% end
+% 
+% %train_rms = vec2mat(train_rms,length(lambda_values));
+% %test_rms = vec2mat(test_rms,length(lambda_values));
+% %val_rms = vec2mat(val_rms,length(lambda_values));
+% 
+% figure(1)
+% hold on;
+% %for var = 1:size(train_rms,1)
+% %plot(lambda_values,train_rms(var,:),'color',cc(var,:),'DisplayName',int2str(M_values(var)));
+% %end
+% log_lambda_values = log(lambda_values);
+% 
+% plot(log_lambda_values,train_rms,'color','b','DisplayName','train');
+% plot(log_lambda_values,test_rms,'color','r','DisplayName','test');
+% plot(log_lambda_values,val_rms,'color','g','DisplayName','val');
+% hold off;
+% title('RMSE vs log(lambda)')
+% ylabel('RMS error');
+% xlabel('log(lambda)');
+% legend('show');
+% saveas(gcf,'Plots_1/RMS/RMS_lambda_20.png');
+% clf;
 
