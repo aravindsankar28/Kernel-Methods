@@ -3,9 +3,11 @@
 \contentsline {subsection}{\numberline {2.1}Generation}{2}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Model creation}{2}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Results}{3}{subsection.2.3}
-\contentsline {subsubsection}{\numberline {2.3.1}Plots of approximated functions}{3}{subsubsection.2.3.1}
-\contentsline {section}{\numberline {3}Dataset 2}{7}{section.3}
-\contentsline {subsection}{\numberline {3.1}Generation}{7}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Model creation}{7}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Results}{7}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Plots of approximated functions}{7}{subsection.3.4}
+\contentsline {subsubsection}{\numberline {2.3.1}Plots of approximated functions - Question 1}{3}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Plots of RMS Error - Question 3}{6}{subsubsection.2.3.2}
+\contentsline {subsubsection}{\numberline {2.3.3}Scatter plots of target and model output}{7}{subsubsection.2.3.3}
+\contentsline {section}{\numberline {3}Dataset 2}{11}{section.3}
+\contentsline {subsection}{\numberline {3.1}Generation}{11}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Model creation}{11}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Results}{11}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Plots of approximated functions}{11}{subsection.3.4}
