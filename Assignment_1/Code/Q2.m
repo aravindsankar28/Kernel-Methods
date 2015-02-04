@@ -257,8 +257,8 @@ saveas(gcf,'Plots_2/RMS/RMS_lambda_100.png');
 
 % Scatter plots for varying N
 
-n_range = [1000];
-m_range = [300];
+n_range = [100,200,400,700,1000];
+m_range = [100];
 
 for i = 1:length(n_range)
     for j = 1:length(m_range)
@@ -284,8 +284,9 @@ end
 % Scatter plots for varying M
 
 %{
+
 n_range = [100];
-m_range = [100];
+m_range = [10,40,80,100];
 
 for i = 1:length(n_range)
     for j = 1:length(m_range)
