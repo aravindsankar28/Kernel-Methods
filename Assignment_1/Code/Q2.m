@@ -30,12 +30,15 @@ sizeTest = [200 3];
 testSet = fscanf(fId,'%f %f %f',sizeTest);
 fclose(fId);
 
-%{
-% Plots on varying M - note lambda = 0 here
-N_values = [100]; % training set size
-M_values = [10];  % no of basis functions
+%%%%%%%%%%%%%%%%%%% Surface Plots %%%%%%%%%%%%%%%%%%%
 
-target_output = trainSet(:,3);
+% Plots on varying M - note lambda = 0 here
+
+%{
+
+N_values = [100]; % training set size
+M_values = [100];  % no of basis functions
+
 for i = 1:length(N_values)
     for j = 1:length(M_values)
         eval(sprintf('trainSet = trainSet_%d;',N_values(i)));
@@ -60,10 +63,111 @@ for i = 1:length(N_values)
         hold on;
         
         surf(x1,x2,y);
-        %legend('t','y(x,w)');
+        
+        legend('t','y(x,w)');
+        a = strcat(('Plot of model and target output N = '),int2str(N_values(i)), ' and M = ',int2str(M_values(j)));
+        title(a);
+        xlabel('x_1 (input variable)');
+        ylabel('x_2 (input variable)');
+        zlabel('Model and Target output');
+        legend('show');
+        saveas(fig1,strcat('Plots_2/Varying_M/VaryingM_N',int2str(N_values(i)),'M',int2str(M_values(j)),'.png'));
+        
     end
 end
+
 %}
+
+
+% Plots on varying N - note lambda = 0 here
+
+%{
+
+N_values = [100]; % training set size
+M_values = [100];  % no of basis functions
+
+for i = 1:length(N_values)
+    for j = 1:length(M_values)
+        eval(sprintf('trainSet = trainSet_%d;',N_values(i)));
+        [coeffs,designMat,centroids,widthParam] = surface_fit(trainSet,N_values(i),M_values(j),0);
+        model_output = designMat*coeffs;
+            
+        [x1,x2] = meshgrid(linspace(-10,10));
+        y = zeros(size(x1,1),size(x1,2));
+        basisVec = zeros(M_values(j),1);
+        for k = 1:size(x1,1)
+            for l = 1:size(x1,2)
+                for m = 1:M_values(j)
+                    basisVec(m,1) = exp(-((x1(k,l)-centroids(m,1))^2+(x2(k,l)-centroids(m,2))^2))/widthParam(m,1);
+                end 
+                y(k,l) = basisVec'*coeffs;
+            end
+        end
+        
+        fig1 = figure;
+        plot3(trainSet(:,1),trainSet(:,2),trainSet(:,3),'ro');
+        axis([-10,10,-10,10,min(y(:)),max(y(:))]);
+        hold on;
+        
+        surf(x1,x2,y);
+        
+        legend('t','y(x,w)');
+        a = strcat(('Plot of model and target output N = '),int2str(N_values(i)), ' and M = ',int2str(M_values(j)));
+        title(a);
+        xlabel('x_1 (input variable)');
+        ylabel('x_2 (input variable)');
+        zlabel('Model and Target output');
+        legend('show');
+        saveas(fig1,strcat('Plots_2/Varying_N/VaryingN_N',int2str(N_values(i)),'M',int2str(M_values(j)),'.png'));
+        
+    end
+end
+
+%}
+
+
+% Plots on varying lambda
+
+N = 100; % training set size
+M = 100;  % no of basis functions
+lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1];
+
+for i = 1:length(lambda_values)
+    
+    lambda = lambda_values(i);
+    
+    eval(sprintf('trainSet = trainSet_%d;',N));
+    [coeffs,designMat,centroids,widthParam] = surface_fit(trainSet,N,M,lambda);
+    model_output = designMat*coeffs;
+            
+    [x1,x2] = meshgrid(linspace(-10,10));
+    y = zeros(size(x1,1),size(x1,2));
+    basisVec = zeros(M,1);
+    for k = 1:size(x1,1)
+        for l = 1:size(x1,2)
+            for m = 1:M
+                basisVec(m,1) = exp(-((x1(k,l)-centroids(m,1))^2+(x2(k,l)-centroids(m,2))^2))/widthParam(m,1);
+            end 
+        y(k,l) = basisVec'*coeffs;
+        end
+    end
+        
+    fig1 = figure;
+    plot3(trainSet(:,1),trainSet(:,2),trainSet(:,3),'ro');
+    axis([-10,10,-10,10,min(y(:)),max(y(:))]);
+    hold on;
+        
+    surf(x1,x2,y);
+        
+    legend('t','y(x,w)');
+    a = strcat(('Plot of model and target output N = '),int2str(N), ' and M = ',int2str(M),' for lambda = ',num2str(lambda));
+    title(a);
+    xlabel('x_1 (input variable)');
+    ylabel('x_2 (input variable)');
+    zlabel('Model and Target output');
+    legend('show');
+    saveas(fig1,strcat('Plots_2/Varying_lambda/Varyinglambda_N',int2str(N),'M',int2str(M),'lambda',num2str(lambda),'.png'));    
+end
 
 %%%%%%%%%%%%RMS ERROR PLOTS%%%%%%%%%
 
@@ -184,6 +288,7 @@ end
 
 % Scatter plots for varying lambda
 
+%{
 N = 100;
 M = 100;
 lambda_range = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1];
@@ -207,3 +312,4 @@ for i = 1:length(lambda_range)
     saveas(fig1,strcat('Plots_2/Scatter/Varying_lambda/Varyinglambda_N',int2str(N),'M',int2str(M),'lambda',num2str(lambda),'.png'));    
   
 end
+%}
