@@ -4,7 +4,7 @@
 % M           - model complexity
 % lambda      - array of values to test for regularization
 
-lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1];
+
 sigma = 0.1;
 
 validationSet = samplePoints(sigma,50);
@@ -17,10 +17,16 @@ train_1000 = samplePoints(sigma,1000);
 
 %fn = @(x) exp(cos(2*pi*x));
 %fplot(fn,[0,1]);
+M_values = [];
+for i = 1:20
+    M_values = [M_values,i];
+end
 
-lambda = 0.0;
-%M_values = [2,3,5,7,10,15];
-M_values = [0,1,3,9,15];
+lambda_values = [];
+for i = -40:1
+    lambda_values = [lambda_values,exp(i)];
+end
+
 
 cc = hsv(length(M_values)+2);
 a = cc(1,:);
@@ -96,11 +102,11 @@ val_error
 %}
 
 
-M = 9;
-
-for i=1:length(lambda_values)
-    Plot_fn_1(train_20,M,lambda_values(i),3);
-end
+% M = 9;
+% 
+% for i=1:length(lambda_values)
+%     Plot_fn_1(train_20,M,lambda_values(i),3);
+% end
 
 
 
@@ -120,7 +126,7 @@ test_rms = [];
 val_rms = [];
 %figrms_test = figure('Name','RMS error on test set for train_20');
 for i=1:length(M_values)
-    [rtrain,rtest,rval] = rmserr_Q1_M(train_1000,testSet,validationSet,M_values(i),lambda_values);
+    [rtrain,rtest,rval] = rmserr_Q1_M(train_100,testSet,validationSet,M_values(i),lambda_values);
     train_rms = [train_rms,rtrain];
     test_rms = [test_rms,rtest];
     val_rms = [val_rms,rval];        
@@ -143,7 +149,7 @@ title('RMSE vs complexity')
 ylabel('RMS error');
 xlabel('Model Complexity');
 legend('show');
-saveas(gcf,'Plots_1/RMS/RMS_complexity_1000.png');
+saveas(gcf,'Plots_1/RMS/RMS_complexity_100.png');
 clf;
 
 
@@ -156,7 +162,7 @@ test_rms = [];
 val_rms = [];
 %figrms_test = figure('Name','RMS error on test set for train_20');
 for i=1:length(lambda_values)
-    [rtrain,rtest,rval] = rmserr_Q1_lambda(train_1000,testSet,validationSet,M_values,lambda_values(i));
+    [rtrain,rtest,rval] = rmserr_Q1_lambda(train_100,testSet,validationSet,M_values,lambda_values(i));
     train_rms = [train_rms,rtrain];
     test_rms = [test_rms,rtest];
     val_rms = [val_rms,rval];        
@@ -181,6 +187,6 @@ title('RMSE vs log(lambda)')
 ylabel('RMS error');
 xlabel('log(lambda)');
 legend('show');
-saveas(gcf,'Plots_1/RMS/RMS_lambda_1000.png');
+saveas(gcf,'Plots_1/RMS/RMS_lambda_100.png');
 clf;
 
