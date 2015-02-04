@@ -1,7 +1,7 @@
 function [coeffs,designMat,centroids,widthParam] = surface_fit(trainSet,N,M,lambda)
 
 % perform k-means clustering
-[idx,centroids] = kmeans(trainSet(:,1:2),M,'replicate',20,'EmptyAction','drop');
+[idx,centroids] = kmeans(trainSet(:,1:2),M,'replicate',20,'EmptyAction','singleton');
 
 %scatter(trainSet(:,2),trainSet(:,1),[],idx);
 

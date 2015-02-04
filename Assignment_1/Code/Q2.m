@@ -190,7 +190,9 @@ end
 
 % RMSE vs complexity 
 
-M_values = [10,20,30,40,50,60,70,80,90,100];  % no of basis functions
+%{
+
+M_values = [50,100,200,400,600,800,1000];  % no of basis functions
 lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,10];
 
 train_rms = [];
@@ -198,7 +200,7 @@ test_rms = [];
 val_rms = [];
 
 for i=1:length(M_values)
-    [rtrain,rtest,rval] = rmserr_Q2_M(trainSet_100,testSet,valSet,M_values(i),lambda_values);
+    [rtrain,rtest,rval] = rmserr_Q2_M(trainSet_1000,testSet,valSet,M_values(i),lambda_values);
     train_rms = [train_rms,rtrain];
     test_rms = [test_rms,rtest];
     val_rms = [val_rms,rval];        
@@ -214,16 +216,22 @@ title('RMSE vs complexity')
 ylabel('RMS error');
 xlabel('Model Complexity');
 legend('show');
-saveas(gcf,'Plots_2/RMS/RMS_complexity_100.png');
+saveas(gcf,'Plots_2/RMS/RMS_complexity_1000.png');
+
+%}
 
 % RMSE vs lambda
 
 %{
+
+M_values = [10,20,30,40,50,60,70,80,90,100];  % no of basis functions
+lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,10];
+
 train_rms = [];
 test_rms = [];
 val_rms = [];
 for i=1:length(lambda_values)
-    [rtrain,rtest,rval] = rmserr_Q2_lambda(trainSet_1000,testSet,valSet,M_values,lambda_values(i));
+    [rtrain,rtest,rval] = rmserr_Q2_lambda(trainSet_100,testSet,valSet,M_values,lambda_values(i));
     train_rms = [train_rms,rtrain];
     test_rms = [test_rms,rtest];
     val_rms = [val_rms,rval];        
@@ -241,14 +249,14 @@ title('RMSE vs log(lambda)')
 ylabel('RMS error');
 xlabel('log(lambda)');
 legend('show');
-saveas(gcf,'Plots_2/RMS/RMS_lambda_1000.png');
+saveas(gcf,'Plots_2/RMS/RMS_lambda_100.png');
+
 %}
 
 %%%%%%%%%%%% SCATTER Plots %%%%%%%%%%%%%%%
 
 % Scatter plots for varying N
 
-%{
 n_range = [1000];
 m_range = [300];
 
@@ -272,7 +280,6 @@ for i = 1:length(n_range)
         saveas(fig1,strcat('Plots_2/Scatter/VaryingN/VaryingN_N',int2str(N),'M',int2str(M),'.png'));
     end
 end 
-%}
 
 % Scatter plots for varying M
 
