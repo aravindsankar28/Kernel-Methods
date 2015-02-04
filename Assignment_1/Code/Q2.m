@@ -33,19 +33,16 @@ fclose(fId);
 %{
 % Plots on varying M - note lambda = 0 here
 N_values = [100]; % training set size
-M_values = [5];  % no of basis functions
+M_values = [10];  % no of basis functions
 
 target_output = trainSet(:,3);
 for i = 1:length(N_values)
     for j = 1:length(M_values)
+        eval(sprintf('trainSet = trainSet_%d;',N_values(i)));
         [coeffs,designMat,centroids,widthParam] = surface_fit(trainSet,N_values(i),M_values(j),0);
         model_output = designMat*coeffs;
-        
-        fig1 = figure;
-        plot3(trainSet(:,1),trainSet(:,2),trainSet(:,3),'ro');
-        %, axis([-90,130,-20,150,-10,80]
-        
-        [x1,x2] = meshgrid(linspace(-20,10));
+            
+        [x1,x2] = meshgrid(linspace(-10,10));
         y = zeros(size(x1,1),size(x1,2));
         basisVec = zeros(M_values(j),1);
         for k = 1:size(x1,1)
@@ -56,6 +53,12 @@ for i = 1:length(N_values)
                 y(k,l) = basisVec'*coeffs;
             end
         end
+        
+        fig1 = figure;
+        plot3(trainSet(:,1),trainSet(:,2),trainSet(:,3),'ro');
+        axis([-10,10,-10,10,min(y(:)),max(y(:))]);
+        hold on;
+        
         surf(x1,x2,y);
         %legend('t','y(x,w)');
     end
@@ -119,21 +122,22 @@ legend('show');
 saveas(gcf,'Plots_2/RMS/RMS_lambda_1000.png');
 %}
 
-%%%%%%%%%%%%SCATTER Plots%%%%%%%%%%%%%%%
+%%%%%%%%%%%% SCATTER Plots %%%%%%%%%%%%%%%
 
 % Scatter plots for varying N
 
-n_range = [100,1000];
-m_range = [9,15,40];
+%{
+n_range = [1000];
+m_range = [300];
 
 for i = 1:length(n_range)
     for j = 1:length(m_range)
         N = n_range(i);
-        M = m_range(i);
+        M = m_range(j);
         fig1 = figure(1);
         b = strcat('Scatter plot of model output Vs target output for N = ',int2str(N),' and M = ',int2str(M));
         
-        eval(sprintf('trainSet = trainSet_%d',N));
+        eval(sprintf('trainSet = trainSet_%d;',N));
         [coeffs,designMat,centroids,widthParam] = surface_fit(trainSet,N,M,0);
         model_output = designMat*coeffs;
         target_output = trainSet(:,3);
@@ -146,3 +150,60 @@ for i = 1:length(n_range)
         saveas(fig1,strcat('Plots_2/Scatter/VaryingN/VaryingN_N',int2str(N),'M',int2str(M),'.png'));
     end
 end 
+%}
+
+% Scatter plots for varying M
+
+%{
+n_range = [100];
+m_range = [100];
+
+for i = 1:length(n_range)
+    for j = 1:length(m_range)
+
+        N = n_range(i);
+        M = m_range(j);        
+        
+        fig1 = figure(1);
+        b = strcat('Scatter plot of model output Vs target output for N = ',int2str(N),' and M = ',int2str(M));
+        
+        eval(sprintf('trainSet = trainSet_%d;',N));
+        [coeffs,designMat,centroids,widthParam] = surface_fit(trainSet,N,M,0);
+        model_output = designMat*coeffs;
+        target_output = trainSet(:,3);
+        scatter(model_output,target_output,'ko','filled');        
+        
+        xlabel('Target output');
+        ylabel('Model output');
+        title(b);
+        saveas(fig1,strcat('Plots_2/Scatter/VaryingM/VaryingM_N',int2str(N),'M',int2str(M),'.png'));
+    end
+end
+
+%}
+
+% Scatter plots for varying lambda
+
+N = 100;
+M = 100;
+lambda_range = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1];
+
+for i = 1:length(lambda_range)
+    
+    lambda = lambda_range(i);
+        
+    fig1 = figure(1);
+    b = strcat('Scatter plot of model output Vs target output for N = ',int2str(N),' and M = ',int2str(M),' lambda = ',num2str(lambda));
+        
+    eval(sprintf('trainSet = trainSet_%d;',N));
+    [coeffs,designMat,centroids,widthParam] = surface_fit(trainSet,N,M,lambda);
+    model_output = designMat*coeffs;
+    target_output = trainSet(:,3);
+    scatter(model_output,target_output,'ko','filled');        
+        
+    xlabel('Target output');
+    ylabel('Model output');
+    title(b);
+    saveas(fig1,strcat('Plots_2/Scatter/Varying_lambda/Varyinglambda_N',int2str(N),'M',int2str(M),'lambda',num2str(lambda),'.png'));    
+  
+end
