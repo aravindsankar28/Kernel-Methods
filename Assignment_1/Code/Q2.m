@@ -1,5 +1,5 @@
 N_values = [20,100,1000]; % training set size
-M_values = [3,5,7,9,11,15,30,50];  % no of basis functions
+M_values = [3,5,7,9,11,15,30,50,90,99];  % no of basis functions
 lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,2,5]; % regularization parameter
 
 % read in training datasets 
@@ -93,6 +93,7 @@ saveas(gcf,'Plots_2/RMS/RMS_complexity_1000.png');
 
 % RMSE vs lambda
 
+%{
 train_rms = [];
 test_rms = [];
 val_rms = [];
@@ -116,4 +117,32 @@ ylabel('RMS error');
 xlabel('log(lambda)');
 legend('show');
 saveas(gcf,'Plots_2/RMS/RMS_lambda_1000.png');
+%}
 
+%%%%%%%%%%%%SCATTER Plots%%%%%%%%%%%%%%%
+
+% Scatter plots for varying N
+
+n_range = [100,1000];
+m_range = [9,15,40];
+
+for i = 1:length(n_range)
+    for j = 1:length(m_range)
+        N = n_range(i);
+        M = m_range(i);
+        fig1 = figure(1);
+        b = strcat('Scatter plot of model output Vs target output for N = ',int2str(N),' and M = ',int2str(M));
+        
+        eval(sprintf('trainSet = trainSet_%d',N));
+        [coeffs,designMat,centroids,widthParam] = surface_fit(trainSet,N,M,0);
+        model_output = designMat*coeffs;
+        target_output = trainSet(:,3);
+        scatter(model_output,target_output,'ko','filled'); 
+        
+        xlabel('Target output');
+        ylabel('Model output');
+        title(b);
+        
+        saveas(fig1,strcat('Plots_2/Scatter/VaryingN/VaryingN_N',int2str(N),'M',int2str(M),'.png'));
+    end
+end 
