@@ -126,7 +126,7 @@ test_rms = [];
 val_rms = [];
 %figrms_test = figure('Name','RMS error on test set for train_20');
 for i=1:length(M_values)
-    [rtrain,rtest,rval] = rmserr_Q1_M(train_100,testSet,validationSet,M_values(i),lambda_values);
+    [rtrain,rtest,rval] = rmserr_Q1_M(train_20,testSet,validationSet,M_values(i),lambda_values);
     train_rms = [train_rms,rtrain];
     test_rms = [test_rms,rtest];
     val_rms = [val_rms,rval];        
@@ -149,7 +149,7 @@ title('RMSE vs complexity')
 ylabel('RMS error');
 xlabel('Model Complexity');
 legend('show');
-saveas(gcf,'Plots_1/RMS/RMS_complexity_100.png');
+saveas(gcf,'Plots_1/RMS/RMS_complexity_20.png');
 clf;
 
 
@@ -162,7 +162,7 @@ test_rms = [];
 val_rms = [];
 %figrms_test = figure('Name','RMS error on test set for train_20');
 for i=1:length(lambda_values)
-    [rtrain,rtest,rval] = rmserr_Q1_lambda(train_100,testSet,validationSet,M_values,lambda_values(i));
+    [rtrain,rtest,rval] = rmserr_Q1_lambda(train_20,testSet,validationSet,M_values,lambda_values(i));
     train_rms = [train_rms,rtrain];
     test_rms = [test_rms,rtest];
     val_rms = [val_rms,rval];        
@@ -187,6 +187,6 @@ title('RMSE vs log(lambda)')
 ylabel('RMS error');
 xlabel('log(lambda)');
 legend('show');
-saveas(gcf,'Plots_1/RMS/RMS_lambda_100.png');
+saveas(gcf,'Plots_1/RMS/RMS_lambda_20.png');
 clf;
 
