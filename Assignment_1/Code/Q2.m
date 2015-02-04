@@ -191,8 +191,7 @@ end
 % RMSE vs complexity 
 
 %{
-
-M_values = [50,100,200,400,600,800,1000];  % no of basis functions
+M_values = [10,50,100,200,400,600,700];  % no of basis functions
 lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,10];
 
 train_rms = [];
@@ -200,7 +199,8 @@ test_rms = [];
 val_rms = [];
 
 for i=1:length(M_values)
-    [rtrain,rtest,rval] = rmserr_Q2_M(trainSet_1000,testSet,valSet,M_values(i),lambda_values);
+    i
+    [rtrain,rtest,rval] = rmserr_Q2_M(trainSet_700,testSet,valSet,M_values(i),lambda_values);
     train_rms = [train_rms,rtrain];
     test_rms = [test_rms,rtest];
     val_rms = [val_rms,rval];        
@@ -216,7 +216,7 @@ title('RMSE vs complexity')
 ylabel('RMS error');
 xlabel('Model Complexity');
 legend('show');
-saveas(gcf,'Plots_2/RMS/RMS_complexity_1000.png');
+saveas(gcf,'Plots_2/RMS/RMS_complexity_700.png');
 
 %}
 
@@ -224,14 +224,14 @@ saveas(gcf,'Plots_2/RMS/RMS_complexity_1000.png');
 
 %{
 
-M_values = [10,20,30,40,50,60,70,80,90,100];  % no of basis functions
+M_values = [10,50,100,200,400,600,700];  % no of basis functions
 lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,10];
 
 train_rms = [];
 test_rms = [];
 val_rms = [];
 for i=1:length(lambda_values)
-    [rtrain,rtest,rval] = rmserr_Q2_lambda(trainSet_100,testSet,valSet,M_values,lambda_values(i));
+    [rtrain,rtest,rval] = rmserr_Q2_lambda(trainSet_700,testSet,valSet,M_values,lambda_values(i));
     train_rms = [train_rms,rtrain];
     test_rms = [test_rms,rtest];
     val_rms = [val_rms,rval];        
@@ -249,7 +249,7 @@ title('RMSE vs log(lambda)')
 ylabel('RMS error');
 xlabel('log(lambda)');
 legend('show');
-saveas(gcf,'Plots_2/RMS/RMS_lambda_100.png');
+saveas(gcf,'Plots_2/RMS/RMS_lambda_700.png');
 
 %}
 
@@ -273,8 +273,8 @@ for i = 1:length(n_range)
         target_output = trainSet(:,3);
         scatter(model_output,target_output,'ko','filled'); 
         
-        xlabel('Target output');
-        ylabel('Model output');
+        ylabel('Target output');
+        xlabel('Model output');
         title(b);
         
         saveas(fig1,strcat('Plots_2/Scatter/VaryingN/VaryingN_N',int2str(N),'M',int2str(M),'.png'));
@@ -284,7 +284,6 @@ end
 % Scatter plots for varying M
 
 %{
-
 n_range = [100];
 m_range = [10,40,80,100];
 
@@ -303,13 +302,12 @@ for i = 1:length(n_range)
         target_output = trainSet(:,3);
         scatter(model_output,target_output,'ko','filled');        
         
-        xlabel('Target output');
-        ylabel('Model output');
+        ylabel('Target output');
+        xlabel('Model output');
         title(b);
         saveas(fig1,strcat('Plots_2/Scatter/VaryingM/VaryingM_N',int2str(N),'M',int2str(M),'.png'));
     end
 end
-
 %}
 
 % Scatter plots for varying lambda
@@ -317,7 +315,7 @@ end
 %{
 N = 100;
 M = 100;
-lambda_range = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1];
+lambda_range = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,10];
 
 for i = 1:length(lambda_range)
     
@@ -332,8 +330,8 @@ for i = 1:length(lambda_range)
     target_output = trainSet(:,3);
     scatter(model_output,target_output,'ko','filled');        
         
-    xlabel('Target output');
-    ylabel('Model output');
+    ylabel('Target output');
+    xlabel('Model output');
     title(b);
     saveas(fig1,strcat('Plots_2/Scatter/Varying_lambda/Varyinglambda_N',int2str(N),'M',int2str(M),'lambda',num2str(lambda),'.png'));    
   

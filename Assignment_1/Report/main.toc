@@ -9,7 +9,7 @@
 \contentsline {section}{\numberline {3}Dataset 2}{11}{section.3}
 \contentsline {subsection}{\numberline {3.1}Generation}{11}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Model creation}{11}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Results}{11}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Surface Plots of approximated functions - Question 2}{11}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.3}Results}{12}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Surface Plots of approximated functions - Question 2}{12}{subsection.3.4}
 \contentsline {subsection}{\numberline {3.5}Plots of RMS Error - Question 3}{14}{subsection.3.5}
 \contentsline {subsection}{\numberline {3.6}Scatter plots of target and model output - Question 4}{15}{subsection.3.6}
