@@ -58,6 +58,7 @@ cc(3,:) = a;
 % legend(legend_names);
 
 
+%M_values = [0,1,3,9,15];
 M_values = [15];
 for i = 1:length(M_values)
    Plot_fn_1(train_1000,M_values(i),0.0,1,validationSet,testSet);
@@ -71,8 +72,8 @@ end
 
 % Change M for different set  - use Plot_fn function and pass 2 as the last
 % param
-M = 15;
-% 
+% M = 15;
+% % 
 % Plot_fn_1(train_20,M,0,2);
 % Plot_fn_1(train_100,M,0,2);
 % Plot_fn_1(train_1000,M,0,2);
@@ -103,7 +104,7 @@ val_error
 
 
 % M = 9;
-% 
+% lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1];
 % for i=1:length(lambda_values)
 %     Plot_fn_1(train_20,M,lambda_values(i),3);
 % end
@@ -120,17 +121,17 @@ val_error
 %%%%%%%%%%%%RMS ERROR PLOTS%%%%%%%%%
 
 
-cc = hsv(length(M_values));
-train_rms = [];
-test_rms = [];
-val_rms = [];
-%figrms_test = figure('Name','RMS error on test set for train_20');
-for i=1:length(M_values)
-    [rtrain,rtest,rval] = rmserr_Q1_M(train_20,testSet,validationSet,M_values(i),lambda_values);
-    train_rms = [train_rms,rtrain];
-    test_rms = [test_rms,rtest];
-    val_rms = [val_rms,rval];        
-end
+% cc = hsv(length(M_values));
+% train_rms = [];
+% test_rms = [];
+% val_rms = [];
+% %figrms_test = figure('Name','RMS error on test set for train_20');
+% for i=1:length(M_values)
+%     [rtrain,rtest,rval] = rmserr_Q1_M(train_20,testSet,validationSet,M_values(i),lambda_values);
+%     train_rms = [train_rms,rtrain];
+%     test_rms = [test_rms,rtest];
+%     val_rms = [val_rms,rval];        
+% end
 
 %train_rms = vec2mat(train_rms,length(lambda_values));
 %test_rms = vec2mat(test_rms,length(lambda_values));

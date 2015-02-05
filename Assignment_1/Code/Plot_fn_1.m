@@ -35,19 +35,21 @@ if(index == 1)
     
     %legend('show');
     b = strcat('Scatter plot of model output Vs target output for N = ',int2str(N),' and M = ',int2str(M));
-    
-    scatter(polyval(coeffs,train(:,1)),train(:,2),'ko','filled'); 
+    scatter(train(:,2),polyval(coeffs,train(:,1)),'ko','filled'); 
+    %scatter(polyval(coeffs,train(:,1)),train(:,2),'ko','filled'); 
     xlabel('Target output');
     ylabel('Model output');
-    legend('Train');
+    %legend('Train');
     fig1 = figure(1);
     saveas(fig1,strcat('Plots_1/Scatter/VaryingM/VaryingM_N',int2str(length(train)),'M',int2str(M),'.png'));
     %hold on;
     %scatter(polyval(coeffs,val(:,1)),val(:,2),'ro','filled');
     
     %hold on;
-    scatter(polyval(coeffs,test(:,1)),test(:,2),'bo','filled');
+    %scatter(polyval(coeffs,test(:,1)),test(:,2),'bo','filled');
     
+    
+    scatter(test(:,2),polyval(coeffs,test(:,1)),'bo','filled');
     fig1 = figure(1);
     hold off;
     legend('Test');
@@ -73,7 +75,8 @@ if(index == 2)
 %     legend('Data points','t','y(x,w)');
 
     b = strcat('Scatter plot of model output Vs target output for N = ',int2str(N),' and M = ',int2str(M));
-    scatter(polyval(coeffs,train(:,1)),train(:,2),'ko','filled'); 
+    %scatter(polyval(coeffs,train(:,1)),train(:,2),'ko','filled'); 
+    scatter(train(:,2),polyval(coeffs,train(:,1)),'ko','filled'); 
     xlabel('Target output');
     ylabel('Model output');
     title(b);
@@ -92,7 +95,8 @@ if (index == 3)
 %     ylabel('Model and Target output');
 
     b = strcat('Scatter plot of model output Vs target output for N = ',int2str(N),' and M = ',int2str(M),' lambda = ',num2str(lambda));
-    scatter(polyval(coeffs,train(:,1)),train(:,2),'ko','filled'); 
+    %scatter(polyval(coeffs,train(:,1)),train(:,2),'ko','filled'); 
+    scatter(train(:,2),polyval(coeffs,train(:,1)),'ko','filled'); 
     xlabel('Target output');
     ylabel('Model output');
     title(b);
