@@ -61,17 +61,16 @@ testSet = load('../Data/group2/bivariateData/group2_test.txt');
 
 % Plots on varying M - note lambda = 0 here
 
-%{
-
-N_values = [100]; % training set size
-M_values = [10,40,80,100];  % no of basis functions
+N_values = [1000]; % training set size
+M_values = [1000];  % no of basis functions
 
 for i = 1:length(N_values)
     for j = 1:length(M_values)
         eval(sprintf('trainSet = trainSet_%d;',N_values(i)));
         [coeffs,designMat,centroids,widthParam] = surface_fit(trainSet,N_values(i),M_values(j),0);
         model_output = designMat*coeffs;
-            
+          
+        %{
         [x1,x2] = meshgrid(linspace(-10,10));
         y = zeros(size(x1,1),size(x1,2));
         basisVec = zeros(M_values(j),1);
@@ -83,11 +82,15 @@ for i = 1:length(N_values)
                 y(k,l) = basisVec'*coeffs;
             end
         end
+        %}
         
         fig1 = figure;
         plot3(trainSet(:,1),trainSet(:,2),trainSet(:,3),'ro');
-        axis([-10,10,-10,10,min(y(:)),max(y(:))]);
+        
+        %axis([-10,10,-10,10,min(y(:)),max(y(:))]);
         hold on;
+        
+        %plot3(trainSet(:,1),trainSet(:,2),model_output,'bo');
         
         surf(x1,x2,y);
         
@@ -103,7 +106,6 @@ for i = 1:length(N_values)
     end
 end
 
-%}
 
 % Plots on varying N - note lambda = 0 here
 
@@ -269,7 +271,7 @@ saveas(gcf,'Plots_2/RMS/RMS_lambda_700.png');
 
 % Scatter plots for varying N
 
-%n_range = [100,200,400,700,1000];
+%{
 n_range = [1000];
 m_range = [100];
 
@@ -307,6 +309,8 @@ for i = 1:length(n_range)
         %saveas(fig1,strcat('Plots_2/Scatter/VaryingN/VaryingN_N',int2str(N),'M',int2str(M),'.png'));
     end
 end 
+
+%}
 
 % Scatter plots for varying M
 
