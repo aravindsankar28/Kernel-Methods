@@ -3,47 +3,59 @@ M_values = [3,5,7,9,11,15,30,50,90,99];  % no of basis functions
 lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,10]; % regularization parameter
 
 % read in training datasets 
-fId = fopen('../Data/group2/bivariateData/group2_train20.txt','r');
-sizeTrain = [20 3];
-trainSet_20 = fscanf(fId,'%f %f %f',sizeTrain);
-fclose(fId);
+% fId = fopen('../Data/group2/bivariateData/group2_train20.txt','r');
+% sizeTrain = [20 3];
+% trainSet_20 = fscanf(fId,'%f %f %f',sizeTrain);
 
-fId = fopen('../Data/group2/bivariateData/group2_train100.txt','r');
-sizeTrain = [100 3];
-trainSet_100 = fscanf(fId,'%f %f %f',sizeTrain);
-fclose(fId);
+%fclose(fId);
 
-fId = fopen('../Data/group2/bivariateData/group2_train200.txt','r');
-sizeTrain = [200 3];
-trainSet_200 = fscanf(fId,'%f %f %f',sizeTrain);
-fclose(fId);
+% fId = fopen('../Data/group2/bivariateData/group2_train100.txt','r');
+% sizeTrain = [100 3];
+% trainSet_100 = fscanf(fId,'%f %f %f',sizeTrain);
+% fclose(fId);
 
-fId = fopen('../Data/group2/bivariateData/group2_train400.txt','r');
-sizeTrain = [400 3];
-trainSet_400 = fscanf(fId,'%f %f %f',sizeTrain);
-fclose(fId);
+% fId = fopen('../Data/group2/bivariateData/group2_train200.txt','r');
+% sizeTrain = [200 3];
+% trainSet_200 = fscanf(fId,'%f %f %f',sizeTrain);
+% fclose(fId);
 
-fId = fopen('../Data/group2/bivariateData/group2_train700.txt','r');
-sizeTrain = [700 3];
-trainSet_700 = fscanf(fId,'%f %f %f',sizeTrain);
-fclose(fId);
+% fId = fopen('../Data/group2/bivariateData/group2_train400.txt','r');
+% sizeTrain = [400 3];
+% trainSet_400 = fscanf(fId,'%f %f %f',sizeTrain);
+% fclose(fId);
+% 
+% fId = fopen('../Data/group2/bivariateData/group2_train700.txt','r');
+% sizeTrain = [700 3];
+% trainSet_700 = fscanf(fId,'%f %f %f',sizeTrain);
+% fclose(fId);
 
-fId = fopen('../Data/group2/bivariateData/group2_train1000.txt','r');
-sizeTrain = [1000 3];
-trainSet_1000 = fscanf(fId,'%f %f %f',sizeTrain);
-fclose(fId);
+% fId = fopen('../Data/group2/bivariateData/group2_train1000.txt','r');
+% sizeTrain = [1000 3];
+% trainSet_1000 = fscanf(fId,'%f %f %f',sizeTrain);
+% fclose(fId);
+
+trainSet_20 = load('../Data/group2/bivariateData/group2_train20.txt');
+trainSet_100 = load('../Data/group2/bivariateData/group2_train100.txt');
+trainSet_200 = load('../Data/group2/bivariateData/group2_train200.txt');
+trainSet_400 = load('../Data/group2/bivariateData/group2_train400.txt');
+trainSet_700 = load('../Data/group2/bivariateData/group2_train700.txt');
+trainSet_1000 = load('../Data/group2/bivariateData/group2_train1000.txt');
+trainSet_2000 = load('../Data/group2/bivariateData/group2_train.txt');
+valSet = load('../Data/group2/bivariateData/group2_val.txt');
+testSet = load('../Data/group2/bivariateData/group2_test.txt');
+
 
 % read in validation dataset 
-fId = fopen('../Data/group2/bivariateData/group2_val.txt','r');
-sizeVal = [300 3];
-valSet = fscanf(fId,'%f %f %f',sizeVal);
-fclose(fId);
-
-% read in test dataset 
-fId = fopen('../Data/group2/bivariateData/group2_test.txt','r');
-sizeTest = [200 3];
-testSet = fscanf(fId,'%f %f %f',sizeTest);
-fclose(fId);
+% fId = fopen('../Data/group2/bivariateData/group2_val.txt','r');
+% sizeVal = [300 3];
+% valSet = fscanf(fId,'%f %f %f',sizeVal);
+% fclose(fId);
+% 
+% % read in test dataset 
+% fId = fopen('../Data/group2/bivariateData/group2_test.txt','r');
+% sizeTest = [200 3];
+% testSet = fscanf(fId,'%f %f %f',sizeTest);
+% fclose(fId);
 
 %%%%%%%%%%%%%%%%%%% Surface Plots %%%%%%%%%%%%%%%%%%%
 
@@ -257,27 +269,42 @@ saveas(gcf,'Plots_2/RMS/RMS_lambda_700.png');
 
 % Scatter plots for varying N
 
-n_range = [100,200,400,700,1000];
+%n_range = [100,200,400,700,1000];
+n_range = [1000];
 m_range = [100];
 
 for i = 1:length(n_range)
     for j = 1:length(m_range)
         N = n_range(i);
         M = m_range(j);
-        fig1 = figure(1);
-        b = strcat('Scatter plot of model output Vs target output for N = ',int2str(N),' and M = ',int2str(M));
+        %fig1 = figure(1);
+        %b = strcat('Scatter plot of model output Vs target output for N = ',int2str(N),' and M = ',int2str(M));
         
         eval(sprintf('trainSet = trainSet_%d;',N));
         [coeffs,designMat,centroids,widthParam] = surface_fit(trainSet,N,M,0);
         model_output = designMat*coeffs;
         target_output = trainSet(:,3);
-        scatter(model_output,target_output,'ko','filled'); 
+        %scatter(model_output,target_output,'ko','filled'); 
+        designMat_test = zeros(size(testSet,1),M);
+        for i1=1:size(testSet,1)
+            for j=1:M
+                designMat_test(i1,j) = exp(-norm(testSet(i1,1:2)-centroids(j,:))^2)/widthParam(j,1);
+            end
+        end
         
+        %scatter(designMat_test*coeffs,testSet(:,3),'ro','filled'); 
+        b = strcat('Scatter plot of model output Vs target output for N = ',int2str(N),' and M = ',int2str(M),'on test data');
+        plot3(trainSet(:,2),trainSet(:,1),trainSet(:,3),'ro');
+        hold on;
+        plot3(trainSet(:,2),trainSet(:,1),model_output,'b*');
+        
+        %plot3(trainSet(:,2),trainSet(:,1),trainSet(:,3));
         ylabel('Target output');
         xlabel('Model output');
         title(b);
         
-        saveas(fig1,strcat('Plots_2/Scatter/VaryingN/VaryingN_N',int2str(N),'M',int2str(M),'.png'));
+        %saveas(fig1,strcat('test_200_100','test_1000_100','.png'));
+        %saveas(fig1,strcat('Plots_2/Scatter/VaryingN/VaryingN_N',int2str(N),'M',int2str(M),'.png'));
     end
 end 
 
