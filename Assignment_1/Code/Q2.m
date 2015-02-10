@@ -273,46 +273,50 @@ m_range = [100];
 
 for i = 1:length(n_range)
     for j = 1:length(m_range)
+        
         N = n_range(i);
         M = m_range(j);
-        %fig1 = figure(1);
-        %b = strcat('Scatter plot of model output Vs target output for N = ',int2str(N),' and M = ',int2str(M));
+        
+        fig1 = figure(1);
+       % b = strcat('Scatter plot of model output Vs target output for N = ',int2str(N),' and M = ',int2str(M));
         
         eval(sprintf('trainSet = trainSet_%d;',N));
         [coeffs,designMat,centroids,widthParam] = surface_fit(trainSet,N,M,0);
         model_output = designMat*coeffs;
         target_output = trainSet(:,3);
         %scatter(model_output,target_output,'ko','filled'); 
+        %axis equal;
+        
+        
         designMat_test = zeros(size(testSet,1),M);
         for i1=1:size(testSet,1)
             for j=1:M
                 designMat_test(i1,j) = exp(-norm(testSet(i1,1:2)-centroids(j,:))^2)/widthParam(j,1);
             end
-        end
+        end%
         
-        %scatter(designMat_test*coeffs,testSet(:,3),'ro','filled'); 
+        scatter(designMat_test*coeffs,testSet(:,3),'ro','filled'); 
         b = strcat('Scatter plot of model output Vs target output for N = ',int2str(N),' and M = ',int2str(M),'on test data');
-        plot3(trainSet(:,2),trainSet(:,1),trainSet(:,3),'ro');
-        hold on;
-        plot3(trainSet(:,2),trainSet(:,1),model_output,'b*');
+        %plot3(trainSet(:,2),trainSet(:,1),trainSet(:,3),'ro');
+        %hold on;
+        %plot3(trainSet(:,2),trainSet(:,1),model_output,'b*');
         
         %plot3(trainSet(:,2),trainSet(:,1),trainSet(:,3));
         ylabel('Target output');
         xlabel('Model output');
         title(b);
         
-        %saveas(fig1,strcat('test_200_100','test_1000_100','.png'));
+        saveas(fig1,strcat('Plots_2/Scatter/VaryingN/test_1000_100','.png'));
         %saveas(fig1,strcat('Plots_2/Scatter/VaryingN/VaryingN_N',int2str(N),'M',int2str(M),'.png'));
     end
 end 
-
 %}
 
 % Scatter plots for varying M
 
 %{
-n_range = [100];
-m_range = [10,40,80,100];
+n_range = [400];
+m_range = [10,50,100,400];
 
 for i = 1:length(n_range)
     for j = 1:length(m_range)
@@ -337,11 +341,12 @@ for i = 1:length(n_range)
 end
 %}
 
+
 % Scatter plots for varying lambda
 
 %{
-N = 100;
-M = 100;
+N = 400;
+M = 400;
 lambda_range = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,10];
 
 for i = 1:length(lambda_range)
@@ -363,4 +368,5 @@ for i = 1:length(lambda_range)
     saveas(fig1,strcat('Plots_2/Scatter/Varying_lambda/Varyinglambda_N',int2str(N),'M',int2str(M),'lambda',num2str(lambda),'.png'));    
   
 end
+
 %}
