@@ -61,8 +61,9 @@ testSet = load('../Data/group2/bivariateData/group2_test.txt');
 
 % Plots on varying M - note lambda = 0 here
 
-N_values = [1000]; % training set size
-M_values = [1000];  % no of basis functions
+%{
+N_values = [400]; % training set size
+M_values = [10,50,100,400];  % no of basis functions
 
 for i = 1:length(N_values)
     for j = 1:length(M_values)
@@ -70,7 +71,6 @@ for i = 1:length(N_values)
         [coeffs,designMat,centroids,widthParam] = surface_fit(trainSet,N_values(i),M_values(j),0);
         model_output = designMat*coeffs;
           
-        %{
         [x1,x2] = meshgrid(linspace(-10,10));
         y = zeros(size(x1,1),size(x1,2));
         basisVec = zeros(M_values(j),1);
@@ -82,11 +82,9 @@ for i = 1:length(N_values)
                 y(k,l) = basisVec'*coeffs;
             end
         end
-        %}
         
         fig1 = figure;
         plot3(trainSet(:,1),trainSet(:,2),trainSet(:,3),'ro');
-        
         %axis([-10,10,-10,10,min(y(:)),max(y(:))]);
         hold on;
         
@@ -105,7 +103,7 @@ for i = 1:length(N_values)
         
     end
 end
-
+%}
 
 % Plots on varying N - note lambda = 0 here
 
@@ -134,7 +132,7 @@ for i = 1:length(N_values)
         
         fig1 = figure;
         plot3(trainSet(:,1),trainSet(:,2),trainSet(:,3),'ro');
-        axis([-10,10,-10,10,min(y(:)),max(y(:))]);
+        %axis([-10,10,-10,10,min(y(:)),max(y(:))]);
         hold on;
         
         surf(x1,x2,y);
@@ -150,16 +148,14 @@ for i = 1:length(N_values)
         
     end
 end
-
 %}
 
 % Plots on varying lambda
 
 %{
-
-N = 100; % training set size
-M = 100;  % no of basis functions
-lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1];
+N = 1000; % training set size
+M = 1000;  % no of basis functions
+lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,10];
 
 for i = 1:length(lambda_values)
     
@@ -183,7 +179,7 @@ for i = 1:length(lambda_values)
         
     fig1 = figure;
     plot3(trainSet(:,1),trainSet(:,2),trainSet(:,3),'ro');
-    axis([-10,10,-10,10,min(y(:)),max(y(:))]);
+    %axis([-10,10,-10,10,min(y(:)),max(y(:))]);
     hold on;
         
     surf(x1,x2,y);
@@ -197,7 +193,6 @@ for i = 1:length(lambda_values)
     legend('show');
     saveas(fig1,strcat('Plots_2/Varying_lambda/Varyinglambda_N',int2str(N),'M',int2str(M),'lambda',num2str(lambda),'.png'));    
 end
-
 %}
 
 %%%%%%%%%%%%RMS ERROR PLOTS%%%%%%%%%
@@ -205,7 +200,8 @@ end
 % RMSE vs complexity 
 
 %{
-M_values = [10,50,100,200,400,600,700];  % no of basis functions
+
+M_values = [10,30,50,100,200,400,500,600,700];  % no of basis functions
 lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,10];
 
 train_rms = [];
@@ -238,14 +234,14 @@ saveas(gcf,'Plots_2/RMS/RMS_complexity_700.png');
 
 %{
 
-M_values = [10,50,100,200,400,600,700];  % no of basis functions
+M_values = [10,30,50,100,200,300,400];  % no of basis functions
 lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,10];
 
 train_rms = [];
 test_rms = [];
 val_rms = [];
 for i=1:length(lambda_values)
-    [rtrain,rtest,rval] = rmserr_Q2_lambda(trainSet_700,testSet,valSet,M_values,lambda_values(i));
+    [rtrain,rtest,rval] = rmserr_Q2_lambda(trainSet_400,testSet,valSet,M_values,lambda_values(i));
     train_rms = [train_rms,rtrain];
     test_rms = [test_rms,rtest];
     val_rms = [val_rms,rval];        
@@ -263,7 +259,7 @@ title('RMSE vs log(lambda)')
 ylabel('RMS error');
 xlabel('log(lambda)');
 legend('show');
-saveas(gcf,'Plots_2/RMS/RMS_lambda_700.png');
+saveas(gcf,'Plots_2/RMS/RMS_lambda_400.png');
 
 %}
 
