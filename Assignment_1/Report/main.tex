@@ -359,11 +359,11 @@ Here, we are given the dataset which is bivariate (2 input variables and 1 outpu
 
 As the goal is to fit a hyper surface to the given data using the linear model of regression, we need to decide on the number of Gaussian basis functions $M$ which decides the model complexity as well as the centroid and width parameter associated with each Gaussian basis function. 
 
-In order to obtain the centroids of the basis functions, we cluster the training data using $k$-means clustering where $k$ equals the number of basis functions and set the centroids associated with the basis functions to the centroids of the clusters obtained. We set the width parameter of each basis function to be the average distance from the two nearest neighboring cluster centers to the cluster centre of this basis function (read from literature).
+In order to obtain the centroids of the basis functions, we cluster the training data using $k$-means clustering where $k$ equals the number of basis functions and set the centroids associated with the basis functions to the centroids of the clusters obtained. We set the width parameter of each basis function to be the average distance from the two nearest neighboring cluster centers to the cluster center of this basis function (read from literature).
 
 Through the plots, we show the variation of model outputs and RMS errors on varying different  parameters and our analysis of the results to choose the best model.
 
-Here is a plot of the distribution of the input training data (1000 points) provided (x \& y axes correspond to the 2 input variables). We observe that there is a huge concentration of data points in the range [-10,10] in both input variables.
+Here is a plot of the distribution of the input training data (2000 points) provided (x \& y axes correspond to the 2 input variables and z corresponds to the target output). We observe that the given surface to be approximated has the shape of a bowl.
 \begin{figure}[H]
 \centering
 \includegraphics[width=100mm]{data_scatter}
@@ -378,30 +378,30 @@ Here is a plot of the distribution of the input training data (1000 points) prov
 
 \subsection{Surface Plots of approximated functions - Question 2}
 \begin{flushleft}
-The Surface plots depict the variation of the surface fit obtained on varying the model complexity ($M$ - No. of basis functions), on the training dataset of size 100. Each plot shows the data points and the fitted surface obtained by linear model of regression on Gaussian Basis functions.
+The Surface plots depict the variation of the surface fit obtained on varying the model complexity ($M$ - No. of basis functions), on the training dataset of size 400. Each plot shows the data points and the fitted surface obtained by linear model of regression on Gaussian Basis functions.
 
 \end{flushleft}
 \begin{figure}[H]
 
 \begin{subfigure}{.5\textwidth}
 \centering
-\includegraphics[width=\linewidth]{D2/VaryingM_N100M10}
-\caption{N = 100 M = 10}
+\includegraphics[width=\linewidth]{D2/VaryingM_N400M10}
+\caption{N = 400 M = 10}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
-\includegraphics[width=\linewidth]{D2/VaryingM_N100M40}
-\caption{N = 100 M = 40}
+\includegraphics[width=\linewidth]{D2/VaryingM_N400M50}
+\caption{N = 400 M = 50}
 \end{subfigure}
 
 
 \begin{subfigure}{.5\textwidth}
 \centering
-\includegraphics[width=\linewidth]{D2/VaryingM_N100M80}
-\caption{N = 100 M = 80}
+\includegraphics[width=\linewidth]{D2/VaryingM_N400M100}
+\caption{N = 400 M = 100}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
-\includegraphics[width=\linewidth]{D2/VaryingM_N100M100}
-\caption{N = 100 M = 100}
+\includegraphics[width=\linewidth]{D2/VaryingM_N400M400}
+\caption{N = 400 M = 400}
 \end{subfigure}
 
 
@@ -409,15 +409,17 @@ The Surface plots depict the variation of the surface fit obtained on varying th
 
 \textbf{Observations : \newline}
 \begin{itemize}
-\item We chose the training dataset with 100 points to clearly show the issue of overfitting (for large model complexities) in the absence of regularization. It is to be noted that the maximum model complexity possible here is the dataset size since the number of clusters cannot exceed the number of data points.
-\item We notice that for M=10, the surface generated has a large peak in the region centered about the origin as it has high concentration of data point leading to concentration of most clusters there. 
-\item As we increase M to 40, we observe the emergence of multiple smaller peaks on the surface owing to increase in number of generating Gaussians.
-\item Finally, as we increase M to 80 and 100, we observe large number of dominant peaks in the surface which fit the training data more closely (leading to the issue of overfitting).
+\item We chose the training dataset with 400 points to see the shape of surface obtained (for large model complexities) in the absence of regularization. It is to be noted that the maximum model complexity possible here is the dataset size since the number of clusters cannot exceed the number of data points.
+\item We notice that for $M=10$, the surface generated has a few peaks around the edges of teh bowl shaped surface, but it's not adequate to fit the data points well.
+
+\item As we increase $M$ to 50 and 100, we observe the emergence of multiple smaller peaks on the surface owing to increase in number of generating Gaussians. These smaller peaks fit the data points well, and we can observe the bowl-shaped surface obtained.
+\item Finally, as we increase $M$ to 400, we observe a large number of peaks in the surface which fit the training data more closely leading to the issue of overfitting. The surface obtained here, clearly has a poor generalization capability.
 \end{itemize}
 
 
 \begin{flushleft}
-The next set of surface plots show the variation in surface fit on using training datasets of different sizes. Each of these plots are shown for a model complexity of $M = 100$. The training set size is varied as - 100,200,400,700 and 1000. The plot $N =100$ is excluded below, as it has been shown earlier.
+The next set of surface plots show the variation in surface fit on using training datasets of different sizes. Each of these plots are shown for a model complexity of $M = 100$. The training set size is varied as - 100,200,400,700 and 1000. 
+%The plot $N =100$ is excluded below, as it has been shown earlier.
 
 \end{flushleft}
 \begin{figure}[H]
@@ -452,12 +454,16 @@ The next set of surface plots show the variation in surface fit on using trainin
 
 \begin{itemize}
 \item We have studied that for a given model complexity, the over-fitting problem becomes less severe as the size of the data set increases. This is because the larger the data set, the more complex the model that we can afford to fit to the data.
-\item For M=100, we observe that for smaller data set sizes of N=100, N=200, we observe that the dominant peaks are distributed towards the extremes of the input region and are precisely tuned to fit to the data points in the training data leading to overfitting.
-\item As we increase N to 700 and 1000, we observe that the distribution of the peaks becomes more stable and uniform, and it is expected that the surface fitted would generalize well to new data since the peaks are not fit exactly to few training data points.
+\item For $M=100$, for smaller data set sizes of $N=200, N=400$, we observe that the peaks are unevenly distributed towards the extremes of the input region and are precisely tuned to fit to the data points in the training data leading to overfitting.
+\item As we increase $N$ to 700 and 1000, we observe that the distribution of the peaks becomes more stable and uniform, and we can easily see that the surface fitted would generalize well to new data since the peaks are not fit exactly to few training data points, and it resembles the bowl shaped surface obtained on plotting the target output.
 \end{itemize}
 
 \begin{flushleft}
-Next, we look at the effect of the regularization parameter $\lambda$ on the surface fits obtained. The plots shown below are for $N = 100$ and $M = 100$. The reason we choose $M$ to be high, is to demonstrate the effect of overfitting.
+Next, we look at the effect of the regularization parameter $\lambda$ on the surface fits obtained. The plots shown below are for $N = 1000$ and $M = 1000$. The reason we choose $M$ to be high, is to demonstrate the effect of overfitting.
+
+
+\textbf{SOMEONE DO THESE OBSERVATIONS}
+
 
 \end{flushleft}
 
@@ -465,22 +471,22 @@ Next, we look at the effect of the regularization parameter $\lambda$ on the sur
 
 \begin{subfigure}{.5\textwidth}
 \centering
-\includegraphics[width=\linewidth]{D2/Varyinglambda_N100M100lambda1e-06}
+%\includegraphics[width=\linewidth]{D2/Varyinglambda_N1000M1000lambda1e-06}
 \caption{$\lambda$ = $10^{-6}$}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
-\includegraphics[width=\linewidth]{D2/Varyinglambda_N100M100lambda0_01}
+%\includegraphics[width=\linewidth]{D2/Varyinglambda_N1000M1000lambda0_01}
 \caption{$\lambda$ = 0.01}
 \end{subfigure}
 
 
 \begin{subfigure}{.5\textwidth}
 \centering
-\includegraphics[width=\linewidth]{D2/Varyinglambda_N100M100lambda1}
+%\includegraphics[width=\linewidth]{D2/Varyinglambda_N100M100lambda1}
 \caption{$\lambda$ = 1}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
-\includegraphics[width=\linewidth]{D2/Varyinglambda_N100M100lambda10}
+%\includegraphics[width=\linewidth]{D2/Varyinglambda_N100M100lambda10}
 \caption{$\lambda$ = $10$}
 \end{subfigure}
 
@@ -499,7 +505,7 @@ Next, we look at the effect of the regularization parameter $\lambda$ on the sur
 
 \subsection{Plots of RMS Error - Question 3}
 
-In this section , we show the variation of RMS error, w.r.t model complexity $M$. The plots shown below are for datasets of size 100 and 1000.
+In this section , we show the variation of RMS error, w.r.t model complexity $M$. The plots shown below are for datasets of size 400 and 700.
 Again, as earlier, for each set of plots generated on varying 1 parameter (say $M$) , the optimal value of the other parameter (say $\lambda$) is obtained by cross-validation. 
 The errors have been shown on all 3 datasets for each case (test, train and validation). 
 
@@ -507,8 +513,8 @@ The errors have been shown on all 3 datasets for each case (test, train and vali
 
 \begin{subfigure}{.5\textwidth}
 \centering
-\includegraphics[width=\linewidth]{D2/RMS_complexity_100}
-\caption{Varying M, Optimal $\lambda$, 100 train size}
+\includegraphics[width=\linewidth]{D2/RMS_complexity_400}
+\caption{Varying M, Optimal $\lambda$, 400 train size}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
 \includegraphics[width=\linewidth]{D2/RMS_complexity_700}
@@ -518,8 +524,8 @@ The errors have been shown on all 3 datasets for each case (test, train and vali
 
 \begin{subfigure}{.5\textwidth}
 \centering
-\includegraphics[width=\linewidth]{D2/RMS_lambda_100}
-\caption{Optimal M, Varying $\lambda$, 100 train size}
+\includegraphics[width=\linewidth]{D2/RMS_lambda_400}
+\caption{Optimal M, Varying $\lambda$, 400 train size}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
 \includegraphics[width=\linewidth]{D2/RMS_lambda_700}
@@ -530,10 +536,13 @@ The errors have been shown on all 3 datasets for each case (test, train and vali
 \textbf{\\[20pt]Observations :}
 
 \begin{itemize}
-\item For the first plot, we notice that there is slight overfitting on the train data with increasing complexity, due to its small size of 100 leading to decrease in RMS error. Since $\lambda$ is chosen using the validation set, it shows the least RMS error.
-\item  In the second plot we notice moderate overfitting (note that the scale does not begin at 0) on the train data. Even though $\lambda$ is chosen by cross validation, the RMS error on the validation set still grows with increasing complexity of the model since the training points are insufficient leading to overfitting in spite of regularization. The degree of error increase in the validation set (particularly at M $>$ 400 here is more than the previous case due to the high complexity of models being fit.
-\item The two bottom plots show the variation in error with regularization. In the first plot the error on training set is spiky and erratic due to its small size. 
-\item In the second plot, since M values are chosen to reduce error on the validation set, we see a drop in the same. The test set and train set show relatively higher RMS error and do not seem to vary much with the value of regularization parameter. This is probably because a relatively lower value of complexity gets chosen for higher regularization parameters which seems to perform consistently since it fits only the significant clusters.
+\item For the first plot, we notice that there is slight overfitting on the train data with increasing complexity, due to its small size of 400 leading to decrease in RMS error for training data. As we choose the optimal value of $\lambda$ in each case leading to good generalization ability, we see that the RMS error decreases for the test data also. 
+
+\item The second plot closely resembles the first one, but the values of RMS errors obtained are much lower, as the training is done on much larger set of points. Again, we see that RMS error decreases with increase in model complexity.
+
+\item The two bottom plots show the variation in error with regularization.
+In both the plots, we observe that the training error is much lesser than the validation and test error. In the first plot, we observe a dip in the value of train error at $\log {\lambda} = -6 $, which denotes the optimal value for $N = 400$. 
+\item The second plot also is very similar to the first one. Here, the optimal value of $\log{\lambda}$ occurs at $-4$. We see that a higher value of $\lambda$ is required to get a good fit here, since as the number of data points increases, the optimal model complexity would be higher requiring a higher regularization factor.
 \end{itemize}
 
 
@@ -543,29 +552,30 @@ The errors have been shown on all 3 datasets for each case (test, train and vali
 
 \subsection{Scatter plots of target and model output - Question 4}
 
-In these plots, we vary the number of gaussians(M) with the training dataset fixed at size N=100. We choose a relatively small training set so that the plots are indicative of overfitting.
+In these plots, we vary the number of gaussians($M$) with the training dataset fixed at size $N=400$. 
+%We choose a reasonably sized training set so that the plots are indicative of overfitting.
 
 \begin{figure}[H]
 
 \begin{subfigure}{.5\textwidth}
 \centering
-\includegraphics[width=\linewidth]{D2/Scatter/VaryingM_N100M10}
-\caption{N = 100 M = 10}
+\includegraphics[width=\linewidth]{D2/Scatter/VaryingM_N400M10}	
+\caption{N = 400 M = 10}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
-\includegraphics[width=\linewidth]{D2/Scatter/VaryingM_N100M40}
-\caption{N = 100 M = 40}
+\includegraphics[width=\linewidth]{D2/Scatter/VaryingM_N400M50}
+\caption{N = 400 M = 50}
 \end{subfigure}
 
 
 \begin{subfigure}{.5\textwidth}
 \centering
-\includegraphics[width=\linewidth]{D2/Scatter/VaryingM_N100M80}
-\caption{N = 100 M = 80}
+\includegraphics[width=\linewidth]{D2/Scatter/VaryingM_N400M100}
+\caption{N = 400 M = 100}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
-\includegraphics[width=\linewidth]{D2/Scatter/VaryingM_N100M100}
-\caption{N = 100 M = 100}
+\includegraphics[width=\linewidth]{D2/Scatter/VaryingM_N400M400}
+\caption{N = 400 M = 400}
 \end{subfigure}
 
 
@@ -573,27 +583,30 @@ In these plots, we vary the number of gaussians(M) with the training dataset fix
 
 \textbf{Observations : \newline}
 \begin{itemize}
-\item For a fixed training data set size of 100, we vary the model complexity from 10 to 100 to observe the scatter plot of model output vs target output.
-\item We observe that for the maximum possible M value of 100, we obtain an almost perfect scatter plot (resembles $y=x$ plot) as here there are 100 clusters which can generate each training data point separately and hence fit the training data perfectly (i.e huge overfitting, as shown by the plots after this for the corresponding test set).
-\item As we decrease the value of M, the scatter plot gets distorted from $y=x$ line.
-\item When we reach M=10, due to the presence of very few Gaussian basis functions, the surface fitted is incapable of matching the target output in most cases.
+\item For a fixed training data set size of 400, we vary the model complexity from 10 to 400 to observe the scatter plot of target output vs model output.
+\item For $M= 10$, we have very few gaussian basis functions which leads to the fitted surface being incapable of matching the target output in most cases. 
+
+\item For $M = 50,100$, we see a much better scatter plot, with a lot of points being close to the $y = x$ line.
+
+\item We observe that for the maximum possible $M$ value of 400, we obtain an almost perfect scatter plot as here there are 400 clusters which can generate each training data point separately and hence fit the training data perfectly (i.e huge overfitting, as shown by the plots after this for the corresponding test set).
+
 \end{itemize}
 \newpage
 Test set plots corresponding to the above training set plots.
 \begin{figure}
 \begin{subfigure}{.5\textwidth}
 \centering
-\includegraphics[width=\linewidth]{t1}
-\caption{N = 100 M = 80}
+\includegraphics[width=\linewidth]{D2/Scatter/test_400_400}
+\caption{N = 400 M = 400}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
-\includegraphics[width=\linewidth]{t2}
-\caption{N = 100 M = 100}
+\includegraphics[width=\linewidth]{D2/Scatter/test_1000_400}
+\caption{N = 1000 M = 400}
 \end{subfigure}
 \end{figure}
 \textbf{\\[10pt]Remarks:}
 \begin{itemize}
-\item Clearly for the test set, very poor performance is noticeable for the case of M=100, N=100, which performed very well for the training set hence indicating overfitting.
+\item Clearly for the test set, very poor performance is noticeable for the case of $M=400, N=400$, which performed very well for the training set hence indicating overfitting, while for $N = 1000$, we observe good generalization ability.
 \end{itemize}
 \newpage
 In these plots, we vary the number of points in the training dataset(N) with complexity(M) fixed at 100. 
@@ -628,31 +641,33 @@ In these plots, we vary the number of points in the training dataset(N) with com
 \textbf{Observations :}
 
 \begin{itemize}
-\item Moving from N=100 to N=200 leads to more distortion indicating a more generalizable fit (N=100, M=100 was plotted behind and shows x=y behavior since the model is overfit). The same is noticeable as we increase the dataset size even further.
+\item Moving from $N=200$ to $N=400$ leads to more distortion indicating a more generalizable fit. The same is noticeable as we increase the dataset size even further.
 \end{itemize}
 \newpage
 We now introduce regularization and very the parameter $\lambda$ to inspect its effect on the fitting.
+
+\textbf{SOMEONE DO THESE OBSERVATIONS}
 
 \begin{figure}[H]
 
 \begin{subfigure}{.5\textwidth}
 \centering
-\includegraphics[width=\linewidth]{D2/Scatter/Varyinglambda_N100M100lambda1e-06}
+%\includegraphics[width=\linewidth]{D2/Scatter/Varyinglambda_N100M100lambda1e-06}
 \caption{$\lambda$ = $10^{-6}$}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
-\includegraphics[width=\linewidth]{D2/Scatter/Varyinglambda_N100M100lambda0_01}
+%\includegraphics[width=\linewidth]{D2/Scatter/Varyinglambda_N100M100lambda0_01}
 \caption{$\lambda$ = 0.01}
 \end{subfigure}
 
 
 \begin{subfigure}{.5\textwidth}
 \centering
-\includegraphics[width=\linewidth]{D2/Scatter/Varyinglambda_N100M100lambda1}
+%\includegraphics[width=\linewidth]{D2/Scatter/Varyinglambda_N100M100lambda1}
 \caption{$\lambda$ = 1}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
-\includegraphics[width=\linewidth]{D2/Scatter/Varyinglambda_N100M100lambda10}
+%\includegraphics[width=\linewidth]{D2/Scatter/Varyinglambda_N100M100lambda10}
 \caption{$\lambda$ = $10$}
 \end{subfigure}
 
