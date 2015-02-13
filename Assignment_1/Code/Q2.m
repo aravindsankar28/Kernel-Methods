@@ -155,8 +155,8 @@ end
 %{
 N = 1000; % training set size
 M = 1000;  % no of basis functions
-lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,10];
-
+%lambda_values = [0,10^(-6),10^(-5),10^(-4),10^(-3),10^(-2),10^(-1),1,10];
+%lambda_values = [500];
 for i = 1:length(lambda_values)
     
     lambda = lambda_values(i);
@@ -193,6 +193,7 @@ for i = 1:length(lambda_values)
     legend('show');
     saveas(fig1,strcat('Plots_2/Varying_lambda/Varyinglambda_N',int2str(N),'M',int2str(M),'lambda',num2str(lambda),'.png'));    
 end
+
 %}
 
 %%%%%%%%%%%%RMS ERROR PLOTS%%%%%%%%%
@@ -368,5 +369,4 @@ for i = 1:length(lambda_range)
     saveas(fig1,strcat('Plots_2/Scatter/Varying_lambda/Varyinglambda_N',int2str(N),'M',int2str(M),'lambda',num2str(lambda),'.png'));    
   
 end
-
 %}

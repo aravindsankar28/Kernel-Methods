@@ -11,5 +11,5 @@
 \contentsline {subsection}{\numberline {3.2}Model creation}{12}{subsection.3.2}
 \contentsline {subsection}{\numberline {3.3}Results}{12}{subsection.3.3}
 \contentsline {subsection}{\numberline {3.4}Surface Plots of approximated functions - Question 2}{12}{subsection.3.4}
-\contentsline {subsection}{\numberline {3.5}Plots of RMS Error - Question 3}{15}{subsection.3.5}
-\contentsline {subsection}{\numberline {3.6}Scatter plots of target and model output - Question 4}{17}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.5}Plots of RMS Error - Question 3}{16}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}Scatter plots of target and model output - Question 4}{18}{subsection.3.6}

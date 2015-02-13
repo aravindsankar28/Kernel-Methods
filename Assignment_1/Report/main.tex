@@ -461,36 +461,40 @@ The next set of surface plots show the variation in surface fit on using trainin
 \begin{flushleft}
 Next, we look at the effect of the regularization parameter $\lambda$ on the surface fits obtained. The plots shown below are for $N = 1000$ and $M = 1000$. The reason we choose $M$ to be high, is to demonstrate the effect of overfitting.
 
-
-\textbf{SOMEONE DO THESE OBSERVATIONS}
-
-
 \end{flushleft}
 
 \begin{figure}[H]
 
 \begin{subfigure}{.5\textwidth}
 \centering
-%\includegraphics[width=\linewidth]{D2/Varyinglambda_N1000M1000lambda1e-06}
+\includegraphics[width=\linewidth]{D2/Varyinglambda_N1000M1000lambda1e-06}
 \caption{$\lambda$ = $10^{-6}$}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
-%\includegraphics[width=\linewidth]{D2/Varyinglambda_N1000M1000lambda0_01}
+\includegraphics[width=\linewidth]{D2/Varyinglambda_N1000M1000lambda0_01}
 \caption{$\lambda$ = 0.01}
 \end{subfigure}
 
 
 \begin{subfigure}{.5\textwidth}
 \centering
-%\includegraphics[width=\linewidth]{D2/Varyinglambda_N100M100lambda1}
+\includegraphics[width=\linewidth]{D2/Varyinglambda_N1000M1000lambda1}
 \caption{$\lambda$ = 1}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
-%\includegraphics[width=\linewidth]{D2/Varyinglambda_N100M100lambda10}
+\includegraphics[width=\linewidth]{D2/Varyinglambda_N1000M1000lambda10}
 \caption{$\lambda$ = $10$}
 \end{subfigure}
 
-
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{D2/Varyinglambda_N1000M1000lambda100}
+\caption{$\lambda$ = 100}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=\linewidth]{D2/Varyinglambda_N1000M1000lambda500}
+\caption{$\lambda$ = $500$}
+\end{subfigure}
 
 \end{figure}
 
@@ -500,6 +504,7 @@ Next, we look at the effect of the regularization parameter $\lambda$ on the sur
 \begin{itemize}
 \item The very small value of $\lambda=10^{-6}$ almost corresponds to the case with negligible regularization. This corresponds to the case of overfitting as the peaks of the surface are tuned precisely to the training data points and don't generalize well.
 \item As the value of $\lambda$ increases upto 10, we penalize the coefficients of the surface generated preventing large weights (in the case of overfitting). Thus, we observe the surface becomes smoother with lesser dominant peaks and these peaks generalize well as they are fit exactly to individual data points.
+\item As we increase the value of $\lambda$ further to 100 and 500, we observe that emphasis on fitting the surface to the training data reduces significantly, leading to surfaces with very less complexity.
 \end{itemize}
 
 
@@ -644,30 +649,28 @@ In these plots, we vary the number of points in the training dataset(N) with com
 \item Moving from $N=200$ to $N=400$ leads to more distortion indicating a more generalizable fit. The same is noticeable as we increase the dataset size even further.
 \end{itemize}
 \newpage
-We now introduce regularization and very the parameter $\lambda$ to inspect its effect on the fitting.
-
-\textbf{SOMEONE DO THESE OBSERVATIONS}
+We now introduce regularization and vary the parameter $\lambda$ to inspect its effect on the surface fitting for $N=400$, $M=400$.
 
 \begin{figure}[H]
 
 \begin{subfigure}{.5\textwidth}
 \centering
-%\includegraphics[width=\linewidth]{D2/Scatter/Varyinglambda_N100M100lambda1e-06}
+\includegraphics[width=\linewidth]{D2/Scatter/Varyinglambda_N400M400lambda1e-06}
 \caption{$\lambda$ = $10^{-6}$}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
-%\includegraphics[width=\linewidth]{D2/Scatter/Varyinglambda_N100M100lambda0_01}
+\includegraphics[width=\linewidth]{D2/Scatter/Varyinglambda_N400M400lambda0_01}
 \caption{$\lambda$ = 0.01}
 \end{subfigure}
 
 
 \begin{subfigure}{.5\textwidth}
 \centering
-%\includegraphics[width=\linewidth]{D2/Scatter/Varyinglambda_N100M100lambda1}
+\includegraphics[width=\linewidth]{D2/Scatter/Varyinglambda_N400M400lambda1}
 \caption{$\lambda$ = 1}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
-%\includegraphics[width=\linewidth]{D2/Scatter/Varyinglambda_N100M100lambda10}
+\includegraphics[width=\linewidth]{D2/Scatter/Varyinglambda_N400M400lambda10}
 \caption{$\lambda$ = $10$}
 \end{subfigure}
 
@@ -679,8 +682,8 @@ We now introduce regularization and very the parameter $\lambda$ to inspect its 
 \textbf{Observations :}
 
 \begin{itemize}
-\item In the first plot, which is same as the one previously plotted, the overfit is apparent.
-\item As we increase the value of $\lambda$ there is more distortion noticeable.
+\item For very small values of $\lambda$, we observe overfitting where the scatter plot of model output vs target output follows the $y=x$ line almost perfectly.
+\item As we increase the value of $\lambda$, there is more distortion noticeable and overfitting to the training data reduces.
 \end{itemize}
 
 

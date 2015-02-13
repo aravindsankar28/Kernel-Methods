@@ -59,9 +59,9 @@ cc(3,:) = a;
 
 
 %M_values = [0,1,3,9,15];
-M_values = [15];
+M_values = [1];
 for i = 1:length(M_values)
-   Plot_fn_1(train_1000,M_values(i),0.0,1,validationSet,testSet);
+   Plot_fn_1(train_20,M_values(i),0.0,1,validationSet,testSet);
 end
 
 
