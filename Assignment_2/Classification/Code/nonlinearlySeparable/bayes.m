@@ -1,0 +1,1 @@
+scatter(train(:,1),train(:,2),[], target_train);
