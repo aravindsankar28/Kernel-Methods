@@ -1,0 +1,15 @@
+function num_comps = find_no_mixture_comps(data,MaxComp,iters)
+
+num_comp_best = zeros(MaxComp,1);
+for iter = 1:50
+    AIC = zeros(9,1);
+    GMModels = cell(9,1);
+    options = statset('MaxIter',500);
+    for k = 1:9
+        GMModels{k} = fitgmdist(class1_train,k);
+        AIC(k)= GMModels{k}.AIC;
+    end
+    [minAIC,numComponents] = min(AIC);
+    num_comp_best(numComponents) = num_comp_best(numComponents) + 1;
+end
+[,num_comps = max(num_comp_best);

@@ -1,9 +1,8 @@
 load_data;
 scatter(train(:,1),train(:,2),'*');
 hold on;
-% Here 50 is the number of times the EM (GMM is fit) is run to make sure
-% that correct result is obtained.
-
+% Here 50 is the number of times the EM (GMis run to make sure that the
+% correct result is obtained
 num1 = find_no_mixture_comps(class1_train,6,50); % Best is 3
 gm_1 = fitgmdist(class1_train,num1);
 ezcontour(@(x,y)pdf(gm_1,[x y]));

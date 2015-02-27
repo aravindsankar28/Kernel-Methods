@@ -3,7 +3,7 @@ load_data;
 scatter(train(:,1),train(:,2),[], target_train);
 % Here it's obvious that numer of gaussians = 1 from scatter plot
 
-options = statset('Display','final');
+options = statset('Display','final','MaxIter',1500);
 gm_1 = fitgmdist(class1_train,1,'Options',options);
 gm_2 = fitgmdist(class2_train,1,'Options',options);
 gm_3 = fitgmdist(class3_train,1,'Options',options);
@@ -35,3 +35,4 @@ hold on;
 ezcontour(@(x,y)pdf(gm_3,[x y]),[min(train(:,1)) max(train(:,1))],[min(train(:,2)) max(train(:,2))]);
 hold on;
 ezcontour(@(x,y)pdf(gm_4,[x y]),[min(train(:,1)) max(train(:,1))],[min(train(:,2)) max(train(:,2))]);
+
