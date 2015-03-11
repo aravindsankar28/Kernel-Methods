@@ -14,6 +14,14 @@ hold on;
 
 num2 = find_no_mixture_comps(class2_train,10,100);
 gm_2 = fitgmdist(class2_train,num2);
-ezcontour(@(x,y)pdf(gm_2,[x y]));
-% Still can't figure out optimal no. of components for class 2 .. the AIC
-% criterion keeps decreasing. 
+ezcontour(@(x,y)pdf(gm_2,[x y]),[-2 2]);
+
+figure;
+% Full plot
+scatter(train(:,1),train(:,2),'*');
+hold on;
+ezcontour(@(x,y)pdf(gm_1,[x y]),[-2 2], [-2 2]);
+hold on;
+ezcontour(@(x,y)pdf(gm_2,[x y]),[-2 2],[-2 2]);
+
+
