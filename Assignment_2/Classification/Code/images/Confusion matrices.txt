@@ -1,0 +1,15 @@
+Train
+\left(\begin{array}{ccccc} 54 & 20 & 35 & 0 & 5\\ 4 & 58 & 12 & 1 & 13\\ 2 & 32 & 88 & 0 & 20\\ 0 & 0 & 0 & 114 & 0\\ 0 & 4 & 3 & 0 & 254 \end{array}\right)
+
+Val
+\left(\begin{array}{ccccc} 11 & 7 & 14 & 0 & 7\\ 2 & 21 & 4 & 0 & 2\\ 5 & 12 & 23 & 0 & 8\\ 0 & 0 & 0 & 39 & 0\\ 1 & 9 & 3 & 0 & 74 \end{array}\right)
+
+Test
+\left(\begin{array}{ccccc} 9 & 7 & 17 & 0 & 4\\ 2 & 19 & 7 & 0 & 2\\ 9 & 13 & 17 & 0 & 9\\ 0 & 0 & 0 & 37 & 0\\ 0 & 3 & 2 & 0 & 82 \end{array}\right)
+
+
+Accuracy :
+
+Train : 0.79
+Val : 0.6942
+Test :  0.6862

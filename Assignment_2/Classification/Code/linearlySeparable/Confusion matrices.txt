@@ -1,0 +1,8 @@
+Train :
+\left(\begin{array}{cc} 150 & 0\\ 0 & 600 \end{array}\right)
+
+Val:
+\left(\begin{array}{cc} 90 & 0\\ 0 & 360 \end{array}\right)
+
+Test :
+\left(\begin{array}{cc} 60 & 0\\ 0 & 240 \end{array}\right)

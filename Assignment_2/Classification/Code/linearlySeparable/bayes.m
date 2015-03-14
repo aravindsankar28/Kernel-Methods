@@ -1,6 +1,11 @@
 load_data;
 figure;
-scatter(train(:,1),train(:,2),[], target_train);
+scatter(train(:,1),train(:,2),[], target_train,'*');
+a = xlabel('$x_1$');
+b = ylabel('$x_2$');
+set(a,'Interpreter','latex');
+set(b,'Interpreter','latex');
+title('Input data having 4 classes');
 
 % Here it's obvious that numer of gaussians = 1 from scatter plot
 %GMModels = cell(4,1);
@@ -34,12 +39,12 @@ p_val = [pdf(gm_1,val), pdf(gm_2,val), pdf(gm_3,val), pdf(gm_4,val)];
 
 % Here , C is confusion matrix
 [C_test,order1] = confusionmat(target_test,y_test);
-[C_val,order2] = confusionmat(target_test,y_test);
+[C_val,order2] = confusionmat(target_val,y_val);
 
 figure;
 
 % Contour plots
-scatter(train(:,1),train(:,2));
+scatter(train(:,1),train(:,2),'*');
 hold on;
 ezcontour(@(x,y)pdf(gm_1,[x y]),[min(train(:,1)) max(train(:,1))],[min(train(:,2)) max(train(:,2))]);
 hold on;
@@ -48,6 +53,13 @@ hold on;
 ezcontour(@(x,y)pdf(gm_3,[x y]),[min(train(:,1)) max(train(:,1))],[min(train(:,2)) max(train(:,2))]);
 hold on;
 ezcontour(@(x,y)pdf(gm_4,[x y]),[min(train(:,1)) max(train(:,1))],[min(train(:,2)) max(train(:,2))]);
+
+a = xlabel('$x_1$');
+b = ylabel('$x_2$');
+set(a,'Interpreter','latex');
+set(b,'Interpreter','latex');
+
+title('Gaussian contours of the 4 class conditional distributions');
 
 
 % Decision region.
@@ -73,5 +85,8 @@ plot(class2_train(:,1),class2_train(:,2),'g*');
 plot(class3_train(:,1),class3_train(:,2),'b*');
 plot(class4_train(:,1),class4_train(:,2),'k*');
 
-xlabel('x');
-ylabel('y');
+a = xlabel('$x_1$');
+b = ylabel('$x_2$');
+set(a,'Interpreter','latex');
+set(b,'Interpreter','latex');
+title('Decision region plot');

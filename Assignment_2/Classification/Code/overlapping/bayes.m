@@ -1,5 +1,11 @@
 load_data;
 scatter(train(:,1),train(:,2),[], target_train,'*');
+a = xlabel('$x_1$');
+b = ylabel('$x_2$');
+set(a,'Interpreter','latex');
+set(b,'Interpreter','latex');
+title('Input data having 2 classes');
+
 figure;
 scatter(train(:,1),train(:,2),'*');
 hold on;
@@ -16,20 +22,30 @@ num2 = find_no_mixture_comps(class2_train,5,10);
 gm_2 = fitgmdist(class2_train,num2);
 ezcontour(@(x,y)pdf(gm_2,[x y]), [-6, 12],[-6, 12]);
 
+
+a = xlabel('$x_1$');
+b = ylabel('$x_2$');
+set(a,'Interpreter','latex');
+set(b,'Interpreter','latex');
+title('Gaussian contours of both the classes');
+
+
 % Prediction of class label for new examples (test data)
 
 % P(X|C_k) - likelihood
 p_test = [pdf(gm_1,test), pdf(gm_2,test)];   
 p_val = [pdf(gm_1,val), pdf(gm_2,val)];   
+p_train = [pdf(gm_1,train), pdf(gm_2,train)];   
 
 % argmax_i P(X|C_k)
 [~,y_test]  = max(p_test,[],2);   
 [~,y_val]  = max(p_val,[],2);   
-
+[~,y_train]  = max(p_train,[],2);   
 % Here , C is confusion matrix
-[C_test,order1] = confusionmat(target_test,y_test);
-[C_val,order2] = confusionmat(target_test,y_test);
 
+[C_test,order1] = confusionmat(target_test,y_test);
+[C_val,order2] = confusionmat(target_val,y_val);
+[C_train,order3] = confusionmat(target_train,y_train);
 
 
 % Decision region.
@@ -53,6 +69,8 @@ colormap(cmap);
 plot(class1_train(:,1),class1_train(:,2),'r*');
 plot(class2_train(:,1),class2_train(:,2),'b*');
 
-
-xlabel('x');
-ylabel('y');
+a = xlabel('$x_1$');
+b = ylabel('$x_2$');
+set(a,'Interpreter','latex');
+set(b,'Interpreter','latex');
+title('Decision region plot');

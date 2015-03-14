@@ -2,17 +2,16 @@ load_data;
 
 inputs = data_input';
 targets = data_target';
-
-val_performances = zeros(100,1);
-train_performances = zeros(100,1);
-test_performances = zeros(100,1);
-for i = 1:100
+val_performances = ones(100,1)*10000;
+train_performances = ones(100,1)*10000;
+test_performances = ones(100,1)*10000;
+for i = 2:100
 
     hiddenLayerSize = i*2;
     net = fitnet(hiddenLayerSize);
     net.performFcn = 'mse';
     net.trainFcn = 'trainlm';
-    %net.trainParam.epochs = 1000;
+    net.trainParam.epochs = 1000;
     %net.trainParam.goal = 0.009;
     net.plotFcns = {'plotperform','plottrainstate','ploterrhist', ...
       'plotregression', 'plotfit'};
@@ -51,21 +50,11 @@ end
 num = idx*2;
 num
 
-% Best num = 4
-
 net = fitnet(num);
 net.performFcn = 'mse';
 net.trainFcn = 'trainlm';
-net.trainParam.epochs = 1000;
+net.trainParam.epochs = 3000;
 net.trainParam.goal = 0.0001;
-net.plotFcns = {'plotperform','plottrainstate','ploterrhist', ...
-  'plotregression', 'plotfit'};
-
-net.divideFcn = 'divideblock';  % Divide blockwise
-net.divideParam.trainRatio = (2/3);
-net.divideParam.valRatio = (1/6);
-net.divideParam.testRatio = (1/6);
-
 
 [net,tr] = train(net,inputs,targets);
 outputs = net(inputs);
@@ -79,27 +68,19 @@ valPerformance = perform(net,valTargets,outputs);
 testPerformance = perform(net,testTargets,outputs);
 
 models = (1:100)*2;
-plot(models,train_performances,models,val_performances,models,test_performances);
-xlabel('Model complexity (Nodes in hidden layer)');
-ylabel('Performance (MSE)');
-title('Plot showing variation of MSE for different model complexities');
+plot(models,train_performances(2:100),models,val_performances(2:100),models,test_performances(2:100));
+%plot(models,train_performances,models,val_performances,models,test_performances);
+
 % For scatter plot, check plotregression
 
-% Plot(s) of model and target outputs
-figure, plotfit(net,inputs,targets);
-
-figure, plot(inputs, targets,'r*',inputs,outputs,'b*');
-title('Plot showing the model and target output (all points)');
-xlabel('x');
-ylabel('Target and Model output');
+figure, plot3(inputs(1,:)',inputs(2,:)',targets','r*',inputs(1,:)',inputs(2,:)',outputs','b*');
 legend('Target output','Model output');
 
-% To plot output at hidden and output nodes w.r.t epochs
-epochs = [1,2,4,8,1000];
 
-legend_str = cell(5,1);
-figure;
-cc = hsv(5);
+
+% To plot output at hidden and output nodes w.r.t epochs
+
+epochs = [1,2,5,15,1000];
 
 for i = 1:length(epochs)
     net = fitnet(num);
@@ -113,16 +94,7 @@ for i = 1:length(epochs)
     net.divideParam.testRatio = (1/6);
 	[net,tr] = train(net,inputs,targets);
 	outputs = net(inputs);
-	plot(inputs,outputs,'*','color',cc(i,:)); 
-    hold on;
-   
-    legend_str{i} = strcat('Epoch  ',int2str(epochs(i)));
     
+	figure,plot3(inputs(1,:)',inputs(2,:)',outputs','k*');
+    legend(int2str(epochs(i)));
 end
-legend(legend_str);
-xlabel('x');
-ylabel('Model output');
-title('Output of output node as a fuction of Epochs');
-
-
-
