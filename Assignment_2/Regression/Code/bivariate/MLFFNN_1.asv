@@ -70,9 +70,8 @@ testPerformance = perform(net,testTargets,outputs);
 models = (2:100)*2;
 plot(models,train_performances(2:100),models,val_performances(2:100),models,test_performances(2:100));
 
-xlabel('Model complexity (No. of hidden nodes)');
-ylabel('Performance (MSE)');
-legend('Train','Validation','Test');
+xlabel('');
+ylabel('');
 %plot(models,train_performances,models,val_performances,models,test_performances);
 
 % For scatter plot, check plotregression
