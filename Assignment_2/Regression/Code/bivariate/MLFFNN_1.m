@@ -122,7 +122,7 @@ for i = 1:length(epochs)
             s = actFcn(a, actFncParams);
         end
     end
-    figure,plot3(inputs(1,:)',inputs(2,:)',s(3,:)','*');
+    figure,plot3(inputs(1,:)',inputs(2,:)',s(5,:)','*');
     title(int2str(epochs(i)));
     
     
@@ -131,5 +131,5 @@ for i = 1:length(epochs)
     a = xlabel('$x_1$');
     b = ylabel('$x_2$');
     set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('Approximated function at epoch =  ',int2str(epochs(i))));
+    set(b,'Interpreter','latex');title(strcat('Hidden layer output at epoch =  ',int2str(epochs(i))));
 end
