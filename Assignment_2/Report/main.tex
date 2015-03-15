@@ -152,8 +152,24 @@ For this simple dataset, we use a feedforward neural network with 1 hidden layer
 The number of nodes in the hidden layer (model complexity) was estimated using cross-validation on the validation dataset given. 
 
 For the best performance on the validation data, we get ?? nodes in the hidden layer. For this configuration, the results obtained are shown below :
-
+	
 % Confusion matrices %
+\textbf{Train :}
+
+\begin{tabular}{|c|c|c|c|} \hline 250 & 0 & 0 & 0\\ \hline 0 & 250 & 0 & 0\\ \hline 0 & 0 & 250 & 0\\ \hline 0 & 0 & 0 & 250 \\ \hline \end{tabular}
+
+
+\textbf{Validation :}
+
+\begin{tabular}{|c|c|c|c|c|} \hline  0 & 0 & 0 & 150\\ \hline 150 & 0 & 0 & 0\\ \hline 0 & 150 & 0 & 0\\ \hline  0 & 0 & 150 & 0\\ \hline 0 & 0 & 0 & 0 \\ \hline \end{tabular}
+
+\textbf{Test :}
+
+
+\begin{tabular}{|c|c|c|c|} \hline 100 & 0 & 0 & 0\\ \hline 0 & 100 & 0 & 0\\ \hline 0 & 0 & 100 & 0\\ \hline 0 & 0 & 0 & 100 \\ \hline \end{tabular}
+
+
+
 
 The decision region plot obtained is shown below in Figure ..
 
@@ -420,7 +436,10 @@ We observe that the accuracy obtained here, is quite less. One of the ways this 
 \textbf{MLFFNN :}
 
 \end{flushleft}
+
 \section{Regression task}
+In this task, we are given the same 2 datasets as the first assignment. In this assignment, we are required to use the MLFFNN and RBFNN models for the purpose of function approximation, specifically curve fitting and surface fitting in datasets 1 and 2 respectively.
+
 
 \subsection{Dataset 1 (Univariate)}
 
