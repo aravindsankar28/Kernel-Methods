@@ -122,7 +122,7 @@ for i = 1:length(epochs)
             s = actFcn(a, actFncParams);
         end
     end
-    figure,plot3(inputs(1,:)',inputs(2,:)',s(2,:)','*');
+    figure,plot3(inputs(1,:)',inputs(2,:)',s(3,:)','*');
     title(int2str(epochs(i)));
     
     
