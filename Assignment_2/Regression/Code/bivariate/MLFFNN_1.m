@@ -67,7 +67,7 @@ trainPerformance = perform(net,trainTargets,outputs);
 valPerformance = perform(net,valTargets,outputs);
 testPerformance = perform(net,testTargets,outputs);
 
-models = (1:100)*2;
+models = (2:100)*2;
 plot(models,train_performances(2:100),models,val_performances(2:100),models,test_performances(2:100));
 %plot(models,train_performances,models,val_performances,models,test_performances);
 
@@ -75,7 +75,7 @@ plot(models,train_performances(2:100),models,val_performances(2:100),models,test
 
 figure, plot3(inputs(1,:)',inputs(2,:)',targets','r*',inputs(1,:)',inputs(2,:)',outputs','b*');
 legend('Target output','Model output');
-
+title('Plot showing target and model output');
 
 
 % To plot output at hidden and output nodes w.r.t epochs

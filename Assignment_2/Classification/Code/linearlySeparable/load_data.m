@@ -13,7 +13,7 @@ class2_test = load('../../Data/linearlySeparable/class2_test.txt');
 class3_test = load('../../Data/linearlySeparable/class3_test.txt');
 class4_test = load('../../Data/linearlySeparable/class4_test.txt');
 
-train = [class1_train; class2_train ; class3_train;  class4_train ];
+train_data = [class1_train; class2_train ; class3_train;  class4_train ];
 target_train = [ones(length(class1_train),1); ones(length(class2_train),1)*2; ones(length(class3_train),1)*3;ones(length(class4_train),1)*4;];
 oneofk_target_train = zeros(length(target_train),4);
 for i=1:length(target_train)
@@ -35,6 +35,6 @@ for i=1:length(target_test)
 end
 
 %For MLFFNN
-data_input = [train;val;test];
+data_input = [train_data;val;test];
 data_target = [oneofk_target_train;oneofk_target_val;oneofk_target_test];
 save('data.mat','data_input','data_target');
