@@ -5,7 +5,7 @@ targets = data_target';
 val_performances = ones(100,1)*10000;
 train_performances = ones(100,1)*10000;
 test_performances = ones(100,1)*10000;
-for i = 2:100
+for i = 2:10
 
     hiddenLayerSize = i*2;
     net = fitnet(hiddenLayerSize);
@@ -87,7 +87,7 @@ set(b,'Interpreter','latex');
 
 
 % To plot output at hidden and output nodes w.r.t epochs
-
+layerNo = 1;
 epochs = [1,2,5,15,1000];
 
 for i = 1:length(epochs)
@@ -103,7 +103,30 @@ for i = 1:length(epochs)
 	[net,tr] = train(net,inputs,targets);
 	outputs = net(inputs);
     
-	figure,plot3(inputs(1,:)',inputs(2,:)',outputs','k*');
+    
+    
+    a1 = bsxfun(@plus, net.iw{1}*inputs, net.b{1});
+    actFcn1 = str2func(net.layers{1}.transferFcn);
+    actFcnParams1 = net.layers{1}.transferParam;
+    s1 = actFcn1(a1,actFcnParams1);
+   
+    s = s1;
+    if (layerNo > 1)
+        for lIndex = 2 : layerNo
+            a = net.lw{lIndex, lIndex-1}*s;
+            if (net.biasConnect(lIndex))
+                a = bsxfun(@plus, a, net.b{lIndex});
+            end
+            actFcn = str2func(net.layers{lIndex}.transferFcn);
+            actFncParams = net.layers{lIndex}.transferParam;
+            s = actFcn(a, actFncParams);
+        end
+    end
+    figure,plot3(inputs(1,:)',inputs(2,:)',s(2,:)','*');
+    title(int2str(epochs(i)));
+    
+    
+	%figure,plot3(inputs(1,:)',inputs(2,:)',outputs','k*');
     %legend(int2str(epochs(i)));
     a = xlabel('$x_1$');
     b = ylabel('$x_2$');
