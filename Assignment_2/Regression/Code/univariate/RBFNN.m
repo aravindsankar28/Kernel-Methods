@@ -38,7 +38,6 @@ for i = 1:length(M_values)
         model_output_test = designMat_test*coeffs;
         target_output_test = test_data(:,2);
         
-        
         train_performance = sumsqr(target_output_train-model_output_train)/length(target_output_train);
         val_performance = sumsqr(target_output_val-model_output_val)/length(target_output_val);
         test_performance = sumsqr(target_output_test-model_output_test)/length(target_output_test);
@@ -48,11 +47,21 @@ for i = 1:length(M_values)
     end
 end
 
-
 [minval,idx] = min(performances(1:48,4));
 best_M = performances(idx,1)
 best_lambda = performances(idx,2)
 
+% Plot of MSE
+plot(performances(:,1),performances(:,3),'marker','o');
+xlabel('Model complexity (number of prototypes)');
+ylabel('Performance (MSE)');
+title('Plot showing variation of MSE for different model complexities');
+grid on
+axis square
 
-
-
+% Plot of model output and target output
+plot(data_input(:,1), data_target(:,1),'r*',data_input(:,1),,'b*')
+title('Plot showing the model and target output (for all points)');
+xlabel('x');
+ylabel('Target and Model output');
+legend('Target output','Model output');
