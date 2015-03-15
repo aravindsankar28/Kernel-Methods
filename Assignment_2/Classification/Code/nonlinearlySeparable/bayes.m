@@ -49,7 +49,7 @@ ezcontour(@(x,y)pdf(gm_2,[x y]),[-2 2],[-2 2]);
 % P(X|C_k) - likelihood
    
 p_val = [pdf(gm_1,val), pdf(gm_2,val)];   
-
+p_test = [pdf(gm_1,test), pdf(gm_2,test)];   
 % argmax_i P(X|C_k)
 [~,y_test]  = max(p_test,[],2);   
 [~,y_val]  = max(p_val,[],2);   

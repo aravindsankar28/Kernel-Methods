@@ -1,11 +1,11 @@
 Train
-\left(\begin{array}{ccccc} 54 & 20 & 35 & 0 & 5\\ 4 & 58 & 12 & 1 & 13\\ 2 & 32 & 88 & 0 & 20\\ 0 & 0 & 0 & 114 & 0\\ 0 & 4 & 3 & 0 & 254 \end{array}\right)
+\left(\begin{tabular}{c|c|c|c|c} \hline 54 & 20 & 35 & 0 & 5\\ \hline 4 & 58 & 12 & 1 & 13\\ \hline 2 & 32 & 88 & 0 & 20\\ \hline 0 & 0 & 0 & 114 & 0\\ \hline 0 & 4 & 3 & 0 & 254 \end{tabular}\right)
 
 Val
-\left(\begin{array}{ccccc} 11 & 7 & 14 & 0 & 7\\ 2 & 21 & 4 & 0 & 2\\ 5 & 12 & 23 & 0 & 8\\ 0 & 0 & 0 & 39 & 0\\ 1 & 9 & 3 & 0 & 74 \end{array}\right)
+\left(\begin{tabular}{c|c|c|c|c} 11 & 7 & 14 & 0 & 7\\ \hline 2 & 21 & 4 & 0 & 2\\ \hline 5 & 12 & 23 & 0 & 8\\ \hline 0 & 0 & 0 & 39 & 0\\ \hline 1 & 9 & 3 & 0 & 74 \end{tabular}\right)
 
 Test
-\left(\begin{array}{ccccc} 9 & 7 & 17 & 0 & 4\\ 2 & 19 & 7 & 0 & 2\\ 9 & 13 & 17 & 0 & 9\\ 0 & 0 & 0 & 37 & 0\\ 0 & 3 & 2 & 0 & 82 \end{array}\right)
+\left(\begin{tabular}{c|c|c|c|c} 9 & 7 & 17 & 0 & 4\\ \hline 2 & 19 & 7 & 0 & 2\\ \hline 9 & 13 & 17 & 0 & 9\\ \hline 0 & 0 & 0 & 37 & 0\\ \hline 0 & 3 & 2 & 0 & 82 \end{tabular}\right)
 
 
 Accuracy :

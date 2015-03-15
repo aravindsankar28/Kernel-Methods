@@ -1,0 +1,12 @@
+train
+
+\begin{array}{|c|c|c|c|} \hline 250 & 0 & 0 & 0\\ \hline \ 0 & 250 & 0 & 0\\ \ \hline 0 & 0 & 250 & 0\\ \ \hline 0 & 0 & 0 & 250 \\ \ \hline \end{array}
+
+
+test
+\begin{array}{|c|c|c|c|} \hline 100 & 0 & 0 & 0\\ \hline 0 & 100 & 0 & 0\\ \hline 0 & 0 & 100 & 0\\ \hline 0 & 0 & 0 & 100 \\ \hline \end{array}\
+
+
+Val
+
+\begin{array}{|c|c|c|c|} \hline 0 & 0 & 0 & 0 & 150\\ \hline 0 & 150 & 0 & 0 & 0\\ \hline 0 & 0 & 150 & 0 & 0\\ \hline 0 & 0 & 0 & 150 & 0\\ \hline 0 & 0 & 0 & 0 & 0 \\ \hline \end{array}

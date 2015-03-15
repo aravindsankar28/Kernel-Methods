@@ -3,9 +3,9 @@ load_data;
 inputs = data_input';
 targets = data_target';
 
-val_performances = zeros(100,1);
-train_performances = zeros(100,1);
-test_performances = zeros(100,1);
+val_performances = 1000*ones(100,1);
+train_performances = 1000*ones(100,1);
+test_performances = 1000*ones(100,1);
 for i = 1:100
 
     hiddenLayerSize = i*2;
@@ -50,6 +50,7 @@ end
 
 num = idx*2;
 num
+
 
 % Best num = 4
 
@@ -101,6 +102,7 @@ legend_str = cell(5,1);
 figure;
 cc = hsv(5);
 
+layerNo = 1;
 for i = 1:length(epochs)
     net = fitnet(num);
 	
@@ -113,16 +115,37 @@ for i = 1:length(epochs)
     net.divideParam.testRatio = (1/6);
 	[net,tr] = train(net,inputs,targets);
 	outputs = net(inputs);
-	plot(inputs,outputs,'*','color',cc(i,:)); 
-    hold on;
-   
+	%plot(inputs,outputs,'*','color',cc(i,:)); 
+    %hold on;
+    
     legend_str{i} = strcat('Epoch  ',int2str(epochs(i)));
     
+    a1 = bsxfun(@plus, net.iw{1}*inputs, net.b{1});
+    actFcn1 = str2func(net.layers{1}.transferFcn);
+    actFcnParams1 = net.layers{1}.transferParam;
+    s1 = actFcn1(a1,actFcnParams1);
+   
+    s = s1;
+    if (layerNo > 1)
+        for lIndex = 2 : layerNo
+            a = net.lw{lIndex, lIndex-1}*s;
+            if (net.biasConnect(lIndex))
+                a = bsxfun(@plus, a, net.b{lIndex});
+            end
+            actFcn = str2func(net.layers{lIndex}.transferFcn);
+            actFncParams = net.layers{lIndex}.transferParam;
+            s = actFcn(a, actFncParams);
+        end
+    end
+    figure,plot(inputs,s','*');
+    title(int2str(epochs(i)));
+    
+    
 end
-legend(legend_str);
-xlabel('x');
-ylabel('Model output');
-title('Output of output node as a fuction of Epochs');
+%legend(legend_str);
+% xlabel('x');
+% ylabel('Model output');
+% title('Output of output node as a fuction of Epochs');
 
 
 
