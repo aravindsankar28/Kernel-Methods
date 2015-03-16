@@ -6,7 +6,7 @@ targets = data_target';
 val_performances = 1000*ones(100,1);
 train_performances = 1000*ones(100,1);
 test_performances = 1000*ones(100,1);
-for i = 1:100
+for i = 1:6
 
     hiddenLayerSize = i*2;
     net = fitnet(hiddenLayerSize);

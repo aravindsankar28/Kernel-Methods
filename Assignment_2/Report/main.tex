@@ -145,25 +145,24 @@ The decision region plot obtained, showing the separation between the 3 classes 
 \includegraphics[width=\linewidth]{Classification/linearlySeparable/decn_region_perceptron.png}
 \caption{}
 \end{figure}
-
+\newpage
 \textbf{MLFFNN :} \\[10pt]
 
 For this simple dataset, we use a feedforward neural network with 1 hidden layer. There are 4 nodes in the output layer, for which we use a 1-of-k representation of the class labels. The function used is the one available in the MATLAB \textit{nntools} toolbox. The MSE error function was used in the output layer.
-The number of nodes in the hidden layer (model complexity) was estimated using cross-validation on the validation dataset given. 
-
-For the best performance on the validation data, we get ?? nodes in the hidden layer. For this configuration, the results obtained are shown below :
+The number of nodes in the hidden layer (model complexity) was estimated to be 9 with hyperbolic tangent function, using multiple iterations of cross-validation. For this configuration, the results obtained are shown below :
 	
 % Confusion matrices %
-\textbf{Train :}
+\textbf{\\[5pt]Confusion Matrices: \\[10pt]}
+\textbf{Train :\\[5pt]}
 
 \begin{tabular}{|c|c|c|c|} \hline 250 & 0 & 0 & 0\\ \hline 0 & 250 & 0 & 0\\ \hline 0 & 0 & 250 & 0\\ \hline 0 & 0 & 0 & 250 \\ \hline \end{tabular}
 
 
-\textbf{Validation :}
+\textbf{\\[10pt]Validation :\\[5pt]}
 
 \begin{tabular}{|c|c|c|c|c|} \hline  0 & 0 & 0 & 150\\ \hline 150 & 0 & 0 & 0\\ \hline 0 & 150 & 0 & 0\\ \hline  0 & 0 & 150 & 0\\ \hline 0 & 0 & 0 & 0 \\ \hline \end{tabular}
 
-\textbf{Test :}
+\textbf{\\[10pt]Test :\\[5pt]}
 
 
 \begin{tabular}{|c|c|c|c|} \hline 100 & 0 & 0 & 0\\ \hline 0 & 100 & 0 & 0\\ \hline 0 & 0 & 100 & 0\\ \hline 0 & 0 & 0 & 100 \\ \hline \end{tabular}
@@ -171,12 +170,296 @@ For the best performance on the validation data, we get ?? nodes in the hidden l
 
 
 
-The decision region plot obtained is shown below in Figure ..
+\textbf{\\[10pt]Decision Region:\\[5pt]}
+\includegraphics[scale=1]{Classification/linearlySeparable/decn_region_nn}
 
-The outputs of hidden and output nodes are shown below ..
+\textbf{\\[10pt]Output Layer Plots across Epochs of training}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/1_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/1_2}
+  
+\end{subfigure}
+\caption{Epoch 1 class 1 and 2}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/1_3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/1_4}
+  
+\end{subfigure}
+\caption{Epoch 1 class 3 and 4}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/2_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/2_2}
+  
+\end{subfigure}
+\caption{Epoch 2 class 1 and 2}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/2_3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/2_4}
+  
+\end{subfigure}
+\caption{Epoch 2 class 3 and 4}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/5_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/5_2}
+  
+\end{subfigure}
+\caption{Epoch 5 class 1 and 2}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/5_3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/5_4}
+  
+\end{subfigure}
+\caption{Epoch 5 class 3 and 4}
+\end{figure}
 
 
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/20_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/20_2}
+  
+\end{subfigure}
+\caption{Epoch 20 class 1 and 2}
+\end{figure}
 
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/20_3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/20_4}
+  
+\end{subfigure}
+\caption{Epoch 20 class 3 and 4}
+\end{figure}
+Clearly, a stable output has been established by the 20th epoch, looking at the above plots. We also proceed to look at what the hidden layer is outputing at some epochs. \\[10pt]
+\begin{figure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h1_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h1_2}
+  
+\end{subfigure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h1_3}
+  
+\end{subfigure}
+\caption{Epoch 1 hidden nodes 1,2,3}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h1_4}
+ 
+\end{subfigure}%
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h1_5}
+  
+\end{subfigure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h1_6}
+  
+\end{subfigure}
+\caption{Epoch 1 hidden nodes 4,5,6}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h1_7}
+ 
+\end{subfigure}%
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h1_8}
+  
+\end{subfigure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h1_9}
+  
+\end{subfigure}
+\caption{Epoch 1 hidden nodes 7,8,9}
+\end{figure}
+
+\newpage
+\begin{figure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h5_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h5_2}
+  
+\end{subfigure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h5_3}
+  
+\end{subfigure}
+\caption{Epoch 5 hidden nodes 1,2,3}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h5_4}
+ 
+\end{subfigure}%
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h5_5}
+  
+\end{subfigure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h5_6}
+  
+\end{subfigure}
+\caption{Epoch 5 hidden nodes 4,5,6}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h5_7}
+ 
+\end{subfigure}%
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h5_8}
+  
+\end{subfigure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h5_9}
+  
+\end{subfigure}
+\caption{Epoch 5 hidden nodes 7,8,9}
+\end{figure}
+\newpage
+\begin{figure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h20_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h20_2}
+  
+\end{subfigure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h20_3}
+  
+\end{subfigure}
+\caption{Epoch 20 hidden nodes 1,2,3}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h20_4}
+ 
+\end{subfigure}%
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h20_5}
+  
+\end{subfigure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h20_6}
+  
+\end{subfigure}
+\caption{Epoch 20 hidden nodes 4,5,6}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h20_7}
+ 
+\end{subfigure}%
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h20_8}
+  
+\end{subfigure}
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/linearlySeparable/h20_9}
+  
+\end{subfigure}
+\caption{Epoch 20 hidden nodes 7,8,9}
+\end{figure}
+We can notice the clear S shaped curves that appear out of the hidden layer in these plots. Also note that the difference between epochs 5 and 20 is less than that between 1 and 5 as expected.
+\newpage
 Comparison --
 \end{flushleft}
 
@@ -189,7 +472,8 @@ The input data is as shown in the figure below. \\[10pt]
 \end{flushleft}
 
 \begin{figure}[H]
-\centering
+0
+centering
 \includegraphics[width=\linewidth]{Classification/nonlinearlySeparable/input_data.png}
 \caption{Given dataset}
 \end{figure}
@@ -442,6 +726,12 @@ In this task, we are given the same 2 datasets as the first assignment. In this 
 
 
 \subsection{Dataset 1 (Univariate)}
+\begin{flushleft}
+Here, we are required to do curve fitting of the function $e^{cos(2 \pi x)}$.
+\end{flushleft}
+
+\textbf{MLFFNN :}
+
 
 
 \subsection{Dataset 2 (Bivariate)}
