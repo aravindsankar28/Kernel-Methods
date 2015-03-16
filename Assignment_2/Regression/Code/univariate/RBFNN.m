@@ -1,6 +1,6 @@
 load_data;
 
-M_values = [2,5,10,15,50,100,200];  % no of basis functions
+M_values = [2,5,10,15,50,70,100];  % no of basis functions
 lambda_values = [10^(-6),10^(-4),10^(-2),1,10,100,1000,10000]; % regularization parameter
 
 peformances = zeros(length(M_values)*length(lambda_values),5);
@@ -46,7 +46,7 @@ for i = 1:length(M_values)
     end
 end
 
-[minval,idx] = min(performances(1:len(performances,1),4));
+[minval,idx] = min(performances(:,4));
 best_M = performances(idx,1)
 best_lambda = performances(idx,2)
 
@@ -57,6 +57,18 @@ plot(performances(idx,1),performances(idx,3),'r',performances(idx,1),performance
 xlabel('Model complexity (number of prototypes)');
 ylabel('Performance (MSE)');
 title('Plot showing variation of MSE vs M for best lambda');
+legend('Train','Validation','Test');
+
+idx=find( performances(:,1)== best_M );
+lam = performances(idx,2);
+ln_lam = [];
+for i=1:length(lam)
+    ln_lam = [ln_lam, log(lam(i))];
+end
+plot(lam,performances(idx,3),'r',lam,performances(idx,4),'g',lam,performances(idx,5),'b');
+xlabel('Model complexity (regularization param)');
+ylabel('Performance (MSE)');
+title('Plot showing variation of MSE vs lambda for best M');
 legend('Train','Validation','Test');
 
 % Plot of model output and target output

@@ -506,10 +506,10 @@ The Gaussian mixture model was used to model the class conditional densities of 
 
 For this purpose, we adopt an unsupervised approach. We use the Bayesian Information Criterion (BIC), which provides a trade-off between the likelihood of the data and the model complexity.
 
- \mathrm{BIC} = {-2 \cdot \ln{\hat L} + k \cdot \ln(n)}. \ 
+ $BIC = -2 \cdot \ln\hat L + k \cdot \ln(n)$  
 
 
-where \hat L is the maximized likelihood, k is the no. of parameters, and n the number of data points. The model with the lowest BIC value is expected to be the best one.
+where $\hat L$ is the maximized likelihood, k is the no. of parameters, and n the number of data points. The model with the lowest BIC value is expected to be the best one.
 
 
 Based on this criterion, we obtained 3 Gaussian components for class 1 (inside region) and 5 Gaussian components for class 2. The Gaussian contours obtained for each of the classes are shown in the figures below.
@@ -1023,7 +1023,7 @@ In this dataset, we are given a set of images and are required to classify them 
 
 \end{enumerate}
 
-The features extracted from the image are Color Histogram Features which give rise to 16 \times 3 = 48 features.  We are required to compare the Bayes classifier and neural network classifier on this dataset.
+The features extracted from the image are Color Histogram Features which give rise to 16 $\times$ 3 = 48 features.  We are required to compare the Bayes classifier and neural network classifier on this dataset.
 
 
 \begin{flushleft}
@@ -1107,10 +1107,25 @@ The results obtained on using the best configuration are shown below in the form
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \section{Regression task}
+
 In this task, we are given the same 2 datasets as the first assignment. In this assignment, we are required to use the MLFFNN and RBFNN models for the purpose of function approximation, specifically curve fitting and surface fitting in datasets 1 and 2 respectively.
-
-
 
 
 \subsection{Dataset 1 (Univariate)}
@@ -1217,15 +1232,59 @@ The plot of each of hidden layer nodes for different number of epochs:
 
 \textbf{Generalized RBF model :}
 
+For the generalized Radial Basis Function Network, the model complexity depends on the number of prototypes chosen and regularization parameter. We chose the prototypes by performing k-means clustering and choosing the custer centers as prototypes. We varies the number of prototypes from 1 to 200 and regularization parameter from $10^{-6}$ to $10^4$, and compared the performance (MSE) on all the three sets. The plots showing the variation of MSE w.r.t model complexity and regularization parameter (each for optimal value of other parameter) are shown below :
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{Regression/rbfnn_univariate/mse_lambda.png}
+\caption{MSE vs Model Complexity (Regularization parameter)}
+\end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{Regression/rbfnn_univariate/mse_m.png}
+\caption{MSE vs Model Complexity (Number of prototypes)}
+\end{figure}
 
+The optimal number of prototypes obtained was 10 and optimal regularization parameter was 0.01. The plots of model and target output for this are:
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/rbfnn_univariate/output_train.png}
+\caption{Plots of model and target output (Train data)}
+\end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/rbfnn_univariate/output_val.png}
+\caption{Plots of model and target output (Validation data)}
+\end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/rbfnn_univariate/output_test.png}
+\caption{Plots of model and target output (Test data)}
+\end{figure}
 
+Scatter plot with target output on $x$-axis and model output on $y$-axis for train, validation, test data is as follows:
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/rbfnn_univariate/scatter_train.png}
+\caption{Scatter plots of model and target output (Train data)}
+\end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/rbfnn_univariate/scatter_val.png}
+\caption{Scatter plots of model and target output (Validation data)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/rbfnn_univariate/scatter_test.png}
+\caption{Scatter plots of model and target output (Test data)}
+\end{figure}
 
 
 
@@ -1470,6 +1529,63 @@ The plot of output of hidden layer 1 node (one of the nodes) after different num
 \caption{Output of output layer node}
 \end{figure}
 
+
+
+\textbf{Generalized RBF Model:}
+
+For the generalized Radial Basis Function Network, the model complexity depends on the number of prototypes chosen and regularization parameter. We chose the prototypes by performing k-means clustering and choosing the cluster centers as prototypes. We varies the number of prototypes from 1 to 500 and regularization parameter from $10^{-6}$ to $10^4$, and compared the performance (MSE) on all the three sets. The plots showing the variation of MSE w.r.t model complexity and regularization parameter (each for optimal value of other parameter) are shown below :
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{Regression/rbfnn_bivariate/mse_lambda.png}
+\caption{MSE vs Model Complexity (Regularization parameter)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{Regression/rbfnn_bivariate/mse_m.png}
+\caption{MSE vs Model Complexity (Number of prototypes)}
+\end{figure}
+
+The plots of model and target output for train, validation and test data are:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/rbfnn_bivariate/output_train.png}
+\caption{Plots of model and target output (Train data)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/rbfnn_bivariate/output_val.png}
+\caption{Plots of model and target output (Validation data)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/rbfnn_bivariate/output_test.png}
+\caption{Plots of model and target output (Test data)}
+\end{figure}
+
+Scatter plot with target output on $x$-axis and model output on $y$-axis for train, validation, test data is as follows:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/rbfnn_bivariate/scatter_train.png}
+\caption{Scatter plots of model and target output (Train data)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/rbfnn_bivariate/scatter_val.png}
+\caption{Scatter plots of model and target output (Validation data)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/rbfnn_bivariate/scatter_test.png}
+\caption{Scatter plots of model and target output (Test data)}
+\end{figure}
 
 
 
