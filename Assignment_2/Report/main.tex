@@ -1016,23 +1016,77 @@ Validation Accuracy : 69.42  \% \\[10pt]
 Test Accuracy : 68.62 \% \\[10pt]
 
 
-We observe that the accuracy obtained here, is quite less. One of the ways this can be improved is by considering different number of gaussian mixture components for each class.
+We observe that the accuracy obtained here, is quite less. One of the ways this can be improved is by considering different number of gaussian mixture components for each class. \\[10pt]
 
 
-\textbf{MLFFNN :}
+\textbf{MLFFNN :} \\[10pt]
+\begin{flushleft}
+
+For this dataset, as the complexity is high, we use a feed-forward neural network with 2 layers.  The number of nodes in these 2 layers represent the model complexity. The best complexity was found out using cross validation on the validation dataset. 
+
+The best model configuration obtained is shown below :
+
+\end{flushleft}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Classification/images/net_config.png}
+\caption{Confusion matrices}
+\end{figure}
+
+
+
+
+The results obtained on using the best configuration are shown below in the form of confusion matrices :
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Classification/images/confusion.png}
+\caption{Confusion matrices}
+\end{figure}
+
+
 
 \end{flushleft}
 
 \section{Regression task}
 In this task, we are given the same 2 datasets as the first assignment. In this assignment, we are required to use the MLFFNN and RBFNN models for the purpose of function approximation, specifically curve fitting and surface fitting in datasets 1 and 2 respectively.
 
-
 \subsection{Dataset 1 (Univariate)}
 \begin{flushleft}
-Here, we are required to do curve fitting of the function $e^{cos(2 \pi x)}$.
+Here, we are required to do curve fitting of the function $e^{cos(2 \pi x)}$. For this purpose we use a training set of 1000 points.
+
+
+
 \end{flushleft}
 
+
+\begin{flushleft}
 \textbf{MLFFNN :}
+For the uni-variate dataset, we use a feed-forward network with 1 hidden layer. The number of nodes in the hidden layer represents the model complexity, which is estimated by looking at the performance on the validation dataset. We varies the number of hidden layer nodes from 1 to 200, and compared the performance   (MSE) on all the three sets. The plot showing the variation of MSE w.r.t model complexity is shown below :
+
+\end{flushleft}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Regression/univariate/mse.png}
+\caption{B - Train  R- Val G- Test}
+\end{figure}
+
+The best neural network configuration obtained is shown below, with 4 nodes in the hidden layer.
+
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Regression/univariate/net_config.png}
+\caption{Neural network configuration}
+\end{figure}
+
+For this configuration, the plots of model and target outputs are shown in the Figures below : 
+
 
 
 
