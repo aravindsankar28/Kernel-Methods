@@ -6,7 +6,7 @@ targets = data_target';
 val_performances = 1000*ones(100,1);
 train_performances = 1000*ones(100,1);
 test_performances = 1000*ones(100,1);
-for i = 1:6
+for i = 1:100
 
     hiddenLayerSize = i*2;
     net = fitnet(hiddenLayerSize);
@@ -80,18 +80,32 @@ valPerformance = perform(net,valTargets,outputs);
 testPerformance = perform(net,testTargets,outputs);
 
 models = (1:100)*2;
-plot(models,train_performances,models,val_performances,models,test_performances);
+figure, plot(models,train_performances(2:100),models,val_performances(2:100),models,test_performances(2:100));
 xlabel('Model complexity (Nodes in hidden layer)');
 ylabel('Performance (MSE)');
 title('Plot showing variation of MSE for different model complexities');
 legend('Train','Validation','Test');
 % For scatter plot, check plotregression
 
+return
+
 % Plot(s) of model and target outputs
 figure, plotfit(net,inputs,targets);
 
-figure, plot(inputs, targets,'r*',inputs,outputs,'b*');
-title('Plot showing the model and target output (all points)');
+figure, plot(inputs.* tr.trainMask{1}, trainTargets,'r*',inputs.* tr.trainMask{1},outputs.* tr.trainMask{1},'b*');
+title('Plot showing the model and target output (train set)');
+xlabel('x');
+ylabel('Target and Model output');
+legend('Target output','Model output');
+
+figure, plot(inputs.* tr.valMask{1}, valTargets,'r*',inputs.* tr.valMask{1},outputs.* tr.valMask{1},'b*');
+title('Plot showing the model and target output (validation set)');
+xlabel('x');
+ylabel('Target and Model output');
+legend('Target output','Model output');
+
+figure, plot(inputs.* tr.testMask{1}, testTargets,'r*',inputs.* tr.testMask{1},outputs.* tr.testMask{1},'b*');
+title('Plot showing the model and target output (test set)');
 xlabel('x');
 ylabel('Target and Model output');
 legend('Target output','Model output');
@@ -138,9 +152,9 @@ for i = 1:length(epochs)
             s = actFcn(a, actFncParams);
         end
     end
-    figure,plot(inputs,s','*');
-    title(int2str(epochs(i)));
-    
+    %figure,plot(inputs,s','*');
+    %title(int2str(epochs(i)));
+    %legend('HL Node 1','HL Node 2','HL Node 3','HL Node 4');
     
 end
 %legend(legend_str);

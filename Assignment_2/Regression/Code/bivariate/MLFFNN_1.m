@@ -5,7 +5,7 @@ targets = data_target';
 val_performances = ones(100,1)*10000;
 train_performances = ones(100,1)*10000;
 test_performances = ones(100,1)*10000;
-for i = 2:10
+for i = 4:4
 
     hiddenLayerSize = i*2;
     net = fitnet(hiddenLayerSize);
@@ -75,15 +75,38 @@ ylabel('Performance (MSE)');
 legend('Train','Validation','Test');
 %plot(models,train_performances,models,val_performances,models,test_performances);
 
+% Plot of target & model outputs
+
+figure, plot3(inputs(1,:).* tr.trainMask{1}, inputs(2,:).* tr.trainMask{1}, trainTargets,'r*',inputs(1,:).* tr.trainMask{1}, inputs(2,:).* tr.trainMask{1},outputs.* tr.trainMask{1},'b*');
+title('Plot showing the model and target output (train set)');
+xlabel('x');
+ylabel('Target and Model output');
+legend('Target output','Model output');
+
+figure, plot3(inputs(1,:).* tr.valMask{1}, inputs(2,:).* tr.valMask{1}, valTargets,'r*',inputs(1,:).* tr.valMask{1}, inputs(2,:).* tr.valMask{1},outputs.* tr.valMask{1},'b*');
+title('Plot showing the model and target output (validation set)');
+xlabel('x');
+ylabel('Target and Model output');
+legend('Target output','Model output');
+
+figure, plot3(inputs(1,:).* tr.testMask{1}, inputs(2,:).* tr.testMask{1}, testTargets,'r*',inputs(1,:).* tr.testMask{1}, inputs(2,:).* tr.testMask{1},outputs.* tr.testMask{1},'b*');
+title('Plot showing the model and target output (test set)');
+xlabel('x');
+ylabel('Target and Model output');
+legend('Target output','Model output');
+
+
+
+
 % For scatter plot, check plotregression
 
-figure, plot3(inputs(1,:)',inputs(2,:)',targets','r*',inputs(1,:)',inputs(2,:)',outputs','b*');
-legend('Target output','Model output');
-title('Plot showing target and model output');
-a = xlabel('$x_1$');
-b = ylabel('$x_2$');
-set(a,'Interpreter','latex');
-set(b,'Interpreter','latex');
+%figure, plot3(inputs(1,:)',inputs(2,:)',targets','r*',inputs(1,:)',inputs(2,:)',outputs','b*');
+%legend('Target output','Model output');
+%title('Plot showing target and model output');
+%a = xlabel('$x_1$');
+%b = ylabel('$x_2$');
+%set(a,'Interpreter','latex');
+%set(b,'Interpreter','latex');
 
 
 % To plot output at hidden and output nodes w.r.t epochs
@@ -122,15 +145,15 @@ for i = 1:length(epochs)
             s = actFcn(a, actFncParams);
         end
     end
-    figure,plot3(inputs(1,:)',inputs(2,:)',s(5,:)','*');
-    title(int2str(epochs(i)));
+    %figure,plot3(inputs(1,:)',inputs(2,:)',s(5,:)','*');
+    %title(int2str(epochs(i)));
     
     
 	%figure,plot3(inputs(1,:)',inputs(2,:)',outputs','k*');
     %legend(int2str(epochs(i)));
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('Hidden layer output at epoch =  ',int2str(epochs(i))));
+    %a = xlabel('$x_1$');
+    %b = ylabel('$x_2$');
+    %set(a,'Interpreter','latex');
+    %set(b,'Interpreter','latex');title(strcat('Hidden layer output at epoch =  ',int2str(epochs(i))));
 end
     

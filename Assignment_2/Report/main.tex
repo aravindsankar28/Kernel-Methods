@@ -67,7 +67,7 @@ The contours of each of the Gaussians obtained are shown in Figure 2. We can obs
 
 The results obtained are shown below in the form of confusion matrices :\\[10pt]
 
-Train : \\[10pt]
+\textbf{Train} : \\[10pt]
 
 
 \begin{tabular}{|c|c|}
@@ -79,7 +79,7 @@ Train : \\[10pt]
 
 \end{tabular}\\[10pt]
 
-Validation: \\[10pt]
+\textbf{Validation}: \\[10pt]
 
 \begin{tabular}{|c|c|} 
 \hline
@@ -87,7 +87,7 @@ Validation: \\[10pt]
 0 & 360 \\ \hline
 \end{tabular}\\[10pt]
 
-Test : \\[10pt]
+\textbf{Test} : \\[10pt]
 
 \begin{tabular}{|c|c|} \hline 
 60 & 0\\ \hline
@@ -95,6 +95,9 @@ Test : \\[10pt]
  \end{tabular}\\[10pt]
 
 We observe 100 \% accuracy in the classification of points in the validation and test data. The decision region plot, showing the separation between the 3 classes is shown in Figure 3.
+
+
+\textbf{\\[10pt]Decision Region:\\[5pt]}
 
 
 \begin{figure}[H]
@@ -114,8 +117,9 @@ Since the data is linearly separable across pairs of classes, we can use the Per
 
 One approach is to use the One-Vs-All method for classification.  For the we require each of the 4 sets (using one class positive and others negative) to be linearly separable. If we consider the One-Vs-All classifier for the Red-Class (where point of red class are positive), we cannot find a separating hyperplane.
 
-So, we use the approach of One-Vs-One classification.  $ 4 \choose 2 $ = 6 classifiers are constructed by considering each pair of classes. For any new point $x$, we use the outputs of each of the classifiers, and take the majority vote. As expected, the performance of training data was 100 \% as the hyperplane obtained separates the training data.  \\[10pt]
+So, we use the approach of One-Vs-One classification.  $ 4 \choose 2 $ = 6 classifiers are constructed by considering each pair of classes. For any new point x, we use the outputs of each of the classifiers, and take the majority vote. As expected, the performance of training data was 100 \% as the hyperplane obtained separates the training data.  \\[10pt]
 
+\newpage
 The results obtained are shown below  :\\[10pt]
 
 \textbf{Train} : \\[10pt]
@@ -138,7 +142,9 @@ The results obtained are shown below  :\\[10pt]
 From the results, we see that only one point is misclassified in the validation and test datasets, and that one point is a point in class 1 which is misclassified as class 2. This is because both the classes are very close to each other, and the hyperplanes obtained are not the optimal ones. \\[10pt]
 
 The decision region plot obtained, showing the separation between the 3 classes is shown in Figure 4.
+\newpage 
 
+\textbf{\\[10pt]Decision Region:\\[5pt]}
 
 \begin{figure}[H]
 \centering
@@ -167,11 +173,13 @@ The number of nodes in the hidden layer (model complexity) was estimated to be 9
 \textbf{\\[10pt]Test :\\[5pt]}
 
 
-\begin{tabular}{|c|c|c|c|} \hline 100 & 0 & 0 & 0\\ \hline 0 & 100 & 0 & 0\\ \hline 0 & 0 & 100 & 0\\ \hline 0 & 0 & 0 & 100 \\ \hline \end{tabular}
+\begin{tabular}{|c|c|c|c|} \hline 100 & 0 & 0 & 0\\ \hline 0 & 100 & 0 & 0\\ \hline 0 & 0 & 100 & 0\\ \hline 0 & 0 & 0 & 100 \\ \hline \end{tabular} \\[10pt]
 
 
+We can see that 100 \% accuracy is obtained on all the three sets. The neural network adequately models the decision boundaries between each class, as shown below in the decision region plot.
 
 \newpage
+
 \textbf{\\[10pt]Decision Region:\\[5pt]}
 \includegraphics[scale=1]{Classification/linearlySeparable/decn_region_nn}
 
@@ -460,7 +468,16 @@ Clearly, a stable output has been established by the 20th epoch, looking at the 
 \end{subfigure}
 \caption{Epoch 20 hidden nodes 7,8,9}
 \end{figure}
-We can notice the clear S shaped curves that appear out of the hidden layer in these plots. They appear steep because we have plotted the full range on the x and y axis. The beta values are tuned by the tool. Also note that the difference between epochs 5 and 20 is less than that between 1 and 5 as expected.
+We can notice the clear S shaped curves that appear out of the hidden layer in these plots. They appear steep because we have plotted the full range on the x and y axis. The beta values are tuned by the tool. Also note that the difference between epochs 5 and 20 is less than that between 1 and 5 as expected.\\[10pt]
+
+
+\textbf{Observation :}
+\begin{itemize}
+\item As the given dataset is linearly separable, the bayes classifier is able model the linear decision boundaries well, giving 100\% accuracy.
+\item The perceptron algorithm identifies separating hyperplanes between each pair classes, which may not be optimal. Because of this reason, we observe that the accuracy on validation and test data is less than 100 \%. Obviously, as the perceptron is able separate the training data, the training accuracy is 100 
+\%
+\item The neural network classifier, being a generalization on the basic perceptron classifier, is able to  model the decision boundaries well, giving 100 \% accuracy.
+\end{itemize}
 \newpage
 \end{flushleft}
 
@@ -473,23 +490,26 @@ The input data is as shown in the figure below. \\[10pt]
 \end{flushleft}
 
 \begin{figure}[H]
+
 \centering
 \includegraphics[width=\linewidth]{Classification/nonlinearlySeparable/input_data.png}
 \caption{Given dataset}
 \end{figure}
 
 
-\textbf{Bayes classifier :}  \\[10pt]
+
 \begin{flushleft}
 
+\textbf{Bayes classifier :}  \\[10pt]
 The Gaussian mixture model was used to model the class conditional densities of each class. Unlike the previous data, we can see the need to use more than one component in the GMM used to model each of the classes. Hence, we need to choose the appropriate number of Gaussian components to represent each class.
 \\[10pt]
 
 For this purpose, we adopt an unsupervised approach. We use the Bayesian Information Criterion (BIC), which provides a trade-off between the likelihood of the data and the model complexity.
 
-\[ \mathrm{BIC} = {-2 \cdot \ln{\hat L} + k \cdot \ln(n)}. \ \]
+ \mathrm{BIC} = {-2 \cdot \ln{\hat L} + k \cdot \ln(n)}. \ 
 
-where $\hat L$ is the maximized likelihood, $k$ is the no. of parameters, and $n$ the number of data points. The model with the lowest BIC value is expected to be the best one.
+
+where \hat L is the maximized likelihood, k is the no. of parameters, and n the number of data points. The model with the lowest BIC value is expected to be the best one.
 
 
 Based on this criterion, we obtained 3 Gaussian components for class 1 (inside region) and 5 Gaussian components for class 2. The Gaussian contours obtained for each of the classes are shown in the figures below.
@@ -535,8 +555,10 @@ The results obtained are shown below : \\[10pt]
 As expected, since the Gaussian adequately model the distributions of the 2 nonlinearly separable classes, we get 100 \% accuracy on all 3 sets.
 
 The decision region plot separating the 2 classes is shown below :
-
+\newpage
 \end{flushleft}
+
+\textbf{Decision region : } \\[5pt]
 
 \end{flushleft}
 
@@ -554,8 +576,13 @@ Here again, as in the previous dataset, we use a neural network with 1 hidden la
 
 For the best performance by cross validation, we get 4 nodes in the hidden layer. For this configuration, the results obtained are shown below.
 \\[5pt]
-\includegraphics[scale=0.6]{Classification/nonlinearlySeparable/net_config} \newpage
-\textbf{Decision Region from NN:\\[5pt]}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{Classification/nonlinearlySeparable/net_config} 
+\end{figure}
+\newpage
+
+\textbf{Decision Region :\\[5pt]}
 \includegraphics[scale=1]{Classification/nonlinearlySeparable/decn_region_nn_nls}
 \end{flushleft}
 % Confusion matrices %
@@ -573,6 +600,8 @@ For the best performance by cross validation, we get 4 nodes in the hidden layer
 
 
 \begin{tabular}{|c|c|}\hline  60 & 0 \\ \hline 0 & 240 \\ \hline \end{tabular}
+
+Here again, we see that the neural network is able to obtain 100 \% accuracy on all the three sets.
 \end{flushleft}
 \newpage
 \textbf{Output Layer values with Epochs\\[5pt]}
@@ -702,6 +731,13 @@ Clearly, the outputs have converged to a great extent by the 10th epoch.
 \end{figure}
 \end{figure}
 The above shows a clean and smooth S shaped hyperbolic tangent curve at all epochs for the hidden layers. We chose hyperbolic tangent since the training was faster.
+
+\textbf{Observations :} 
+\begin{itemize}
+\item The bayes classifier with GMM's models the class conditional densities of each class accurately, giving 100\% accuracy.
+\item The neural network also models the non-linear decision boundary correctly, leading to 100 \% accuracy.
+
+\end{itemize}
 \newpage
 \subsubsection{Overlapping classes Dataset}
 \begin{flushleft}
@@ -759,6 +795,8 @@ The decision region plot obtained is shown below :
 
 \end{flushleft}
 
+\textbf{Decision region : \\[5pt]}
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{Classification/overlapping/decn_region_bayes.png}
@@ -773,7 +811,10 @@ Here again, as in the previous dataset, we use a neural network with 1 hidden la
 
 For the best performance on the validation data, we get 16 nodes in the hidden layer. For this configuration, the results obtained are shown below.
 \\[5pt]
+\begin{figure}
+\centering
 \includegraphics[scale=0.6]{Classification/overlapping/net_config}
+\end{figure}
 \newpage
 \textbf{\\[5pt]Decision Region\\[10pt]}
 \includegraphics[scale=1]{Classification/overlapping/decn_region_nn}
@@ -953,7 +994,16 @@ For the best performance on the validation data, we get 16 nodes in the hidden l
   \end{subfigure}
 \caption{Epoch 20 hidden nodes 9 and 15}
 \end{figure}
+
+\textbf{Observations :}
+\begin{itemize}
+\item For the bayes classifier, we get the test accuracy to be 89.75 \%. This is because the points in each pairs of classes overlap, which means it's impossible for any classifier to get 100\% accuracy.
+\item Correspondingly, the test accuracy obtained by neural network model is 89 \%, which is almost the same as Bayes classifier.
+\item We see that the loss in accuracy is not much, given the overlap of the points of the classes.
+\end{itemize}
+
 \newpage
+
 \subsection{Dataset 2 - Image dataset}
 In this dataset, we are given a set of images and are required to classify them according to the labels, which are  :
 
@@ -973,7 +1023,7 @@ In this dataset, we are given a set of images and are required to classify them 
 
 \end{enumerate}
 
-The features extracted from the image are Color Histogram Features which give rise to $16 \times 3 = 48$ features.  We are required to compare the Bayes classifier and neural network classifier on this dataset.
+The features extracted from the image are Color Histogram Features which give rise to 16 \times 3 = 48 features.  We are required to compare the Bayes classifier and neural network classifier on this dataset.
 
 
 \begin{flushleft}
@@ -1045,12 +1095,23 @@ The results obtained on using the best configuration are shown below in the form
 \caption{Confusion matrices}
 \end{figure}
 
+\textbf{Observations :}
+\begin{itemize}
+\item The test accuracy obtained by the bayes classifier (for the optimal no. of components) is 68.62 \%.
+\item The neural network performs better than the bayes classifier and gives a test accuracy of 69.3 \%. 
+\end{itemize}
 
 
 \end{flushleft}
+\newpage
+
+
 
 \section{Regression task}
 In this task, we are given the same 2 datasets as the first assignment. In this assignment, we are required to use the MLFFNN and RBFNN models for the purpose of function approximation, specifically curve fitting and surface fitting in datasets 1 and 2 respectively.
+
+
+
 
 \subsection{Dataset 1 (Univariate)}
 \begin{flushleft}
@@ -1062,6 +1123,7 @@ Here, we are required to do curve fitting of the function $e^{cos(2 \pi x)}$. Fo
 
 
 \begin{flushleft}
+
 \textbf{MLFFNN :}
 For the uni-variate dataset, we use a feed-forward network with 1 hidden layer. The number of nodes in the hidden layer represents the model complexity, which is estimated by looking at the performance on the validation dataset. We varies the number of hidden layer nodes from 1 to 200, and compared the performance   (MSE) on all the three sets. The plot showing the variation of MSE w.r.t model complexity is shown below :
 
@@ -1071,7 +1133,7 @@ For the uni-variate dataset, we use a feed-forward network with 1 hidden layer. 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{Regression/univariate/mse.png}
-\caption{B - Train  R- Val G- Test}
+\caption{Legend: Blue-Train  Green-Validation R-Test}
 \end{figure}
 
 The best neural network configuration obtained is shown below, with 4 nodes in the hidden layer.
@@ -1084,12 +1146,329 @@ The best neural network configuration obtained is shown below, with 4 nodes in t
 \caption{Neural network configuration}
 \end{figure}
 
-For this configuration, the plots of model and target outputs are shown in the Figures below : 
+For this configuration, the plots of model and target outputs are shown in the figures below : 
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/univariate/trainOutput.png}
+\caption{Plots of model and target output (Train data)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/univariate/valOutput.png}
+\caption{Plots of model and target output (Validation data)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/univariate/testOutput.png}
+\caption{Plots of model and target output (Test data)}
+\end{figure}
+
+Scatter plot with target output on $x$-axis and model output on $y$-axis for train, validation, test data is as follows:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.2\linewidth]{Regression/univariate/Scatter_plots.png}
+\caption{Scatter plots of model and target output}
+\end{figure}
+
+The plot of output of output node after different number of epochs:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{Regression/univariate/epoch_output.png}
+\caption{Output of output nodes for different epochs}
+\end{figure}
+
+The plot of each of hidden layer nodes for different number of epochs:
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/univariate/hiddenLayer_1.png}\
+  \caption{Epoch 1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/univariate/hiddenLayer_2.png}
+   \caption{Epoch 2}
+  \end{subfigure}
+  \begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/univariate/hiddenLayer_4.png}\
+  \caption{Epoch 4}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/univariate/hiddenLayer_8.png}
+   \caption{Epoch 8}
+  \end{subfigure}
+  
+  \begin{subfigure}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.8\linewidth]{Regression/univariate/hiddenLayer_1000.png}
+   \caption{End of training}
+  \end{subfigure}
+  
+\caption{Output of hidden layer nodes}
+\end{figure}
 
 \textbf{Generalized RBF model :}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \subsection{Dataset 2 (Bivariate)}
+
+\textbf{MLFFNN with 1 hidden layer:}
+
+For the bi-variate dataset, we first use a feed-forward network with 1 hidden layer. The number of nodes in the hidden layer represents the model complexity, which is estimated by looking at the performance on the validation dataset. We varies the number of hidden layer nodes from 1 to 200, and compared the performance (MSE) on all the three sets. The plot showing the variation of MSE w.r.t model complexity is shown below :
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{Regression/bivariate/1layer_mse.png}
+\caption{MSE vs Model Complexity}
+\end{figure}
+
+The best neural network configuration obtained is shown below, with 8 nodes in the hidden layer.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Regression/bivariate/net_config.png}
+\caption{Neural network configuration}
+\end{figure}
+
+For this configuration, the plots of model and target outputs are shown in the figures below : 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/bivariate/output_1layer_train.png}
+\caption{Plots of model and target output (Train data)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/bivariate/output_1layer_val.png}
+\caption{Plots of model and target output (Validation data)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/bivariate/output_1layer_test.png}
+\caption{Plots of model and target output (Test data)}
+\end{figure}
+
+Scatter plot with target output on $x$-axis and model output on $y$-axis for train, validation, test data is as follows:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Regression/bivariate/scatter_1layer.png}
+\caption{Scatter plots of model and target output}
+\end{figure}
+
+The plot of output of output node after different number of epochs:
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/1layer_epoch_1.png}\
+  \caption{Epoch 1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/1layer_epoch_2.png}
+   \caption{Epoch 2}
+  \end{subfigure}
+  
+  \begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/1layer_epoch_5.png}\
+  \caption{Epoch 5}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/1layer_epoch_15.png}
+   \caption{Epoch 15}
+  \end{subfigure}
+  
+  \begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/1layer_epoch_1000.png}\
+  \caption{End of training}
+\end{subfigure}%
+  
+\caption{Output of output layer node}
+\end{figure}
+
+The plot of output of hidden layer node (one of the nodes) after different number of epochs:
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/hidden_1layer_1.png}\
+  \caption{Epoch 1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/hidden_1layer_2.png}
+   \caption{Epoch 2}
+  \end{subfigure}
+  
+  \begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/hidden_1layer_5.png}\
+  \caption{Epoch 5}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/hidden_1layer_15.png}
+   \caption{Epoch 15}
+  \end{subfigure}
+  
+  \begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/hidden_1layer_1000.png}\
+  \caption{End of training}
+\end{subfigure}%
+  
+\caption{Output of output layer node}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+\textbf{MLFFNN with 2 hidden layers:}
+
+For the bi-variate dataset, we first use a feed-forward network with 2 hidden layers. The number of nodes in each hidden layer represents the model complexity, which is estimated by looking at the performance on the validation dataset. We varies the number of hidden layer nodes from 1 to 200 (ensuring that the second layer has lesser nodes than the first), and compared the performance (MSE) on all the three sets. 
+
+The best neural network configuration obtained is shown below, with 15 nodes in the first hidden layer and 10 in the second hidden layer.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Regression/bivariate/net_config_2.png}
+\caption{Neural network configuration}
+\end{figure}
+
+For this configuration, the plots of model and target outputs are shown in the figures below : 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/bivariate/output_2layer_train.png}
+\caption{Plots of model and target output (Train data)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/bivariate/output_2layer_val.png}
+\caption{Plots of model and target output (Validation data)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Regression/bivariate/output_2layer_test.png}
+\caption{Plots of model and target output (Test data)}
+\end{figure}
+
+Scatter plot with target output on $x$-axis and model output on $y$-axis for train, validation, test data is as follows:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.2\linewidth]{Regression/bivariate/scatter_2layers.png}
+\caption{Scatter plots of model and target output}
+\end{figure}
+
+The plot of output of output node after different number of epochs:
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/2layers_epoch_1.png}\
+  \caption{Epoch 1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/2layers_epoch_2.png}
+   \caption{Epoch 2}
+  \end{subfigure}
+  
+  \begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/2layers_epoch_5.png}\
+  \caption{Epoch 5}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/2layers_epoch_15.png}
+   \caption{Epoch 15}
+  \end{subfigure}
+  
+  \begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/2layers_epoch_1000.png}\
+  \caption{End of training}
+\end{subfigure}%
+  
+\caption{Output of output layer node}
+\end{figure}
+
+The plot of output of hidden layer 1 node (one of the nodes) after different number of epochs:
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/hidden_2layer_1.png}\
+  \caption{Epoch 1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/hidden_2layer_2.png}
+   \caption{Epoch 2}
+  \end{subfigure}
+  
+  \begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/hidden_2layer_5.png}\
+  \caption{Epoch 5}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/hidden_2layer_15.png}
+   \caption{Epoch 15}
+  \end{subfigure}
+  
+  \begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Regression/bivariate/hidden_2layer_1000.png}\
+  \caption{End of training}
+\end{subfigure}%
+  
+\caption{Output of output layer node}
+\end{figure}
 
 
 
