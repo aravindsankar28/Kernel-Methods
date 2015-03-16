@@ -1151,13 +1151,13 @@ For the uni-variate dataset, we use a feed-forward network with 1 hidden layer. 
 \caption{Legend: Blue-Train  Green-Validation R-Test}
 \end{figure}
 
-The best neural network configuration obtained is shown below, with 4 nodes in the hidden layer.
-
+From the above plot, we can see that the train error decreases on increasing the model complexity. This is expected, as a high number of nodes in the hidden layer leads to overfitting of the training data. So, the best neural network configuration is chosen as the one which gives least MSE on the validation data.
+The configuration obtained is shown below, with 4 nodes in the hidden layer.
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth]{Regression/univariate/net_config.png}
+\includegraphics[width=0.6\linewidth]{Regression/univariate/net_config.png}
 \caption{Neural network configuration}
 \end{figure}
 
@@ -1181,7 +1181,12 @@ For this configuration, the plots of model and target outputs are shown in the f
 \caption{Plots of model and target output (Test data)}
 \end{figure}
 
+\begin{flushleft}
+From the plots, we can see that the model output closely follows the target output in all of the three plots, which shows the generalization ability of the neural network model.
+
 Scatter plot with target output on $x$-axis and model output on $y$-axis for train, validation, test data is as follows:
+
+\end{flushleft}
 
 \begin{figure}[H]
 \centering
@@ -1189,7 +1194,13 @@ Scatter plot with target output on $x$-axis and model output on $y$-axis for tra
 \caption{Scatter plots of model and target output}
 \end{figure}
 
-The plot of output of output node after different number of epochs:
+
+\begin{flushleft}
+Again from the scatter plots shown above, we can validate the correctness of the model obtained by observing that the scatter plot follows the $y = x$ line closely. 
+\end{flushleft}
+\newpage
+
+\textbf{Output of output node after different number of epochs:}
 
 \begin{figure}[H]
 \centering
@@ -1197,7 +1208,13 @@ The plot of output of output node after different number of epochs:
 \caption{Output of output nodes for different epochs}
 \end{figure}
 
-The plot of each of hidden layer nodes for different number of epochs:
+\begin{flushleft}
+
+Here, we see that the neural network model starts with bad fit to the training data, and the model output progressively becomes closer to the true function (curve), as the number of epochs increase. The epoch number 1000 just represents the end of training phase. This is also expected as the neural network's performance improves over the epochs till the error function's value becomes nearly zero. 
+\end{flushleft}
+
+\newpage
+\textbf{Output of hidden layer nodes for different number of epochs: \\[10pt]}
 
 \begin{figure}
 \begin{subfigure}{.5\textwidth}
@@ -1229,6 +1246,16 @@ The plot of each of hidden layer nodes for different number of epochs:
   
 \caption{Output of hidden layer nodes}
 \end{figure}
+
+
+\textbf{Observations :}
+
+\begin{itemize}
+\item In general, it was observed that neural network model was decently accurate in the fitting of a non-linear curve. 
+\item The model output closely followed the target output in general. 
+\item The values of MSE on train, val and test obtained for the best model were 0.0096, 0.0106 and 0.0112. \item These indicate that the model not only fits the train data properly, but also generalizes very well.
+\end{itemize}
+
 
 \textbf{Generalized RBF model :}
 
@@ -1300,7 +1327,11 @@ Scatter plot with target output on $x$-axis and model output on $y$-axis for tra
 
 \textbf{MLFFNN with 1 hidden layer:}
 
+\begin{flushleft}
 For the bi-variate dataset, we first use a feed-forward network with 1 hidden layer. The number of nodes in the hidden layer represents the model complexity, which is estimated by looking at the performance on the validation dataset. We varies the number of hidden layer nodes from 1 to 200, and compared the performance (MSE) on all the three sets. The plot showing the variation of MSE w.r.t model complexity is shown below :
+
+\end{flushleft}
+
 
 \begin{figure}[H]
 \centering
@@ -1308,11 +1339,12 @@ For the bi-variate dataset, we first use a feed-forward network with 1 hidden la
 \caption{MSE vs Model Complexity}
 \end{figure}
 
+Here again, we observe similar trends as the previous case and the best configuration is obtained by choosing the model that gives the best validation performance.
 The best neural network configuration obtained is shown below, with 8 nodes in the hidden layer.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth]{Regression/bivariate/net_config.png}
+\includegraphics[width=0.6\linewidth]{Regression/bivariate/net_config.png}
 \caption{Neural network configuration}
 \end{figure}
 
@@ -1336,6 +1368,10 @@ For this configuration, the plots of model and target outputs are shown in the f
 \caption{Plots of model and target output (Test data)}
 \end{figure}
 
+\begin{flushleft}
+In this dataset, the true surface is bowl shaped.  We can see that in all of the three plots, the model output also closely resembles this surface and closely follows the target output also. This can be verified by looking the scatter plots obtained below :
+\end{flushleft}
+
 Scatter plot with target output on $x$-axis and model output on $y$-axis for train, validation, test data is as follows:
 
 \begin{figure}[H]
@@ -1344,7 +1380,10 @@ Scatter plot with target output on $x$-axis and model output on $y$-axis for tra
 \caption{Scatter plots of model and target output}
 \end{figure}
 
-The plot of output of output node after different number of epochs:
+Here, in the scatter plots obtained we observe a $y = x$ for both train and validation datasets. But, for the test data, the best fit line deviates slightly from the $y = x$ line. This is because of slight overfitting which is present, even though the model with the complexity is chosen based on validation. 
+
+
+\textbf{Output of output node after different number of epochs: } \\[10pt] 
 
 \begin{figure}
 \begin{subfigure}{.5\textwidth}
@@ -1378,7 +1417,9 @@ The plot of output of output node after different number of epochs:
 \caption{Output of output layer node}
 \end{figure}
 
-The plot of output of hidden layer node (one of the nodes) after different number of epochs:
+\newpage
+
+\textbf{Output of hidden layer node (one of the nodes) after different number of epochs:}
 
 \begin{figure}
 \begin{subfigure}{.5\textwidth}
@@ -1409,7 +1450,7 @@ The plot of output of hidden layer node (one of the nodes) after different numbe
   \caption{End of training}
 \end{subfigure}%
   
-\caption{Output of output layer node}
+\caption{Output of hidden layer node}
 \end{figure}
 
 
@@ -1453,7 +1494,12 @@ For this configuration, the plots of model and target outputs are shown in the f
 \caption{Plots of model and target output (Test data)}
 \end{figure}
 
+\begin{flushleft}
+
+Here again, as in the earlier case the model outputs closely resemble the true surface of data to be fut, which is bowl shaped.
 Scatter plot with target output on $x$-axis and model output on $y$-axis for train, validation, test data is as follows:
+\end{flushleft}
+
 
 \begin{figure}[H]
 \centering
@@ -1461,6 +1507,7 @@ Scatter plot with target output on $x$-axis and model output on $y$-axis for tra
 \caption{Scatter plots of model and target output}
 \end{figure}
 
+Here, we observe very slight deviations from the $y = x$ line for the test and validation scatter plots. This is because of the slight overfitting caused by using 2 layers in the neural network.
 The plot of output of output node after different number of epochs:
 
 \begin{figure}
@@ -1529,6 +1576,13 @@ The plot of output of hidden layer 1 node (one of the nodes) after different num
 \caption{Output of output layer node}
 \end{figure}
 
+\textbf{Observations :}
+\begin{itemize}
+\item Both the models of neural networks, i.e. with 1 and 2 hidden layers seemed to perform well in the surface fitting task.
+\item The non-linearities in the surface to be approximated are captured by using the tanh sigmoidal function in the hidden layer nodes. 
+\item Though very slight overfitting is observed, the models obtained have good generalization ability.  
+
+\end{itemize}
 
 
 \textbf{Generalized RBF Model:}
