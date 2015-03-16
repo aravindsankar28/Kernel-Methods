@@ -506,10 +506,10 @@ The Gaussian mixture model was used to model the class conditional densities of 
 
 For this purpose, we adopt an unsupervised approach. We use the Bayesian Information Criterion (BIC), which provides a trade-off between the likelihood of the data and the model complexity.
 
- \mathrm{BIC} = {-2 \cdot \ln{\hat L} + k \cdot \ln(n)}. \ 
+\[ \mathrm{BIC} = {-2 \cdot \ln{\hat L} + k \cdot \ln(n)}. \] 
 
 
-where \hat L is the maximized likelihood, k is the no. of parameters, and n the number of data points. The model with the lowest BIC value is expected to be the best one.
+where $\hat L$ is the maximized likelihood, k is the no. of parameters, and n the number of data points. The model with the lowest BIC value is expected to be the best one.
 
 
 Based on this criterion, we obtained 3 Gaussian components for class 1 (inside region) and 5 Gaussian components for class 2. The Gaussian contours obtained for each of the classes are shown in the figures below.
@@ -1023,7 +1023,7 @@ In this dataset, we are given a set of images and are required to classify them 
 
 \end{enumerate}
 
-The features extracted from the image are Color Histogram Features which give rise to 16 \times 3 = 48 features.  We are required to compare the Bayes classifier and neural network classifier on this dataset.
+The features extracted from the image are Color Histogram Features which give rise to 16 $\times$ 3 = 48 features.  We are required to compare the Bayes classifier and neural network classifier on this dataset.
 
 
 \begin{flushleft}
@@ -1136,7 +1136,8 @@ For the uni-variate dataset, we use a feed-forward network with 1 hidden layer. 
 \caption{Legend: Blue-Train  Green-Validation R-Test}
 \end{figure}
 
-The best neural network configuration obtained is shown below, with 4 nodes in the hidden layer.
+From the above plot, we can see that the train error decreases on increasing the model complexity. This is expected, as a high number of nodes in the hidden layer leads to overfitting of the training data. So, the best neural network configuration is chosen as the one which gives least MSE on the validation data.
+The configuration obtained is shown below, with 4 nodes in the hidden layer.
 
 
 
@@ -1215,6 +1216,12 @@ The plot of each of hidden layer nodes for different number of epochs:
 \caption{Output of hidden layer nodes}
 \end{figure}
 
+
+\textbf{Observations :}
+
+\begin{itemize}
+\item
+\end{itemize}
 \textbf{Generalized RBF model :}
 
 
