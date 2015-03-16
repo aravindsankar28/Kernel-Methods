@@ -1,17 +1,17 @@
-class1_train = load('../../Data/overlapping/class1_train.txt');
-class2_train = load('../../Data/overlapping/class2_train.txt');
-class3_train = load('../../Data/overlapping/class3_train.txt');
-class4_train = load('../../Data/overlapping/class4_train.txt');
+class1_train = load('../../Data/linearlySeparable/class1_train.txt');
+class2_train = load('../../Data/linearlySeparable/class2_train.txt');
+class3_train = load('../../Data/linearlySeparable/class3_train.txt');
+class4_train = load('../../Data/linearlySeparable/class4_train.txt');
 
-class1_val = load('../../Data/overlapping/class1_val.txt');
-class2_val = load('../../Data/overlapping/class2_val.txt');
-class3_val = load('../../Data/overlapping/class3_val.txt');
-class4_val = load('../../Data/overlapping/class4_val.txt');
+class1_val = load('../../Data/linearlySeparable/class1_val.txt');
+class2_val = load('../../Data/linearlySeparable/class2_val.txt');
+class3_val = load('../../Data/linearlySeparable/class3_val.txt');
+class4_val = load('../../Data/linearlySeparable/class4_val.txt');
 
-class1_test = load('../../Data/overlapping/class1_test.txt');
-class2_test = load('../../Data/overlapping/class2_test.txt');
-class3_test = load('../../Data/overlapping/class3_test.txt');
-class4_test = load('../../Data/overlapping/class4_test.txt');
+class1_test = load('../../Data/linearlySeparable/class1_test.txt');
+class2_test = load('../../Data/linearlySeparable/class2_test.txt');
+class3_test = load('../../Data/linearlySeparable/class3_test.txt');
+class4_test = load('../../Data/linearlySeparable/class4_test.txt');
 
 train_data = [class1_train; class2_train ; class3_train;  class4_train ];
 target_train = [ones(length(class1_train),1); ones(length(class2_train),1)*2; ones(length(class3_train),1)*3;ones(length(class4_train),1)*4;];
