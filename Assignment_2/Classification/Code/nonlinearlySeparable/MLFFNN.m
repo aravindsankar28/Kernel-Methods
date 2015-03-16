@@ -243,19 +243,19 @@ for i = 1:length(epochs)
     outputs = net(inputs);
     outputs = outputs';
     
-    figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,1),'r*');
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    zlabel('output for class 1');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)),' for class 1'));
-    figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,2),'g*');
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    zlabel('output for class 2');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)), ' for class 2'));
-    
+%     figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,1),'r*');
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     zlabel('output for class 1');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)),' for class 1'));
+%     figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,2),'g*');
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     zlabel('output for class 2');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)), ' for class 2'));
+%     
 
     
     
@@ -276,7 +276,32 @@ for i = 1:length(epochs)
             s = actFcn(a, actFncParams);
         end
     end
-    s
+    
+    figure,plot3(inputs(1,:)',inputs(2,:)',s(1,:),'k.');
+    a = xlabel('$x_1$');
+    b = ylabel('$x_2$');
+    zlabel('output for hidden node');
+    set(a,'Interpreter','latex');
+    set(b,'Interpreter','latex');title(strcat('hidden node 1 at epoch = ',int2str(epochs(i))));
+
+    figure,plot3(inputs(1,:)',inputs(2,:)',s(2,:),'k.');
+    a = xlabel('$x_1$');
+    b = ylabel('$x_2$');
+    zlabel('output for hidden node');
+    set(a,'Interpreter','latex');
+    set(b,'Interpreter','latex');title(strcat('hidden node 2 at epoch = ',int2str(epochs(i))));
+    figure,plot3(inputs(1,:)',inputs(2,:)',s(3,:),'k.');
+    a = xlabel('$x_1$');
+    b = ylabel('$x_2$');
+    zlabel('output for hidden node');
+    set(a,'Interpreter','latex');
+    set(b,'Interpreter','latex');title(strcat('hidden node 3 at epoch = ',int2str(epochs(i))));
+    figure,plot3(inputs(1,:)',inputs(2,:)',s(4,:),'k.');
+    a = xlabel('$x_1$');
+    b = ylabel('$x_2$');
+    zlabel('output for hidden node');
+    set(a,'Interpreter','latex');
+    set(b,'Interpreter','latex');title(strcat('hidden node 4 at epoch = ',int2str(epochs(i))));
 
 
 
