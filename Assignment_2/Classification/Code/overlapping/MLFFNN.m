@@ -277,48 +277,48 @@ for i = 1:length(epochs)
     % Test the Network
     outputs = net(inputs);
     outputs = outputs';
-    
-    figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,1),'r*');
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    zlabel('output for class 1');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)),' for class 1'));
-    
-    saveas(gcf,strcat(int2str(epochs(i)),'_1.png'));
+%     
+%     figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,1),'r*');
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     zlabel('output for class 1');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)),' for class 1'));
+%     
+%     saveas(gcf,strcat(int2str(epochs(i)),'_1.png'));
     %saveas(gcf,'Plots_1/RMS/RMS_complexity_20.png');
-    
-    figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,2),'g*');
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    zlabel('output for class 2');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)), ' for class 2'));
-    saveas(gcf,strcat(int2str(epochs(i)),'_2.png'));
-    
-    
-    figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,3),'b*');
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    zlabel('output for class 3');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)), ' for class 3'));
-    saveas(gcf,strcat(int2str(epochs(i)),'_3.png'));
-    
-    
-    
-    figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,4),'k*'); 
-    
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    
-    zlabel('output for class 4');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('output layer at epoch =  ',int2str(epochs(i)), ' for class 4'));
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    
-    saveas(gcf,strcat(int2str(epochs(i)),'_4.png'));
+%     
+%     figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,2),'g*');
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     zlabel('output for class 2');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)), ' for class 2'));
+%     saveas(gcf,strcat(int2str(epochs(i)),'_2.png'));
+%     
+%     
+%     figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,3),'b*');
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     zlabel('output for class 3');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)), ' for class 3'));
+%     saveas(gcf,strcat(int2str(epochs(i)),'_3.png'));
+%     
+%     
+%     
+%     figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,4),'k*'); 
+%     
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     
+%     zlabel('output for class 4');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('output layer at epoch =  ',int2str(epochs(i)), ' for class 4'));
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     
+%     saveas(gcf,strcat(int2str(epochs(i)),'_4.png'));
 
     
     
@@ -339,7 +339,52 @@ for i = 1:length(epochs)
             s = actFcn(a, actFncParams);
         end
     end
-    s
+    
+    
+    figure,plot3(inputs(1,:)',inputs(2,:)',s(1,:),'k*');
+    a = xlabel('$x_1$');
+    b = ylabel('$x_2$');
+    zlabel('Hidden layer output for node 1');
+    set(a,'Interpreter','latex');
+    set(b,'Interpreter','latex');title(strcat('hidden layer at epoch = ',int2str(epochs(i)),' for node 1'));
+    
+    saveas(gcf,strcat('h',int2str(epochs(i)),'_1.png'));
+    %saveas(gcf,'Plots_1/RMS/RMS_complexity_20.png');
+    
+    figure,plot3(inputs(1,:)',inputs(2,:)',s(5,:),'k*');
+    a = xlabel('$x_1$');
+    b = ylabel('$x_2$');
+    zlabel('Hidden layer output for node 5');
+    set(a,'Interpreter','latex');
+    set(b,'Interpreter','latex');title(strcat('hidden layer at epoch = ',int2str(epochs(i)), ' for node 5'));
+    saveas(gcf,strcat('h',int2str(epochs(i)),'_5.png'));
+    
+    
+    figure,plot3(inputs(1,:)',inputs(2,:)',s(9,:),'k*');
+    a = xlabel('$x_1$');
+    b = ylabel('$x_2$');
+    zlabel('Hidden layer output for node 9');
+    set(a,'Interpreter','latex');
+    set(b,'Interpreter','latex');title(strcat('hidden layer at epoch = ',int2str(epochs(i)), ' for node 9'));
+    saveas(gcf,strcat('h',int2str(epochs(i)),'_9.png'));
+    
+    
+    
+    figure,plot3(inputs(1,:)',inputs(2,:)',s(15,:),'k*'); 
+    
+    a = xlabel('$x_1$');
+    b = ylabel('$x_2$');
+    
+    zlabel('Hidden layer output for node 16');
+    set(a,'Interpreter','latex');
+    set(b,'Interpreter','latex');title(strcat('hidden layer at epoch =  ',int2str(epochs(i)), ' for node 16'));
+    a = xlabel('$x_1$');
+    b = ylabel('$x_2$');
+    
+    saveas(gcf,strcat('h',int2str(epochs(i)),'_15.png'));
+
+    
+    
 
 
 
