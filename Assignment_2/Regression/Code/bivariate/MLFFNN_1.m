@@ -133,3 +133,4 @@ for i = 1:length(epochs)
     set(a,'Interpreter','latex');
     set(b,'Interpreter','latex');title(strcat('Hidden layer output at epoch =  ',int2str(epochs(i))));
 end
+    
