@@ -233,13 +233,13 @@ latex(sym(c3m))
 
 %EPOCH WISE----------------
 
-epochs = [1,3,5,10,20];
+epochs = [1,5,20];
 
 for i = 1:length(epochs)
     inputs = data_input';
     targets = data_target';
-    hiddenLayerSize = 9;
-    net = patternnet(9);
+    hiddenLayerSize = 16;
+    net = patternnet(16);
     % Create a Pattern Recognition Network
     % for i=1:20
     % hiddenLayerSize = i;
@@ -284,25 +284,41 @@ for i = 1:length(epochs)
     zlabel('output for class 1');
     set(a,'Interpreter','latex');
     set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)),' for class 1'));
+    
+    saveas(gcf,strcat(int2str(epochs(i)),'_1.png'));
+    %saveas(gcf,'Plots_1/RMS/RMS_complexity_20.png');
+    
     figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,2),'g*');
     a = xlabel('$x_1$');
     b = ylabel('$x_2$');
     zlabel('output for class 2');
     set(a,'Interpreter','latex');
     set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)), ' for class 2'));
+    saveas(gcf,strcat(int2str(epochs(i)),'_2.png'));
+    
+    
     figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,3),'b*');
     a = xlabel('$x_1$');
     b = ylabel('$x_2$');
     zlabel('output for class 3');
     set(a,'Interpreter','latex');
     set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)), ' for class 3'));
+    saveas(gcf,strcat(int2str(epochs(i)),'_3.png'));
+    
+    
+    
     figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,4),'k*'); 
+    
     a = xlabel('$x_1$');
     b = ylabel('$x_2$');
+    
     zlabel('output for class 4');
     set(a,'Interpreter','latex');
     set(b,'Interpreter','latex');title(strcat('output layer at epoch =  ',int2str(epochs(i)), ' for class 4'));
-
+    a = xlabel('$x_1$');
+    b = ylabel('$x_2$');
+    
+    saveas(gcf,strcat(int2str(epochs(i)),'_4.png'));
 
     
     
