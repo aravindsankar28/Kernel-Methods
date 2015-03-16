@@ -84,6 +84,7 @@ plot(models,train_performances,models,val_performances,models,test_performances)
 xlabel('Model complexity (Nodes in hidden layer)');
 ylabel('Performance (MSE)');
 title('Plot showing variation of MSE for different model complexities');
+legend('Train','Validation','Test');
 % For scatter plot, check plotregression
 
 % Plot(s) of model and target outputs

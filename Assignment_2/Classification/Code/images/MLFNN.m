@@ -1,17 +1,17 @@
+load_data;
 inputs = data';
-targets = target_data';
+targets = oneofk_target';
 
-combined = [inputs; targets];
+combined = [inputs;targets];
 combined = combined(:,randperm(size(combined,2)));
 
 inputs = combined(1:48,:);
-targets = combined(49,:);
-
+targets = combined(49:53,:);
 bestnet = patternnet([1,1]);
-valerr = 1;
+valerr = 1000;
 % Create a Pattern Recognition Network
- for i=50:51
- for j = 50:51
+ for i= 10:11
+ for j = 5:8
  net = patternnet([i,j]);
 
 % Choose Input and Output Pre/Post-Processing Functions
@@ -36,11 +36,13 @@ net.performFcn = 'mse';  % Mean squared error
 
 % Choose Plot Functions
 % For a list of all plot functions type: help nnplot
-net.plotFcns = {'plotperform','plottrainstate','ploterrhist', ...
+net.plotFcns = {'plotperform','plottrainstate','ploterrhist', 'plotconfusion'...
   'plotregression', 'plotfit'};
 net.layers{1}.transferFcn = 'tansig';
 net.layers{2}.transferFcn = 'tansig';
-net.trainParam.epochs = 500;
+net.layers{3}.transferFcn = 'tansig';
+net.trainParam.epochs = 3000;
+
 % Train the Network
 [net,tr] = train(net,inputs,targets);
 
@@ -52,9 +54,9 @@ trainOut = outputs .* tr.trainMask{1};
 testOut = outputs .* tr.testMask{1};
 valOut = outputs .* tr.valMask{1};
 
-trainOut = trainOut(:,1:500);
-testOut = testOut(:,801:1000);
-valOut =  valOut(:,501:800);
+%trainOut = trainOut(:,1:500);
+%testOut = testOut(:,801:1000);
+%valOut =  valOut(:,501:800);
 
 % Recalculate Training, Validation and Test Performance
 trainTargets = targets .* tr.trainMask{1};
@@ -70,8 +72,8 @@ testPerformance = perform(net,testTargets,outputs)
   end
  end
  end
- % view(net)
-% display(net)
+  view(bestnet)
+  display(bestnet)
 %  
 % trainTargets  = trainTargets(:,1:500);
 % testTargets  = testTargets(:,801:1000);
@@ -168,7 +170,14 @@ testPerformance = perform(net,testTargets,outputs)
 % %figure, plotconfusion(targets,outputs)
 % %figure, ploterrhist(errors)
 % 
-% Decision region.
+
+% cm = confusionmat(traintarget, trainop);
+% latex(sym(cm))
+% c2m = confusionmat(testtarget, testop);
+% latex(sym(c2m))
+% c3m = confusionmat(valtarget, valop);
+% latex(sym(c3m))
+return
 xrange = [-2 2];
 yrange = [-2 2];
 inc = 0.1;
@@ -216,11 +225,6 @@ set(a,'Interpreter','latex');
 set(b,'Interpreter','latex');
 title('Decision region plot');
 
-% cm = confusionmat(traintarget, trainop);
-% latex(sym(cm))
-% c2m = confusionmat(testtarget, testop);
-% latex(sym(c2m))
-% c3m = confusionmat(valtarget, valop);
-% latex(sym(c3m))
+
 % 
 % 

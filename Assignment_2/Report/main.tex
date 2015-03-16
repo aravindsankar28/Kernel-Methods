@@ -149,7 +149,9 @@ The decision region plot obtained, showing the separation between the 3 classes 
 \textbf{MLFFNN :} \\[10pt]
 
 For this simple dataset, we use a feedforward neural network with 1 hidden layer. There are 4 nodes in the output layer, for which we use a 1-of-k representation of the class labels. The function used is the one available in the MATLAB \textit{nntools} toolbox. The MSE error function was used in the output layer.
-The number of nodes in the hidden layer (model complexity) was estimated to be 9 with hyperbolic tangent function, using multiple iterations of cross-validation. For this configuration, the results obtained are shown below :
+The number of nodes in the hidden layer (model complexity) was estimated to be 9 with hyperbolic tangent function, using multiple iterations of cross-validation. For this configuration, the results obtained are shown below.
+\\[5pt]
+\includegraphics[scale=0.6]{Classification/linearlySeparable/net_config}
 	
 % Confusion matrices %
 \textbf{\\[5pt]Confusion Matrices: \\[10pt]}
@@ -169,7 +171,7 @@ The number of nodes in the hidden layer (model complexity) was estimated to be 9
 
 
 
-
+\newpage
 \textbf{\\[10pt]Decision Region:\\[5pt]}
 \includegraphics[scale=1]{Classification/linearlySeparable/decn_region_nn}
 
@@ -458,15 +460,14 @@ Clearly, a stable output has been established by the 20th epoch, looking at the 
 \end{subfigure}
 \caption{Epoch 20 hidden nodes 7,8,9}
 \end{figure}
-We can notice the clear S shaped curves that appear out of the hidden layer in these plots. Also note that the difference between epochs 5 and 20 is less than that between 1 and 5 as expected.
+We can notice the clear S shaped curves that appear out of the hidden layer in these plots. They appear steep because we have plotted the full range on the x and y axis. The beta values are tuned by the tool. Also note that the difference between epochs 5 and 20 is less than that between 1 and 5 as expected.
 \newpage
-Comparison --
 \end{flushleft}
 
 \subsubsection{Non-linearly Separable Dataset}
 \begin{flushleft}
 
-In this dataset, we are given a 2 class problem, where every pair of classes is non-linearly separable, i.e the 2 classes can be separated by a non-linear decision boundary. Here, we are required to compare the performance of Bayes classifier and MLFFNN.
+In this dataset, we are given a 2 class problem, which are non-linearly separable, i.e the 2 classes can be separated by a non-linear decision boundary. Here, we are required to compare the performance of Bayes classifier and MLFFNN.
 The input data is as shown in the figure below. \\[10pt]
 
 \end{flushleft}
@@ -551,23 +552,157 @@ The decision region plot separating the 2 classes is shown below :
 \textbf{MLFFNN} \\[10pt]
 Here again, as in the previous dataset, we use a neural network with 1 hidden layer, for which the number of nodes is estimated using cross validation on the given validation dataset.
 
-For the best performance on the validation data, we get ?? nodes in the hidden layer. For this configuration, the results obtained are shown below :
-
+For the best performance by cross validation, we get 4 nodes in the hidden layer. For this configuration, the results obtained are shown below.
+\\[5pt]
+\includegraphics[scale=0.6]{Classification/nonlinearlySeparable/net_config} \newpage
+\textbf{Decision Region from NN:\\[5pt]}
+\includegraphics[scale=1]{Classification/nonlinearlySeparable/decn_region_nn_nls}
 \end{flushleft}
 % Confusion matrices %
-
+% Confusion matrices %
 \begin{flushleft}
-The decision region plot obtained is shown below in Figure ..
+\textbf{\\[5pt]Confusion Matrices: \\[10pt]}
+\textbf{Train :\\[5pt]}
+\begin{tabular}{|c|c|}\hline  150 & 0 \\ \hline 0 & 600 \\ \hline \end{tabular}
 
-The outputs of hidden and output nodes are shown below ..
+\textbf{\\[10pt]Validation :\\[5pt]}
 
+\begin{tabular}{|c|c|}\hline  90 & 0 \\ \hline 0 & 360 \\ \hline \end{tabular}
+
+\textbf{\\[10pt]Test :\\[5pt]}
+
+
+\begin{tabular}{|c|c|}\hline  60 & 0 \\ \hline 0 & 240 \\ \hline \end{tabular}
 \end{flushleft}
+\newpage
+\textbf{Output Layer values with Epochs\\[5pt]}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/1_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/1_2}
+  
+\end{subfigure}
+\caption{Epoch 1 class 1 and 2}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/5_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/5_2}
+  
+\end{subfigure}
+\caption{Epoch 5 class 1 and 2}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/10_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/10_2}
+  
+\end{subfigure}
+\caption{Epoch 10 class 1 and 2}
+\end{figure}
+Clearly, the outputs have converged to a great extent by the 10th epoch.
+\newpage
+
+\textbf{Hidden layer values with Epochs \\[10pt]}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/h1_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/h1_2}
+\caption{Epoch 1 hidden nodes 1 and 2}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/h1_3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/h1_4}
+  \end{subfigure}
+\caption{Epoch 1 hidden nodes 3 and 4}
+\end{figure}
 
 
-Comparison --
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/h5_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/h5_2}
+  \end{subfigure}
+\caption{Epoch 5 hidden nodes 1 and 2}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/h5_3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/h5_4}
+  \end{subfigure}
+\caption{Epoch 5 hidden nodes 3 and 4}
 
 
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/h20_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/h20_2}
+  \end{subfigure}
+\caption{Epoch 20 hidden nodes 1 and 2}
 
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/h20_3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/h20_4}
+  \end{subfigure}
+\caption{Epoch 20 hidden nodes 3 and 4}
+\end{figure}
+\end{figure}
+The above shows a clean and smooth S shaped hyperbolic tangent curve at all epochs for the hidden layers. We chose hyperbolic tangent since the training was faster.
+\newpage
 \subsubsection{Overlapping classes Dataset}
 \begin{flushleft}
 In this dataset, we are given a 2 class problem, where every pair of classes is linearly non separable, i.e the most of the points can be separated by a linear decision boundary but a few points of each class lie on either side of the boundary. Here, we are required to compare the performance of Bayes classifier and MLFFNN.
@@ -636,22 +771,189 @@ The decision region plot obtained is shown below :
 \textbf{MLFFNN} \\[10pt]
 Here again, as in the previous dataset, we use a neural network with 1 hidden layer, for which the number of nodes is estimated using cross validation on the given validation dataset.
 
-For the best performance on the validation data, we get ?? nodes in the hidden layer. For this configuration, the results obtained are shown below :
-
+For the best performance on the validation data, we get 16 nodes in the hidden layer. For this configuration, the results obtained are shown below.
+\\[5pt]
+\includegraphics[scale=0.6]{Classification/overlapping/net_config}
+\newpage
+\textbf{\\[5pt]Decision Region\\[10pt]}
+\includegraphics[scale=1]{Classification/overlapping/decn_region_nn}
 \end{flushleft}
 % Confusion matrices %
-
 \begin{flushleft}
-The decision region plot obtained is shown below in Figure ..
+\textbf{\\[5pt]Confusion Matrices: \\[10pt]}
+\textbf{Train :\\[5pt]}
+\begin{tabular}{|c|c|c|c|}\hline  215 & 8 & 19 & 8 \\ \hline 10 & 235 & 2& 3 \\ \hline 24 & 1 & 225& 0 \\ \hline 2 & 2 & 0& 246 \\ \hline \end{tabular}
 
-The outputs of hidden and output nodes are shown below ..
+\textbf{\\[10pt]Validation :\\[5pt]}
 
+\begin{tabular}{|c|c|c|c|}\hline  132 & 2 & 7 & 9 \\ \hline 7 & 137 & 3& 3 \\ \hline 13 & 1 & 136& 0 \\ \hline 4 & 2 & 0& 144 \\ \hline \end{tabular}
+
+\textbf{\\[10pt]Test :\\[5pt]}
+
+\begin{tabular}{|c|c|c|c|}\hline  88 & 1 & 7 & 4 \\ \hline 6 & 89 & 4 & 1 \\ \hline 16 & 2 & 82& 0 \\ \hline 3 & 0 & 0& 97 \\ \hline \end{tabular}
 \end{flushleft}
 
+\newpage
+\textbf{Output layer with Epochs \\[10pt]}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/1_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/1_2}
+  \end{subfigure}
+\caption{Epoch 1 output nodes 1 and 2}
+\end{figure}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/1_3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/1_4}
+  \end{subfigure}
+\caption{Epoch 1 output nodes 3 and 4}
+\end{figure}
+
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/5_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/5_2}
+  \end{subfigure}
+\caption{Epoch 5 output nodes 1 and 2}
+\end{figure}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/5_3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/5_4}
+  \end{subfigure}
+\caption{Epoch 5 output nodes 3 and 4}
+\end{figure}
+
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/20_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/20_2}
+  \end{subfigure}
+\caption{Epoch 20 output nodes 1 and 2}
+\end{figure}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/20_3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/20_4}
+  \end{subfigure}
+\caption{Epoch 20 output nodes 3 and 4}
+\end{figure}
+\newpage
 
 
 
 
+
+\textbf{Hidden Layer Values with Epochs \\[10pt]}
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/h1_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/h1_5}
+  \end{subfigure}
+\caption{Epoch 1 hidden nodes 1 and 5}
+\end{figure}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/h1_9}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/h1_15}
+  \end{subfigure}
+\caption{Epoch 1 hidden nodes 9 and 15}
+\end{figure}
+
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/h5_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/h5_5}
+  \end{subfigure}
+\caption{Epoch 5 hidden nodes 1 and 5}
+\end{figure}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/h5_9}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/h5_15}
+  \end{subfigure}
+\caption{Epoch 5 hidden nodes 9 and 15}
+\end{figure}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/h20_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/h20_5}
+  \end{subfigure}
+\caption{Epoch 20 hidden nodes 1 and 5}
+\end{figure}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/h20_9}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/overlapping/h20_15}
+  \end{subfigure}
+\caption{Epoch 20 hidden nodes 9 and 15}
+\end{figure}
+\newpage
 \subsection{Dataset 2 - Image dataset}
 In this dataset, we are given a set of images and are required to classify them according to the labels, which are  :
 
@@ -713,23 +1015,77 @@ Validation Accuracy : 69.42  \% \\[10pt]
 Test Accuracy : 68.62 \% \\[10pt]
 
 
-We observe that the accuracy obtained here, is quite less. One of the ways this can be improved is by considering different number of gaussian mixture components for each class.
+We observe that the accuracy obtained here, is quite less. One of the ways this can be improved is by considering different number of gaussian mixture components for each class. \\[10pt]
 
 
-\textbf{MLFFNN :}
+\textbf{MLFFNN :} \\[10pt]
+\begin{flushleft}
+
+For this dataset, as the complexity is high, we use a feed-forward neural network with 2 layers.  The number of nodes in these 2 layers represent the model complexity. The best complexity was found out using cross validation on the validation dataset. 
+
+The best model configuration obtained is shown below :
+
+\end{flushleft}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Classification/images/net_config.png}
+\caption{Confusion matrices}
+\end{figure}
+
+
+
+
+The results obtained on using the best configuration are shown below in the form of confusion matrices :
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Classification/images/confusion.png}
+\caption{Confusion matrices}
+\end{figure}
+
+
 
 \end{flushleft}
 
 \section{Regression task}
 In this task, we are given the same 2 datasets as the first assignment. In this assignment, we are required to use the MLFFNN and RBFNN models for the purpose of function approximation, specifically curve fitting and surface fitting in datasets 1 and 2 respectively.
 
-
 \subsection{Dataset 1 (Univariate)}
 \begin{flushleft}
-Here, we are required to do curve fitting of the function $e^{cos(2 \pi x)}$.
+Here, we are required to do curve fitting of the function $e^{cos(2 \pi x)}$. For this purpose we use a training set of 1000 points.
+
+
+
 \end{flushleft}
 
+
+\begin{flushleft}
 \textbf{MLFFNN :}
+For the uni-variate dataset, we use a feed-forward network with 1 hidden layer. The number of nodes in the hidden layer represents the model complexity, which is estimated by looking at the performance on the validation dataset. We varies the number of hidden layer nodes from 1 to 200, and compared the performance   (MSE) on all the three sets. The plot showing the variation of MSE w.r.t model complexity is shown below :
+
+\end{flushleft}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Regression/univariate/mse.png}
+\caption{B - Train  R- Val G- Test}
+\end{figure}
+
+The best neural network configuration obtained is shown below, with 4 nodes in the hidden layer.
+
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{Regression/univariate/net_config.png}
+\caption{Neural network configuration}
+\end{figure}
+
+For this configuration, the plots of model and target outputs are shown in the Figures below : 
+
 
 \textbf{Generalized RBF model :}
 
