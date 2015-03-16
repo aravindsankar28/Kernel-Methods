@@ -1,17 +1,14 @@
 load_data;
 inputs = data';
-targets = oneofk_target';
+targets = target_data';
 
-combined = [inputs;targets];
-combined = combined(:,randperm(size(combined,2)));
 
-inputs = combined(1:48,:);
-targets = combined(49:53,:);
+
 bestnet = patternnet([1,1]);
 valerr = 1000;
 % Create a Pattern Recognition Network
- for i= 10:11
- for j = 5:8
+ for i=50:50
+ for j = 50:50
  net = patternnet([i,j]);
 
 % Choose Input and Output Pre/Post-Processing Functions
@@ -28,7 +25,7 @@ net.divideParam.testRatio = 0.2;
 
 % For help on training function 'trainlm' type: help trainlm
 % For a list of all training functions type: help nntrain
-net.trainFcn = 'trainlm';  % Levenberg-Marquardt optimization, fastest backpropagation algorithm in the toolbox
+net.trainFcn = 'traingd';  % Levenberg-Marquardt optimization, fastest backpropagation algorithm in the toolbox
 
 % Choose a Performance Function
 % For a list of all performance functions type: help nnperformance
@@ -36,12 +33,12 @@ net.performFcn = 'mse';  % Mean squared error
 
 % Choose Plot Functions
 % For a list of all plot functions type: help nnplot
-net.plotFcns = {'plotperform','plottrainstate','ploterrhist', 'plotconfusion'...
+net.plotFcns = {'plotperform','plottrainstate','ploterrhist', ...
   'plotregression', 'plotfit'};
-net.layers{1}.transferFcn = 'tansig';
-net.layers{2}.transferFcn = 'tansig';
-net.layers{3}.transferFcn = 'tansig';
-net.trainParam.epochs = 3000;
+%net.layers{1}.transferFcn = 'tansig';
+%net.layers{2}.transferFcn = 'tansig';
+%net.layers{3}.transferFcn = 'tansig';
+
 
 % Train the Network
 [net,tr] = train(net,inputs,targets);
@@ -54,9 +51,9 @@ trainOut = outputs .* tr.trainMask{1};
 testOut = outputs .* tr.testMask{1};
 valOut = outputs .* tr.valMask{1};
 
-%trainOut = trainOut(:,1:500);
-%testOut = testOut(:,801:1000);
-%valOut =  valOut(:,501:800);
+trainOut = trainOut(:,1:500);
+testOut = testOut(:,801:1000);
+valOut =  valOut(:,501:800);
 
 % Recalculate Training, Validation and Test Performance
 trainTargets = targets .* tr.trainMask{1};

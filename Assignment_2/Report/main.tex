@@ -458,15 +458,14 @@ Clearly, a stable output has been established by the 20th epoch, looking at the 
 \end{subfigure}
 \caption{Epoch 20 hidden nodes 7,8,9}
 \end{figure}
-We can notice the clear S shaped curves that appear out of the hidden layer in these plots. Also note that the difference between epochs 5 and 20 is less than that between 1 and 5 as expected.
+We can notice the clear S shaped curves that appear out of the hidden layer in these plots. They appear steep because we have plotted the full range on the x and y axis. The beta values are tuned by the tool. Also note that the difference between epochs 5 and 20 is less than that between 1 and 5 as expected.
 \newpage
-Comparison --
 \end{flushleft}
 
 \subsubsection{Non-linearly Separable Dataset}
 \begin{flushleft}
 
-In this dataset, we are given a 2 class problem, where every pair of classes is non-linearly separable, i.e the 2 classes can be separated by a non-linear decision boundary. Here, we are required to compare the performance of Bayes classifier and MLFFNN.
+In this dataset, we are given a 2 class problem, which are non-linearly separable, i.e the 2 classes can be separated by a non-linear decision boundary. Here, we are required to compare the performance of Bayes classifier and MLFFNN.
 The input data is as shown in the figure below. \\[10pt]
 
 \end{flushleft}
@@ -552,22 +551,73 @@ The decision region plot separating the 2 classes is shown below :
 \textbf{MLFFNN} \\[10pt]
 Here again, as in the previous dataset, we use a neural network with 1 hidden layer, for which the number of nodes is estimated using cross validation on the given validation dataset.
 
-For the best performance on the validation data, we get ?? nodes in the hidden layer. For this configuration, the results obtained are shown below :
-
+For the best performance by cross validation, we get 4 nodes in the hidden layer. For this configuration, the results obtained are shown below : \newpage
+\textbf{Decision Region from NN:\\[5pt]}
+\includegraphics[scale=1]{Classification/nonlinearlySeparable/decn_region_nn_nls}
 \end{flushleft}
 % Confusion matrices %
-
+% Confusion matrices %
 \begin{flushleft}
-The decision region plot obtained is shown below in Figure ..
+\textbf{\\[5pt]Confusion Matrices: \\[10pt]}
+\textbf{Train :\\[5pt]}
+\begin{tabular}{|c|c|}\hline  150 & 0 \\ \hline 0 & 600 \\ \hline \end{tabular}
 
-The outputs of hidden and output nodes are shown below ..
+\textbf{\\[10pt]Validation :\\[5pt]}
 
+\begin{tabular}{|c|c|}\hline  90 & 0 \\ \hline 0 & 360 \\ \hline \end{tabular}
+
+\textbf{\\[10pt]Test :\\[5pt]}
+
+
+\begin{tabular}{|c|c|}\hline  60 & 0 \\ \hline 0 & 240 \\ \hline \end{tabular}
 \end{flushleft}
+\newpage
+\textbf{Output Layer values with Epochs\\[5pt]}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/1_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/1_2}
+  
+\end{subfigure}
+\caption{Epoch 1 class 1 and 2}
+\end{figure}
 
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/5_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/5_2}
+  
+\end{subfigure}
+\caption{Epoch 5 class 1 and 2}
+\end{figure}
 
-Comparison --
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/10_1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/nonlinearlySeparable/10_2}
+  
+\end{subfigure}
+\caption{Epoch 10 class 1 and 2}
+\end{figure}
+Clearly, the outputs have converged to a great extent by the 10th epoch.
+\newpage
 
-
+\textbf{Hidden layer values with Epochs \\[10pt]}
 
 \subsubsection{Overlapping classes Dataset}
 \begin{flushleft}

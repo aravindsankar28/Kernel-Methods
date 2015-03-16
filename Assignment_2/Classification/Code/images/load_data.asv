@@ -1,6 +1,5 @@
 load('../../Data/images/CompleteData.mat');
 class1_data = CompleteData{9};
-class1_data = class1_data(1:140,:);
 CompleteData(9,2)
 
 class2_data = CompleteData{4};
