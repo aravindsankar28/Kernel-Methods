@@ -318,104 +318,104 @@ for i = 1:length(epochs)
 
     
     
-    a1 = bsxfun(@plus, net.iw{1}*inputs, net.b{1});
-    actFcn1 = str2func(net.layers{1}.transferFcn);
-    actFcnParams1 = net.layers{1}.transferParam;
-    s1 = actFcn1(a1,actFcnParams1);
-    layerNo = 1;
-    s = s1;
-    if (layerNo > 1)
-        for lIndex = 2 : layerNo
-            a = net.lw{lIndex, lIndex-1}*s;
-            if (net.biasConnect(lIndex))
-                a = bsxfun(@plus, a, net.b{lIndex});
-            end
-            actFcn = str2func(net.layers{lIndex}.transferFcn);
-            actFncParams = net.layers{lIndex}.transferParam;
-            s = actFcn(a, actFncParams);
-        end
-    end
-    %f = figure,plot3(inputs(1,:)',inputs(2,:)',s(1,:),'k.');
-    f = figure, h=surf(x,y,reshape(s(1,:),size(x)));
-    set(h, 'edgecolor','none');
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    zlabel('output for hidden node');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('hidden node 1 at epoch = ',int2str(epochs(i))));
-    saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_1'),'png');
-    %f = figure,plot3(inputs(1,:)',inputs(2,:)',s(2,:),'k.');
-    f = figure, h=surf(x,y,reshape(s(2,:),size(x)));
-    set(h, 'edgecolor','none');
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    zlabel('output for hidden node');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('hidden node 2 at epoch = ',int2str(epochs(i))));
-    saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_2'),'png');
-    %f = figure,plot3(inputs(1,:)',inputs(2,:)',s(3,:),'k.');
-    f = figure, h=surf(x,y,reshape(s(3,:),size(x)));
-    set(h, 'edgecolor','none');
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    zlabel('output for hidden node');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('hidden node 3 at epoch = ',int2str(epochs(i))));
-    saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_3'),'png');
-    %f = figure,plot3(inputs(1,:)',inputs(2,:)',s(4,:),'k.');
-    f = figure, h=surf(x,y,reshape(s(4,:),size(x)));
-    set(h, 'edgecolor','none');
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    zlabel('output for hidden node');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('hidden node 4 at epoch = ',int2str(epochs(i))));
-    saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_4'),'png');
-    %f = figure,plot3(inputs(1,:)',inputs(2,:)',s(5,:),'k.');
-    f = figure, h=surf(x,y,reshape(s(5,:),size(x)));
-    set(h, 'edgecolor','none');
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    zlabel('output for hidden node');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('hidden node 5 at epoch = ',int2str(epochs(i))));
-    saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_5'),'png');
-    %f = figure,plot3(inputs(1,:)',inputs(2,:)',s(6,:),'k.');
-    f = figure, h=surf(x,y,reshape(s(6,:),size(x)));
-    set(h, 'edgecolor','none');
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    zlabel('output for hidden node');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('hidden node 6 at epoch = ',int2str(epochs(i))));
-    saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_6'),'png');
-    %f = figure,plot3(inputs(1,:)',inputs(2,:)',s(7,:),'k.');
-    f = figure, h=surf(x,y,reshape(s(7,:),size(x)));
-    set(h, 'edgecolor','none');
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    zlabel('output for hidden node');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('hidden node 7 at epoch = ',int2str(epochs(i))));
-    saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_7'),'png');
-    %f = figure,plot3(inputs(1,:)',inputs(2,:)',s(8,:),'k.');
-    f = figure, h=surf(x,y,reshape(s(8,:),size(x)));
-    set(h, 'edgecolor','none');
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    zlabel('output for hidden node');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('hidden node 8 at epoch = ',int2str(epochs(i))));
-    saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_8'),'png');
-    %f = figure,plot3(inputs(1,:)',inputs(2,:)',s(9,:),'k.');
-    f = figure, h=surf(x,y,reshape(s(9,:),size(x)));
-    set(h, 'edgecolor','none');
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    zlabel('output for hidden node');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('hidden node 9 at epoch = ',int2str(epochs(i))));
-    saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_9'),'png');
+%     a1 = bsxfun(@plus, net.iw{1}*inputs, net.b{1});
+%     actFcn1 = str2func(net.layers{1}.transferFcn);
+%     actFcnParams1 = net.layers{1}.transferParam;
+%     s1 = actFcn1(a1,actFcnParams1);
+%     layerNo = 1;
+%     s = s1;
+%     if (layerNo > 1)
+%         for lIndex = 2 : layerNo
+%             a = net.lw{lIndex, lIndex-1}*s;
+%             if (net.biasConnect(lIndex))
+%                 a = bsxfun(@plus, a, net.b{lIndex});
+%             end
+%             actFcn = str2func(net.layers{lIndex}.transferFcn);
+%             actFncParams = net.layers{lIndex}.transferParam;
+%             s = actFcn(a, actFncParams);
+%         end
+%     end
+%     
+%     f = figure, h=surf(x,y,reshape(s(1,:),size(x)));
+%     set(h, 'edgecolor','none');
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     zlabel('output for hidden node');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('hidden node 1 at epoch = ',int2str(epochs(i))));
+%     saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_1'),'png');
+%     
+%     f = figure, h=surf(x,y,reshape(s(2,:),size(x)));
+%     set(h, 'edgecolor','none');
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     zlabel('output for hidden node');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('hidden node 2 at epoch = ',int2str(epochs(i))));
+%     saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_2'),'png');
+%     
+%     f = figure, h=surf(x,y,reshape(s(3,:),size(x)));
+%     set(h, 'edgecolor','none');
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     zlabel('output for hidden node');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('hidden node 3 at epoch = ',int2str(epochs(i))));
+%     saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_3'),'png');
+%     
+%     f = figure, h=surf(x,y,reshape(s(4,:),size(x)));
+%     set(h, 'edgecolor','none');
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     zlabel('output for hidden node');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('hidden node 4 at epoch = ',int2str(epochs(i))));
+%     saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_4'),'png');
+%     
+%     f = figure, h=surf(x,y,reshape(s(5,:),size(x)));
+%     set(h, 'edgecolor','none');
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     zlabel('output for hidden node');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('hidden node 5 at epoch = ',int2str(epochs(i))));
+%     saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_5'),'png');
+%     
+%     f = figure, h=surf(x,y,reshape(s(6,:),size(x)));
+%     set(h, 'edgecolor','none');
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     zlabel('output for hidden node');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('hidden node 6 at epoch = ',int2str(epochs(i))));
+%     saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_6'),'png');
+%     
+%     f = figure, h=surf(x,y,reshape(s(7,:),size(x)));
+%     set(h, 'edgecolor','none');
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     zlabel('output for hidden node');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('hidden node 7 at epoch = ',int2str(epochs(i))));
+%     saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_7'),'png');
+%     
+%     f = figure, h=surf(x,y,reshape(s(8,:),size(x)));
+%     set(h, 'edgecolor','none');
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     zlabel('output for hidden node');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('hidden node 8 at epoch = ',int2str(epochs(i))));
+%     saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_8'),'png');
+%     
+%     f = figure, h=surf(x,y,reshape(s(9,:),size(x)));
+%     set(h, 'edgecolor','none');
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     zlabel('output for hidden node');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('hidden node 9 at epoch = ',int2str(epochs(i))));
+%     saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_9'),'png');
 
     
 end

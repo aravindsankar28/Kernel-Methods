@@ -1,7 +1,7 @@
-% load data.mat;
+load data.mat;
 % 
-% inputs = data_input';
-% targets = data_target';
+inputs = data_input';
+targets = data_target';
 % 
 % bestnet = patternnet(1);
 % valerr = 1;
@@ -198,7 +198,9 @@
 % 
 %EPOCH WISE----------------
 
-epochs = [1,3,5,10,20];
+%epochs = [1,3,5,10,20];
+%epochs = [1,5,10];
+epochs = [1,5,20];
 
 for i = 1:length(epochs)
     inputs = data_input';
@@ -240,22 +242,36 @@ for i = 1:length(epochs)
     [net,tr] = train(net,inputs,targets);
 
     % Test the Network
+    xrange = [-2 2];
+    yrange = [-2 2];
+    inc = 0.05;
+    [x, y] = meshgrid(xrange(1):inc:xrange(2), yrange(1):inc:yrange(2)); 
+    xy = [x(:) y(:)]; % make (x,y) pairs as a bunch of row vectors.
+
+    inputs = xy';
+    
     outputs = net(inputs);
     outputs = outputs';
     
-%     figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,1),'r*');
+%     
+%     f = figure, h=surf(x,y,reshape(outputs(:,1),size(x)));
+%     set(h, 'edgecolor','none');
 %     a = xlabel('$x_1$');
 %     b = ylabel('$x_2$');
 %     zlabel('output for class 1');
 %     set(a,'Interpreter','latex');
 %     set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)),' for class 1'));
-%     figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,2),'g*');
+%     saveas(f,strcat('NewImages/',int2str(epochs(i)),'_1'),'png');
+%     
+%     
+%     f = figure, h=surf(x,y,reshape(outputs(:,2),size(x)));
+%     set(h, 'edgecolor','none');
 %     a = xlabel('$x_1$');
 %     b = ylabel('$x_2$');
 %     zlabel('output for class 2');
 %     set(a,'Interpreter','latex');
 %     set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)), ' for class 2'));
-%     
+%     saveas(f,strcat('NewImages/',int2str(epochs(i)),'_2'),'png');
 
     
     
@@ -276,33 +292,46 @@ for i = 1:length(epochs)
             s = actFcn(a, actFncParams);
         end
     end
-    
-    figure,plot3(inputs(1,:)',inputs(2,:)',s(1,:),'k.');
+      
+
+    f = figure, h=surf(x,y,reshape(s(1,:),size(x)));
+    set(h, 'edgecolor','none');
     a = xlabel('$x_1$');
     b = ylabel('$x_2$');
     zlabel('output for hidden node');
     set(a,'Interpreter','latex');
     set(b,'Interpreter','latex');title(strcat('hidden node 1 at epoch = ',int2str(epochs(i))));
+    saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_1'),'png');
 
-    figure,plot3(inputs(1,:)',inputs(2,:)',s(2,:),'k.');
+    
+    f = figure, h=surf(x,y,reshape(s(2,:),size(x)));
+    set(h, 'edgecolor','none');
     a = xlabel('$x_1$');
     b = ylabel('$x_2$');
     zlabel('output for hidden node');
     set(a,'Interpreter','latex');
     set(b,'Interpreter','latex');title(strcat('hidden node 2 at epoch = ',int2str(epochs(i))));
-    figure,plot3(inputs(1,:)',inputs(2,:)',s(3,:),'k.');
+    saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_2'),'png');
+    
+    
+    f = figure, h=surf(x,y,reshape(s(3,:),size(x)));
+    set(h, 'edgecolor','none');
     a = xlabel('$x_1$');
     b = ylabel('$x_2$');
     zlabel('output for hidden node');
     set(a,'Interpreter','latex');
     set(b,'Interpreter','latex');title(strcat('hidden node 3 at epoch = ',int2str(epochs(i))));
-    figure,plot3(inputs(1,:)',inputs(2,:)',s(4,:),'k.');
+    saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_3'),'png');
+    
+    f = figure, h=surf(x,y,reshape(s(4,:),size(x)));
+    set(h, 'edgecolor','none');
     a = xlabel('$x_1$');
     b = ylabel('$x_2$');
     zlabel('output for hidden node');
     set(a,'Interpreter','latex');
     set(b,'Interpreter','latex');title(strcat('hidden node 4 at epoch = ',int2str(epochs(i))));
-
+    saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_4'),'png');
+    
 
 
 end

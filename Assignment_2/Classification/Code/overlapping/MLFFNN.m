@@ -275,40 +275,56 @@ for i = 1:length(epochs)
     [net,tr] = train(net,inputs,targets);
 
     % Test the Network
+    
+    
+    xrange = [-8 12];
+    yrange = [-8 12];
+    inc = 0.1;
+    [x, y] = meshgrid(xrange(1):inc:xrange(2), yrange(1):inc:yrange(2)); 
+    xy = [x(:) y(:)]; % make (x,y) pairs as a bunch of row vectors.
+    inputs = xy';
+
+
     outputs = net(inputs);
     outputs = outputs';
-%     
-%     figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,1),'r*');
+%  
+%     f = figure, h=surf(x,y,reshape(outputs(:,1),size(x)));
+%     set(h, 'edgecolor','none');
 %     a = xlabel('$x_1$');
 %     b = ylabel('$x_2$');
 %     zlabel('output for class 1');
 %     set(a,'Interpreter','latex');
 %     set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)),' for class 1'));
+%     saveas(f,strcat('NewImages/',int2str(epochs(i)),'_1'),'png');
 %     
-%     saveas(gcf,strcat(int2str(epochs(i)),'_1.png'));
-    %saveas(gcf,'Plots_1/RMS/RMS_complexity_20.png');
 %     
-%     figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,2),'g*');
+%     
+%     f = figure, h=surf(x,y,reshape(outputs(:,2),size(x)));
+%     set(h, 'edgecolor','none');
 %     a = xlabel('$x_1$');
 %     b = ylabel('$x_2$');
 %     zlabel('output for class 2');
 %     set(a,'Interpreter','latex');
 %     set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)), ' for class 2'));
-%     saveas(gcf,strcat(int2str(epochs(i)),'_2.png'));
+%     %saveas(gcf,strcat(int2str(epochs(i)),'_2.png'));
+%     saveas(f,strcat('NewImages/',int2str(epochs(i)),'_2'),'png');
 %     
 %     
-%     figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,3),'b*');
+%     f = figure, h=surf(x,y,reshape(outputs(:,3),size(x)));    	
+%     set(h, 'edgecolor','none');
+%     %figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,3),'b*');
 %     a = xlabel('$x_1$');
 %     b = ylabel('$x_2$');
 %     zlabel('output for class 3');
 %     set(a,'Interpreter','latex');
 %     set(b,'Interpreter','latex');title(strcat('output layer at epoch = ',int2str(epochs(i)), ' for class 3'));
-%     saveas(gcf,strcat(int2str(epochs(i)),'_3.png'));
+%     %saveas(gcf,strcat(int2str(epochs(i)),'_3.png'));
+%     saveas(f,strcat('NewImages/',int2str(epochs(i)),'_3'),'png');
 %     
 %     
-%     
-%     figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,4),'k*'); 
-%     
+%     %figure,plot3(inputs(1,:)',inputs(2,:)',outputs(:,4),'k*'); 
+%     f = figure, h=surf(x,y,reshape(outputs(:,4),size(x)));
+%     set(h, 'edgecolor','none');
 %     a = xlabel('$x_1$');
 %     b = ylabel('$x_2$');
 %     
@@ -317,75 +333,86 @@ for i = 1:length(epochs)
 %     set(b,'Interpreter','latex');title(strcat('output layer at epoch =  ',int2str(epochs(i)), ' for class 4'));
 %     a = xlabel('$x_1$');
 %     b = ylabel('$x_2$');
+%     saveas(f,strcat('NewImages/',int2str(epochs(i)),'_4'),'png');
 %     
-%     saveas(gcf,strcat(int2str(epochs(i)),'_4.png'));
 
     
-    
-    a1 = bsxfun(@plus, net.iw{1}*inputs, net.b{1});
-    actFcn1 = str2func(net.layers{1}.transferFcn);
-    actFcnParams1 = net.layers{1}.transferParam;
-    s1 = actFcn1(a1,actFcnParams1);
-    layerNo = 1;
-    s = s1;
-    if (layerNo > 1)
-        for lIndex = 2 : layerNo
-            a = net.lw{lIndex, lIndex-1}*s;
-            if (net.biasConnect(lIndex))
-                a = bsxfun(@plus, a, net.b{lIndex});
-            end
-            actFcn = str2func(net.layers{lIndex}.transferFcn);
-            actFncParams = net.layers{lIndex}.transferParam;
-            s = actFcn(a, actFncParams);
-        end
-    end
-    
-    
-    figure,plot3(inputs(1,:)',inputs(2,:)',s(1,:),'k*');
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    zlabel('Hidden layer output for node 1');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('hidden layer at epoch = ',int2str(epochs(i)),' for node 1'));
-    
-    saveas(gcf,strcat('h',int2str(epochs(i)),'_1.png'));
-    %saveas(gcf,'Plots_1/RMS/RMS_complexity_20.png');
-    
-    figure,plot3(inputs(1,:)',inputs(2,:)',s(5,:),'k*');
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    zlabel('Hidden layer output for node 5');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('hidden layer at epoch = ',int2str(epochs(i)), ' for node 5'));
-    saveas(gcf,strcat('h',int2str(epochs(i)),'_5.png'));
-    
-    
-    figure,plot3(inputs(1,:)',inputs(2,:)',s(9,:),'k*');
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    zlabel('Hidden layer output for node 9');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('hidden layer at epoch = ',int2str(epochs(i)), ' for node 9'));
-    saveas(gcf,strcat('h',int2str(epochs(i)),'_9.png'));
-    
-    
-    
-    figure,plot3(inputs(1,:)',inputs(2,:)',s(15,:),'k*'); 
-    
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    
-    zlabel('Hidden layer output for node 16');
-    set(a,'Interpreter','latex');
-    set(b,'Interpreter','latex');title(strcat('hidden layer at epoch =  ',int2str(epochs(i)), ' for node 16'));
-    a = xlabel('$x_1$');
-    b = ylabel('$x_2$');
-    
-    saveas(gcf,strcat('h',int2str(epochs(i)),'_15.png'));
-
-    
-    
-
+%     
+%     a1 = bsxfun(@plus, net.iw{1}*inputs, net.b{1});
+%     actFcn1 = str2func(net.layers{1}.transferFcn);
+%     actFcnParams1 = net.layers{1}.transferParam;
+%     s1 = actFcn1(a1,actFcnParams1);
+%     layerNo = 1;
+%     s = s1;
+%     if (layerNo > 1)
+%         for lIndex = 2 : layerNo
+%             a = net.lw{lIndex, lIndex-1}*s;
+%             if (net.biasConnect(lIndex))
+%                 a = bsxfun(@plus, a, net.b{lIndex});
+%             end
+%             actFcn = str2func(net.layers{lIndex}.transferFcn);
+%             actFncParams = net.layers{lIndex}.transferParam;
+%             s = actFcn(a, actFncParams);
+%         end
+%     end
+%     
+%     
+%     %figure,plot3(inputs(1,:)',inputs(2,:)',s(1,:),'k*');
+%     
+%     f = figure, h=surf(x,y,reshape(s(1,:),size(x)));
+%     set(h, 'edgecolor','none');
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     zlabel('Hidden layer output for node 1');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('hidden layer at epoch = ',int2str(epochs(i)),' for node 1'));
+%     %saveas(gcf,strcat('h',int2str(epochs(i)),'_1.png'));
+%     saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_1'),'png');
+%     
+%     %saveas(gcf,'Plots_1/RMS/RMS_complexity_20.png');
+%     
+%     %figure,plot3(inputs(1,:)',inputs(2,:)',s(5,:),'k*');
+%     f = figure, h=surf(x,y,reshape(s(5,:),size(x)));
+%     set(h, 'edgecolor','none');
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     zlabel('Hidden layer output for node 5');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('hidden layer at epoch = ',int2str(epochs(i)), ' for node 5'));
+%     %saveas(gcf,strcat('h',int2str(epochs(i)),'_5.png'));
+%     saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_5'),'png');
+%     
+%     %figure,plot3(inputs(1,:)',inputs(2,:)',s(9,:),'k*');
+%     f = figure, h=surf(x,y,reshape(s(9,:),size(x)));
+%     set(h, 'edgecolor','none');
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     zlabel('Hidden layer output for node 9');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('hidden layer at epoch = ',int2str(epochs(i)), ' for node 9'));
+%     saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_9'),'png');
+%     %saveas(gcf,strcat('h',int2str(epochs(i)),'_9.png'));
+%     
+%     
+%     
+%     %figure,plot3(inputs(1,:)',inputs(2,:)',s(15,:),'k*'); 
+%     f = figure, h=surf(x,y,reshape(s(16,:),size(x)));
+%     set(h, 'edgecolor','none');
+% 
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     
+%     zlabel('Hidden layer output for node 16');
+%     set(a,'Interpreter','latex');
+%     set(b,'Interpreter','latex');title(strcat('hidden layer at epoch =  ',int2str(epochs(i)), ' for node 16'));
+%     a = xlabel('$x_1$');
+%     b = ylabel('$x_2$');
+%     saveas(f,strcat('NewImages/h',int2str(epochs(i)),'_16'),'png');
+%     %saveas(gcf,strcat('h',int2str(epochs(i)),'_15.png'));
+% 
+%     
+%     
+% 
 
 
 end
