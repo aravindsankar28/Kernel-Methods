@@ -26,9 +26,14 @@ target_test = [ones(length(class1_test),1); ones(length(class2_test),1)*2; ones(
 
 % Scale data
 
+min_coord = zeros(size(train,2),1);
+max_coord = zeros(size(train,2),1);
 for i=1:size(train,2)
     min_val = min(train(:,i));
     max_val = max(train(:,i));
+    
+    min_coord(i) = min_val;
+    max_coord(i) = max_val;
     
     train(:,i) = (train(:,i)-min_val)/(max_val-min_val);
     val(:,i) = (val(:,i)-min_val)/(max_val-min_val);

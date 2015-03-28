@@ -50,6 +50,10 @@ inc = 0.1;
 image_size = size(x); 
 xy = [x(:) y(:)]; % make (x,y) pairs as a bunch of row vectors.
 
+%Scale xy
+for i=1:size(xy,2)
+    xy(:,i) = (xy(:,i)-min_coord(i))/(max_coord(i)-min_coord(i));
+end
 [pred ac decv] = ovrpredict(ones(size(xy,1),1), xy, model);
 
 figure;
