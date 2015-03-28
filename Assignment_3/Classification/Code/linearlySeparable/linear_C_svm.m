@@ -14,7 +14,7 @@ for log2c = -1:2:3,
 end
 
 % Final model train
-cmd = ['-q -s 0 -t 0 -c ',num2str(best_C)];
+cmd = ['-s 0 -t 0 -c ',num2str(best_C)];
 model = ovrtrain(target_train,train,cmd);
 
 % Testing
