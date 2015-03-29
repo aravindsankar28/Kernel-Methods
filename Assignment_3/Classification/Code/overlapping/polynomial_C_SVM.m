@@ -3,7 +3,7 @@ load_data
 
 % Cross-validation to identify best C, g, degree
 bestcv = 0;
-for degree = 1:1:3,
+for degree = 1:1:5,
    for log2c = -3:1:3,
        for log2g = -3:1:3,
            cmd = ['-q -s 0 -t 1 -c ',num2str(2^log2c),' -g ',num2str(2^log2g),' -d ',num2str(degree)];
@@ -43,8 +43,8 @@ fprintf('Test confusion matrix')
 C_test
 
 % Decision region plot for training data
-xrange = [-16 20];
-yrange = [-16 20];
+xrange = [-6 12];
+yrange = [-6 12];
 inc = 0.1;
 [x, y] = meshgrid(xrange(1):inc:xrange(2), yrange(1):inc:yrange(2)); 
 image_size = size(x); 
