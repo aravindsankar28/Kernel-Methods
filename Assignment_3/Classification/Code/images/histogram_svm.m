@@ -1,18 +1,18 @@
 % Load and scale data
 load_data
 
-% Cross-validation to identify best C, g
+% Construct kernel matrix
+
+% Cross-validation to identify best C
 bestcv = 0;
 for log2c = -1:2:7,
-    for log2g = -1:2:7,
-        cmd = ['-q -s 0 -t 2 -c ',num2str(2^log2c),' -g ',num2str(2^log2g)];
-        model = ovrtrain(target_train,train,cmd);
-        [pred ac decv] = ovrpredict(target_val, val, model);
-        if (ac >= bestcv),
-          bestcv = ac; best_C = 2^log2c; best_g = 2^log2g; 
-        end
-        fprintf('log2c=%g log2g=%g acc=%g (best C=%g, g=%g, acc=%g)\n', log2c, log2g, ac, best_C, best_g, bestcv);
-    end
+     cmd = ['-q -s 0 -t 2 -c ',num2str(2^log2c),' -g ',num2str(2^log2g)];
+     model = ovrtrain(target_train,train,cmd);
+     [pred ac decv] = ovrpredict(target_val, val, model);
+     if (ac >= bestcv),
+        bestcv = ac; best_C = 2^log2c; best_g = 2^log2g; 
+     end
+     fprintf('log2c=%g log2g=%g acc=%g (best C=%g, g=%g, acc=%g)\n', log2c, log2g, ac, best_C, best_g, bestcv);
 end
 
 

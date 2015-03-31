@@ -1,23 +1,23 @@
 % Load and scale data
 load_data
 
-% Cross-validation to identify best C, g
+% Cross-validation to identify best nu, g
 bestcv = 0;
-for log2c = -1:2:7,
+for nu=0.01:0.05:0.2,
     for log2g = -1:2:7,
-        cmd = ['-q -s 0 -t 2 -c ',num2str(2^log2c),' -g ',num2str(2^log2g)];
+        cmd = ['-q -s 1 -t 2 -n ',num2str(nu),' -g ',num2str(2^log2g)];
         model = ovrtrain(target_train,train,cmd);
         [pred ac decv] = ovrpredict(target_val, val, model);
         if (ac >= bestcv),
-          bestcv = ac; best_C = 2^log2c; best_g = 2^log2g; 
+          bestcv = ac; best_nu = nu; best_g = 2^log2g; 
         end
-        fprintf('log2c=%g log2g=%g acc=%g (best C=%g, g=%g, acc=%g)\n', log2c, log2g, ac, best_C, best_g, bestcv);
+        fprintf('nu=%g log2g=%g acc=%g (best nu=%g, g=%g, acc=%g)\n', nu, log2g, ac, best_nu, best_g, bestcv);
     end
 end
 
 
 % Final model train
-cmd = ['-s 0 -t 2 -c ',num2str(best_C),' -g ',num2str(best_g)];
+cmd = ['-s 1 -t 2 -n ',num2str(best_nu),' -g ',num2str(best_g)];
 model = ovrtrain(target_train,train,cmd);
 
 % Testing
