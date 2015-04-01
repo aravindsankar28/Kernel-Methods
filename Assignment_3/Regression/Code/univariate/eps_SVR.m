@@ -85,7 +85,7 @@ hold on;
 plot(x_range,pred_values-best_p,'k--',x_range,pred_values+best_p,'k--');
 a = legend('True function','Approximated function','$\epsilon$ tube above','$\epsilon$ tube below');
 set(a,'Interpreter','latex');
-b = title('Plot showing true function, approximated function and $\epsion$ tube');
+b = title('Plot showing true function, approximated function and $\epsilon$ tube');
 set(b,'Interpreter','latex');
 
 figure;
@@ -104,4 +104,38 @@ set(b,'Interpreter','latex');
 
 % Plot SV's here.
 
-% Scatter plots here.
+
+x_range = 0:0.1:3;
+
+% Scatter plots here. train - target on x and model on y.
+figure;
+scatter(target_train,pred_train,'k.');
+hold on;
+plot(x_range,x_range,'m');
+
+title('Scatter plot of Model Vs Target output - train data');
+xlabel('Target output');
+ylabel('Model output');
+legend('Scatter plot','Ideal y = x');
+
+% Scatter plots here. val - target on x and model on y.
+figure;
+scatter(target_val,pred_val,'r.');
+hold on;
+plot(x_range,x_range,'m');
+
+title('Scatter plot of Model Vs Target output - validation data');
+xlabel('Target output');
+ylabel('Model output');
+legend('Scatter plot','Ideal y = x');
+
+% Scatter plots here. test  - target on x and model on y.
+figure;
+scatter(target_test,pred_test,'b.');
+hold on;
+plot(x_range,x_range,'m');
+
+title('Scatter plot of Model Vs Target output - test data');
+xlabel('Target output');
+ylabel('Model output');
+legend('Scatter plot','Ideal y = x');

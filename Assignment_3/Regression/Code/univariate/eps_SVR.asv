@@ -83,9 +83,10 @@ hold on;
 plot(x_range,pred_values,'b');
 hold on;
 plot(x_range,pred_values-best_p,'k--',x_range,pred_values+best_p,'k--');
-a = legend('True function','Approximated function','$\epsilon$ tube 1','Epsilon tube 2');
+a = legend('True function','Approximated function','$\epsilon$ tube above','$\epsilon$ tube below');
 set(a,'Interpreter','latex');
-
+b = title('Plot showing true function, approximated function and $\epsion$ tube');
+set(b,'Interpreter','latex');
 
 figure;
 plot(x_range,exp(cos(2*pi*x_range)),'r');
@@ -97,4 +98,20 @@ plot(x_range,pred_values-best_p,'k--',x_range,pred_values+best_p,'k--');
 
 a = legend('True function','Target output','$\epsilon$ tube above','$\epsilon$ tube below');
 set(a,'Interpreter','latex');
+b = title('Plot showing true function, targets and epsilon tube');
+set(b,'Interpreter','latex');
+
+
+% Plot SV's here.
+
+% Scatter plots here. target on x and model on y.
+figure;
+scatter(target_train,pred_train,'k.');
+hold on;
+plot(x_range,x_range,'r');
+
+title('Scatter plot of Model Vs Target output');
+xlabel('Target output');
+ylabel('Model output');
+legend('Scatter plot','Ideal y = x );
 
