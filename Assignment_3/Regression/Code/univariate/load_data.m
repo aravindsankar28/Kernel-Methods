@@ -1,5 +1,5 @@
 % sigma = 0.1; 
-% val_data = samplePoints(sigma,10);
+% val_data = samplePoints(sigma,100);
 % test_data = samplePoints(sigma,50);
 % train_data = samplePoints(sigma,250);
 % save('data.mat','train_data','val_data','test_data');

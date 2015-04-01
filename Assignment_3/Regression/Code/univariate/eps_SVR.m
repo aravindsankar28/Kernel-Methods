@@ -18,7 +18,7 @@ for log2p = -8:1:1
     local_best_C = 0;
     local_best_g = 0;
     
-    for log2c = -4:1:6
+    for log2c = -3:1:8
         for log2g = -4:1:6,
             cmd = ['-q -s 3 -t 2 -c ',num2str(2^log2c),' -g ',num2str(2^log2g),' -p ',num2str(2^log2p)];
             model = svmtrain(target_train,train,cmd);
@@ -63,19 +63,20 @@ cmd = ['-s 3 -t 2 -c ',num2str(best_C),' -g ',num2str(best_g), ' -p ',num2str(be
 model = svmtrain(target_train,train,cmd);
 
 % Testing
-[pred_train ac decv] = svmpredict(target_train, train, model);
+[pred_train, ac, decv] = svmpredict(target_train, train, model);
 mse_train = ac(2);
 fprintf('Train MSE = %g%%\n', mse_train);
-[pred_val ac decv] = svmpredict(target_val, val, model);
+[pred_val, ac, decv] = svmpredict(target_val, val, model);
 mse_val = ac(2);
 fprintf('Validation MSE = %g%%\n', mse_val);
-[pred_test ac decv] = svmpredict(target_test, test, model);
+[pred_test, ac, decv] = svmpredict(target_test, test, model);
 mse_test = ac(2);
 fprintf('Test MSE = %g%%\n', mse_test);
 
 % Plot of true fn, t, approx. fn, eps tube.
 
-x_range = (0:0.01:1)';
+% pred_values contains model output for the discretized x-axis.
+x_range = (0:0.001:1)';
 figure;
 plot(x_range,exp(cos(2*pi*x_range)),'r');
 hold on;
@@ -88,11 +89,12 @@ set(a,'Interpreter','latex');
 b = title('Plot showing true function, approximated function and $\epsilon$ tube');
 set(b,'Interpreter','latex');
 
+
+% Now plotting target outputs etc along with true fn. and eps tube.
 figure;
 plot(x_range,exp(cos(2*pi*x_range)),'r');
 hold on;
-[pred_values,~,~] = svmpredict(zeros(length(x_range),1), x_range, model);
-scatter(train,target_train,'b');
+scatter(train,target_train,'b.');
 hold on;
 plot(x_range,pred_values-best_p,'k--',x_range,pred_values+best_p,'k--');
 
@@ -103,11 +105,33 @@ set(b,'Interpreter','latex');
 
 
 % Plot SV's here.
+figure;
+
+plot(x_range,pred_values,'g');
+hold on;
+plot(x_range,pred_values-best_p,'k--',x_range,pred_values+best_p,'k--');
+sv_indices = [model.sv_indices model.sv_coef];
+idx_vector = (sv_indices(:,2) == -best_C) + (sv_indices(:,2) == best_C);
+bsv_indices = sv_indices(find(idx_vector)); % Find non-zero indices.
+ubsv_indices = sv_indices(find(~idx_vector));  % Find zero indices.
+
+% entry is 1 => BSV else UBSV.
+
+scatter(train(bsv_indices),target_train(bsv_indices),'r.');
+hold on;
+
+scatter(train(ubsv_indices(:,1)),target_train(ubsv_indices(:,1)),'b.');
+hold on;
+
+a = legend('Approximated function','$\epsilon$ tube above','$\epsilon$ tube below','Bounded SVs','Unbounded Svs');
+set(a,'Interpreter','latex');
+b = title('Plot showing approximated function, epsilon tube and support vectors');
+set(b,'Interpreter','latex');
 
 
-x_range = 0:0.1:3;
 
 % Scatter plots here. train - target on x and model on y.
+x_range = 0:0.1:3;
 figure;
 scatter(target_train,pred_train,'k.');
 hold on;
