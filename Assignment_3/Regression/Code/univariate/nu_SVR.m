@@ -6,7 +6,6 @@ bestcv = Inf;
 best_nu = 0;
 best_C = 0;
 best_g = 0;
-best_p = 0;
 
 mse_train_nu = zeros(10,1);
 mse_val_nu = zeros(10,1);
@@ -17,27 +16,24 @@ for nu = 0.09:0.1:0.99
     local_best_cv = Inf;
     local_best_C = 0;
     local_best_g = 0;
-    local_best_p = 0;
-    for log2p = -8:1:1
-        for log2c = -3:1:8
-            for log2g = -4:1:6,
-                cmd = ['-q -s 4 -t 2 -c ',num2str(2^log2c),' -g ',num2str(2^log2g),' -p ',num2str(2^log2p) ' -n ', num2str(nu)];
-                model = svmtrain(target_train,train,cmd);
-
-                [pred, ac, decv] = svmpredict(target_val, val, model);
-                mse = ac(2);
-                if (mse <= bestcv)
-                  bestcv = mse; best_C = 2^log2c; best_g = 2^log2g; best_p = 2^log2p;best_nu = nu;
-                end
-                if (mse <= local_best_cv)
-                    local_best_cv = mse; local_best_C = 2^log2c; local_best_g = 2^log2g; local_best_p = 2^log2p;
-                end
-
-                %fprintf('log2c=%g log2g=%g acc=%g (best C=%g, g=%g, acc=%g)\n', log2c, log2g, mse, best_C, best_g, bestcv);
+    
+    for log2c = -3:1:6
+        for log2g = -4:1:6,
+            cmd = ['-q -s 4 -t 2 -c ',num2str(2^log2c),' -g ',num2str(2^log2g),' -n ', num2str(nu)];
+            model = svmtrain(target_train,train,cmd);
+            [pred, ac, decv] = svmpredict(target_val, val, model);
+            mse = ac(2);
+            if (mse <= bestcv)
+              bestcv = mse; best_C = 2^log2c; best_g = 2^log2g;best_nu = nu;
             end
+            if (mse <= local_best_cv)
+                local_best_cv = mse; local_best_C = 2^log2c; local_best_g = 2^log2g;
+            end
+
+            fprintf('log2c=%g log2g=%g mse=%g (best C=%g, g=%g, acc=%g)\n', log2c, log2g, mse, best_C, best_g, bestcv);
         end
     end
-    cmd = ['-s 4 -t 2 -c ',num2str(local_best_C),' -g ',num2str(local_best_g), ' -p ',num2str(2^local_best_p), ' -n ', num2str(nu)];
+    cmd = ['-s 4 -t 2 -c ',num2str(local_best_C),' -g ',num2str(local_best_g),' -n ', num2str(nu)];
     model = svmtrain(target_train,train,cmd);
     [~ ,ac, ~] = svmpredict(target_train, train, model);
     mse_train_nu(i) = ac(2);
@@ -49,7 +45,7 @@ for nu = 0.09:0.1:0.99
 end
 
 
-bestcv,best_C,best_g,best_p,best_nu
+bestcv,best_C,best_g,best_nu
 
 % MSE plot w.r.t nu
 nu_range = 0.09:0.1:0.99;
@@ -61,7 +57,7 @@ set(a,'Interpreter','latex');
 
 
 % Final model train
-cmd = ['-s 4 -t 2 -c ',num2str(best_C),' -g ',num2str(best_g), ' -p ',num2str(best_p),' -n ', num2str(best_nu)];
+cmd = ['-s 4 -t 2 -c ',num2str(best_C),' -g ',num2str(best_g),' -n ', num2str(best_nu)];
 model = svmtrain(target_train,train,cmd);
 
 % Testing
@@ -75,6 +71,14 @@ fprintf('Validation MSE = %g%%\n', mse_val);
 mse_test = ac(2);
 fprintf('Test MSE = %g%%\n', mse_test);
 
+
+
+sv_indices = [model.sv_indices model.sv_coef];
+idx_vector = (sv_indices(:,2) == -best_C) + (sv_indices(:,2) == best_C);
+bsv_indices = sv_indices(find(idx_vector)); % Find non-zero indices.
+ubsv_indices = sv_indices(find(~idx_vector));  % Find zero indices.
+epsilon = mean(abs(target_train(ubsv_indices)-pred_train(ubsv_indices)));
+
 % Plot of true fn, t, approx. fn, eps tube.
 
 % pred_values contains model output for the discretized x-axis.
@@ -85,7 +89,7 @@ hold on;
 [pred_values,~,~] = svmpredict(zeros(length(x_range),1), x_range, model);
 plot(x_range,pred_values,'b');
 hold on;
-plot(x_range,pred_values-best_p,'k--',x_range,pred_values+best_p,'k--');
+plot(x_range,pred_values-epsilon,'k--',x_range,pred_values+epsilon,'k--');
 a = legend('True function','Approximated function','$\epsilon$ tube above','$\epsilon$ tube below');
 set(a,'Interpreter','latex');
 b = title('Plot showing true function, approximated function and $\epsilon$ tube');
@@ -98,7 +102,7 @@ plot(x_range,exp(cos(2*pi*x_range)),'r');
 hold on;
 scatter(train,target_train,'b.');
 hold on;
-plot(x_range,pred_values-best_p,'k--',x_range,pred_values+best_p,'k--');
+plot(x_range,pred_values-epsilon,'k--',x_range,pred_values+epsilon,'k--');
 
 a = legend('True function','Target output','$\epsilon$ tube above','$\epsilon$ tube below');
 set(a,'Interpreter','latex');
@@ -111,11 +115,7 @@ figure;
 
 plot(x_range,pred_values,'g');
 hold on;
-plot(x_range,pred_values-best_p,'k--',x_range,pred_values+best_p,'k--');
-sv_indices = [model.sv_indices model.sv_coef];
-idx_vector = (sv_indices(:,2) == -best_C) + (sv_indices(:,2) == best_C);
-bsv_indices = sv_indices(find(idx_vector)); % Find non-zero indices.
-ubsv_indices = sv_indices(find(~idx_vector));  % Find zero indices.
+plot(x_range,pred_values-epsilon,'k--',x_range,pred_values+epsilon,'k--');
 
 % entry is 1 => BSV else UBSV.
 
