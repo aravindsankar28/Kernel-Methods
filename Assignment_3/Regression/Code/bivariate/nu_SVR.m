@@ -7,18 +7,18 @@ best_nu = 0;
 best_C = 0;
 best_g = 0;
 
-mse_train_nu = zeros(20,1);
-mse_val_nu = zeros(20,1);
-mse_test_nu = zeros(20,1);
+nu_range = 0.01:0.1:1;
+
+mse_train_nu = zeros(size(nu_range,1),1);
+mse_val_nu = zeros(size(nu_range,1),1);
+mse_test_nu = zeros(size(nu_range,1),1);
 
 i = 1;
-for nu = 0.01:0.05:1
+for nu = 0.01:0.1:1
     local_best_cv = Inf;
     local_best_C = 0;
     local_best_g = 0;
     
-    for log2c = -2:1:6
-        for log2g = -2:1:6,
             cmd = ['-q -s 4 -t 2 -c ',num2str(2^log2c),' -g ',num2str(2^log2g),' -n ', num2str(nu)];
             model = svmtrain(target_train,train,cmd);
             [pred, ac, decv] = svmpredict(target_val, val, model);
@@ -48,7 +48,7 @@ end
 bestcv,best_C,best_g,best_nu
 
 % MSE plot w.r.t nu
-nu_range = 0.01:0.05:1
+
 plot(nu_range,mse_train_nu,nu_range,mse_val_nu,nu_range,mse_test_nu);
 legend('Train','Validation','Test');
 
