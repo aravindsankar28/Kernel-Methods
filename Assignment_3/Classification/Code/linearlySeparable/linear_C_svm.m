@@ -89,6 +89,8 @@ for i = 1:4
 
     plot_x = linspace(min(train(:,1)),max(train(:,1)),30);
     plot_y = (-1/w(2))*(w(1)*plot_x+w0);
+    plot_1 = (-1/w(2))*(w(1)*plot_x+w0+1);
+    plot_2 = (-1/w(2))*(w(1)*plot_x+w0-1);
     
     figure;
     hold on;
@@ -100,12 +102,24 @@ for i = 1:4
     %plot(train(indices,1),train(indices,2),'b*');
     %plot(train(~indices,1),train(~indices,2),'r*');
 
-    plot(plot_x,plot_y,'k-','LineWidth',1);
+ 
+    all_indices = 1:size(train,1);
+    remaining_indices = setdiff(all_indices,sv_indices(:,1))';
+    
+    plot(train(remaining_indices,1),train(remaining_indices,2),'r*');
+    hold on;
+    
+       plot(plot_x,plot_y,'k-','LineWidth',1);
+    hold on;
+    
+    plot(plot_x,plot_1,'r-','LineWidth',1);
+    hold on;
+    plot(plot_x,plot_2,'r-','LineWidth',1);
     
     a = xlabel('$x_1$');
     b = ylabel('$x_2$');
     set(a,'Interpreter','latex');
     set(b,'Interpreter','latex');
     title(strcat('Separating hyperplane for class ',num2str(i)));
-    legend('B-SV','UB-SV')
+    legend('B-SV','UB-SV','')
 end
