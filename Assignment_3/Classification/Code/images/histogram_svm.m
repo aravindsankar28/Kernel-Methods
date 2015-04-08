@@ -3,6 +3,7 @@ load_data
 
 % Construct kernel matrix
 
+
 % Cross-validation to identify best C
 bestcv = 0;
 for log2c = -1:2:7,

@@ -70,3 +70,42 @@ b = ylabel('$x_2$');
 set(a,'Interpreter','latex');
 set(b,'Interpreter','latex');
 title('Decision region plot');
+
+% Plotting support vectors
+
+%w = ((((target_train(sv_indices(:,1))==1).*2)-1).*sv_indices(:,2))'*train(sv_indices(:,1),:);
+%w0 = model.models{1}.rho;
+for i = 1:4    
+    sv_indices = [model.models{i}.sv_indices model.models{i}.sv_coef];
+    idx_vector = (sv_indices(:,2) == -best_C) + (sv_indices(:,2) == best_C);
+    bsv_indices = sv_indices(find(idx_vector)); % Find non-zero indices
+    ubsv_indices = sv_indices(find(~idx_vector));  % Find zero indices
+    
+    w = model.models{i}.SVs' * model.models{i}.sv_coef;
+    w0 = -model.models{i}.rho;
+    if (model.models{i}.Label(1) == -1)
+        w = -w; w0 = -w0;
+    end
+
+    plot_x = linspace(min(train(:,1)),max(train(:,1)),30);
+    plot_y = (-1/w(2))*(w(1)*plot_x+w0);
+    
+    figure;
+    hold on;
+  
+    plot(train(bsv_indices,1),train(bsv_indices,2),'g*'); % B-SV
+    plot(train(ubsv_indices,1),train(ubsv_indices,2),'k*'); % U-SV
+
+    %indices = (target_train(:)==i);
+    %plot(train(indices,1),train(indices,2),'b*');
+    %plot(train(~indices,1),train(~indices,2),'r*');
+
+    plot(plot_x,plot_y,'k-','LineWidth',1);
+    
+    a = xlabel('$x_1$');
+    b = ylabel('$x_2$');
+    set(a,'Interpreter','latex');
+    set(b,'Interpreter','latex');
+    title(strcat('Separating hyperplane for class ',num2str(i)));
+    legend('B-SV','UB-SV')
+end
