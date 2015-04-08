@@ -105,11 +105,19 @@ for i = 1:4
  
     all_indices = 1:size(train,1);
     remaining_indices = setdiff(all_indices,sv_indices(:,1))';
+    remaining_labels = target_train(remaining_indices);
+    positive_indices = remaining_indices(find(remaining_labels == i));
+    negative_indices = remaining_indices(find(~(remaining_labels == i)));
     
-    plot(train(remaining_indices,1),train(remaining_indices,2),'r*');
+    plot(train(positive_indices,1),train(positive_indices,2),'b*');
     hold on;
     
-       plot(plot_x,plot_y,'k-','LineWidth',1);
+    
+    plot(train(negative_indices,1),train(negative_indices,2),'r*');
+    hold on;
+    
+    
+    plot(plot_x,plot_y,'k-','LineWidth',1);
     hold on;
     
     plot(plot_x,plot_1,'r-','LineWidth',1);
@@ -121,5 +129,5 @@ for i = 1:4
     set(a,'Interpreter','latex');
     set(b,'Interpreter','latex');
     title(strcat('Separating hyperplane for class ',num2str(i)));
-    legend('B-SV','UB-SV','')
+    legend('B-SV','UB-SV','Positive class points','Other points');
 end

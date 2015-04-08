@@ -24,6 +24,11 @@ target_val = [ones(length(class1_val),1); ones(length(class2_val),1)*2; ones(len
 test = [class1_test; class2_test ; class3_test;  class4_test ];
 target_test = [ones(length(class1_test),1); ones(length(class2_test),1)*2; ones(length(class3_test),1)*3;ones(length(class4_test),1)*4;];
 
+
+train_unscaled = train;
+val_unscaled = val;
+test_unscaled = test;
+
 % Scale data
 
 min_coord = zeros(size(train,2),1);
