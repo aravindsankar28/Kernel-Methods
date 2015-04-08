@@ -18,7 +18,8 @@ for nu = 0.01:0.1:1
     local_best_cv = Inf;
     local_best_C = 0;
     local_best_g = 0;
-    
+     for log2c = 5:1:8
+        for log2g = -10:1:-3
             cmd = ['-q -s 4 -t 2 -c ',num2str(2^log2c),' -g ',num2str(2^log2g),' -n ', num2str(nu)];
             model = svmtrain(target_train,train,cmd);
             [pred, ac, decv] = svmpredict(target_val, val, model);
@@ -30,7 +31,7 @@ for nu = 0.01:0.1:1
                 local_best_cv = mse; local_best_C = 2^log2c; local_best_g = 2^log2g;
             end
 
-            fprintf('log2c=%g log2g=%g mse=%g (best C=%g, g=%g, acc=%g)\n', log2c, log2g, mse, best_C, best_g, bestcv);
+            fprintf('nu = %g log2c=%g log2g=%g mse=%g (best C=%g, g=%g, mse=%g)\n', nu,log2c, log2g, mse, best_C, best_g, bestcv);
         end
     end
     cmd = ['-s 4 -t 2 -c ',num2str(local_best_C),' -g ',num2str(local_best_g),' -n ', num2str(nu)];
@@ -54,6 +55,9 @@ legend('Train','Validation','Test');
 
 a = title('MSE on varying $\nu$');
 set(a,'Interpreter','latex');
+b = xlabel('$\nu$');
+ylabel('MSE');
+set(b,'Interpreter','latex');
 
 % Final model train
 cmd = ['-s 4 -t 2 -c ',num2str(best_C),' -g ',num2str(best_g),' -n ', num2str(best_nu)];

@@ -57,8 +57,11 @@ eps_range = 2.^(-4:1:3);
 plot(eps_range,mse_train_eps,eps_range,mse_val_eps,eps_range,mse_test_eps);
 legend('Train','Validation','Test');
 
+b = xlabel('$\epsilon$');
+ylabel('MSE');
 a = title('MSE on varying $\epsilon$');
 set(a,'Interpreter','latex');
+set(b,'Interpreter','latex');
 
 
 % Final model train

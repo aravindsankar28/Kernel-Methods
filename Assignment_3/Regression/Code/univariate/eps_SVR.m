@@ -56,6 +56,9 @@ legend('Train','Validation','Test');
 
 a = title('MSE on varying $\epsilon$');
 set(a,'Interpreter','latex');
+b = xlabel('$\epsilon$');
+ylabel('MSE');
+set(b,'Interpreter','latex');
 
 
 % Final model train

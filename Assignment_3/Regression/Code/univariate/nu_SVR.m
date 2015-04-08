@@ -53,8 +53,10 @@ plot(nu_range,mse_train_nu,nu_range,mse_val_nu,nu_range,mse_test_nu);
 legend('Train','Validation','Test');
 
 a = title('MSE on varying $\nu$');
+b = xlabel('$\nu$');
+ylabel('MSE');
 set(a,'Interpreter','latex');
-
+set(b,'Interpreter','latex');
 
 % Final model train
 cmd = ['-s 4 -t 2 -c ',num2str(best_C),' -g ',num2str(best_g),' -n ', num2str(best_nu)];
