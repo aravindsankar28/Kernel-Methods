@@ -3,26 +3,27 @@ load_data;
 % Cross-validation to identify best C, g
 bestcv = 0;
 
-for log2c = -6:1:6,
-    for log2g = -6:1:6,
+for nu = 0.0:0.01:1.0
+    for log2g = -10:1:8,
         
-        cmd = ['-q -s 5 -t 2 -c ',num2str(2^log2c),' -g ',num2str(2^log2g)];
+        cmd = ['-q -s 5 -t 2 -n ',num2str(nu),' -g ',num2str(2^log2g)];
         model = svmtrain(target_train,train,cmd);
         [pred ac decv] = svmpredict(target_val, val, model);
         
         ac = ac(1);
-        if (ac >= bestcv),
-          bestcv = ac; best_C = 2^log2c; best_g = 2^log2g; 
+        if (ac > bestcv)
+          bestcv = ac; best_nu = nu; best_g = 2^log2g; 
         end
-        fprintf('log2c=%g log2g=%g acc=%g (best C=%g, g=%g, acc=%g) \n', log2c, log2g, ac, best_C, best_g, bestcv);
+        
+        fprintf('nu=%g log2g=%g acc=%g (best nu=%g, g=%g, best acc=%g) \n', nu, log2g, ac, best_nu, best_g, bestcv);
     end
     
 end
 
 
-best_C,best_g,bestcv
+best_nu,best_g,bestcv
 % Final model train
-cmd = ['-s 5 -t 2 -c ',num2str(best_C),' -g ',num2str(best_g)];
+cmd = ['-s 5 -t 2 -n ',num2str(best_nu),' -g ',num2str(best_g)];
 model = svmtrain(target_train,train,cmd);
 
 
@@ -53,14 +54,9 @@ C_test
 
 
 % TODO
-% TP/(TP+FP) where normal class is considered as +ve.
-
 fprintf('Percentage of true positives train  = %g%%\n',C_train(2,2)*100/double(C_train(2,2)+C_train(2,1)));
 fprintf('Percentage of true positives val  = %g%%\n',C_val(2,2)*100/double(C_val(2,2)+C_val(2,1)));
 fprintf('Percentage of true positives test  = %g%%\n',C_test(2,2)*100/double(C_test(2,2)+C_test(2,1)));
-
-
-fprintf('Percentage of false positives train  = %g%%\n',C_train(2,1)*100/double(C_train(2,1)+C_train(1,1)));
 
 
 % Plotting training, val and test data point predictions.
@@ -98,7 +94,7 @@ plot(abnormal_points_val(:,1),abnormal_points_val(:,2),'b.');
 
 
 legend('Actual Normal points ','Actual Abnormal points','Predicted normal points','Predicted abnormal points');
-title('Results of C-SVDD on validation data');
+title('Results of nu-SVDD on validation data');
 
 
 % test
