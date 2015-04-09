@@ -74,3 +74,46 @@ b = ylabel('$x_2$');
 set(a,'Interpreter','latex');
 set(b,'Interpreter','latex');
 title('Decision region plot');
+
+% Plotting support vectors
+
+for i = 1:4    
+    sv_indices = [model.models{i}.sv_indices model.models{i}.sv_coef];
+    idx_vector = (sv_indices(:,2) == -best_C) + (sv_indices(:,2) == best_C);
+    bsv_indices = sv_indices(find(idx_vector)); % Find non-zero indices
+    ubsv_indices = sv_indices(find(~idx_vector));  % Find zero indices
+    
+    % xy live from code above
+    [pred ac decv] = svmpredict(ones(size(xy,1),1), xy, model.models{i});
+
+    figure;
+    decisionmap = reshape(pred, image_size);
+    imagesc(xrange,yrange,decisionmap);
+    hold on;
+    set(gca,'ydir','normal');
+    cmap = [0.6 0.7 1; 0.95 1 0.95];
+    colormap(cmap);
+        
+    all_indices = 1:size(train,1);
+    remaining_indices = setdiff(all_indices,sv_indices(:,1))';
+    remaining_labels = target_train(remaining_indices);
+    positive_indices = remaining_indices(find(remaining_labels == i));
+    negative_indices = remaining_indices(find(~(remaining_labels == i)));
+         
+    plot(train(bsv_indices,1).*(max_coord(1)-min_coord(1))+min_coord(1),train(bsv_indices,2).*(max_coord(2)-min_coord(2))+min_coord(2),'k*','DisplayName', 'B-SV'); % B-SV
+    hold on;
+    plot(train(ubsv_indices,1).*(max_coord(1)-min_coord(1))+min_coord(1),train(ubsv_indices,2).*(max_coord(2)-min_coord(2))+min_coord(2),'r*','DisplayName', 'UB-SV'); % U-SV
+    hold on;
+    
+    plot(train(positive_indices,1).*(max_coord(1)-min_coord(1))+min_coord(1),train(positive_indices,2).*(max_coord(2)-min_coord(2))+min_coord(2),'b*','DisplayName', 'Pos. non-SVR');
+    hold on;   
+    plot(train(negative_indices,1).*(max_coord(1)-min_coord(1))+min_coord(1),train(negative_indices,2).*(max_coord(2)-min_coord(2))+min_coord(2),'g*','DisplayName', 'Neg. non-SVR'); 
+    hold on;
+    
+    a = xlabel('$x_1$');
+    b = ylabel('$x_2$');
+    set(a,'Interpreter','latex');
+    set(b,'Interpreter','latex');
+    title(strcat('Support vectors for class ',num2str(i)));
+    legend show;
+end
