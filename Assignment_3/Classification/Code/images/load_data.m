@@ -51,6 +51,10 @@ train = [class1_train; class2_train; class3_train; class4_train ; class5_train ]
 val = [class1_val; class2_val; class3_val; class4_val ; class5_val ];
 test = [class1_test; class2_test; class3_test; class4_test ; class5_test];
 
+train_unscaled = train;
+val_unscaled = val;
+test_unscaled = test;
+
 % Scale data
 
 min_coord = zeros(size(train,2),1);
