@@ -162,4 +162,25 @@ a = xlabel('$x_1$');
 b = ylabel('$x_2$');
 set(a,'Interpreter','latex');
 set(b,'Interpreter','latex');
-title('Decision region plot showing boundary between normal and abnormal classes');
+%title('Decision region plot showing boundary between normal and abnormal classes');
+
+
+% Plotting support vectors
+
+
+sv_indices = [model.sv_indices model.sv_coef];
+idx_vector = (sv_indices(:,2) == -best_C) + (sv_indices(:,2) == best_C);
+bsv_indices = sv_indices(find(idx_vector)); % Find non-zero indices.
+ubsv_indices = sv_indices(find(~idx_vector));  % Find zero indices.
+
+
+
+scatter(train_unscaled(:,1),train_unscaled(:,2),'k.');
+hold on;
+scatter(train_unscaled(bsv_indices,1),train_unscaled(bsv_indices,2),'r.');
+hold on;
+
+scatter(train_unscaled(ubsv_indices,1),train_unscaled(ubsv_indices,2),'b.');
+hold on;
+title('Plot of bounded and unbounded support vectors');
+legend('Training data points','Bounded SV vectors','Unbounded SV vectors');

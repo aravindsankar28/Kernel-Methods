@@ -3,10 +3,10 @@ load_data;
 % Cross-validation to identify best C, g
 bestcv = 0;
 
-for nu = 0.0:0.01:1.0
-    for log2g = -10:1:8,
+for nu = 0.01:0.01:0.3
+    for log2g = -10:1:10,
         
-        cmd = ['-q -s 5 -t 2 -n ',num2str(nu),' -g ',num2str(2^log2g)];
+        cmd = ['-q -s 2 -t 2 -n ',num2str(nu),' -g ',num2str(2^log2g)];
         model = svmtrain(target_train,train,cmd);
         [pred ac decv] = svmpredict(target_val, val, model);
         
@@ -14,8 +14,8 @@ for nu = 0.0:0.01:1.0
         if (ac > bestcv)
           bestcv = ac; best_nu = nu; best_g = 2^log2g; 
         end
-        
-        fprintf('nu=%g log2g=%g acc=%g (best nu=%g, g=%g, best acc=%g) \n', nu, log2g, ac, best_nu, best_g, bestcv);
+        ac(1)
+        %fprintf('nu=%g log2g=%g acc=%g (best nu=%g, g=%g, best acc=%g) \n', nu, log2g, ac, best_nu, best_g, bestcv);
     end
     
 end
@@ -23,7 +23,7 @@ end
 
 best_nu,best_g,bestcv
 % Final model train
-cmd = ['-s 5 -t 2 -n ',num2str(best_nu),' -g ',num2str(best_g)];
+cmd = ['-s 2 -t 2 -n ',num2str(best_nu),' -g ',num2str(best_g)];
 model = svmtrain(target_train,train,cmd);
 
 
@@ -71,7 +71,7 @@ figure,plot(normal_points_train(:,1),normal_points_train(:,2),'r.');
 hold on;
 plot(abnormal_points_train(:,1),abnormal_points_train(:,2),'b.');
 legend('Normal points','Abnormal points');
-title('Predictions made by C-SVDD on training data');
+title('Predictions made by nu-SVDD on training data');
 
 
 
@@ -117,7 +117,7 @@ plot(abnormal_points_test(:,1),abnormal_points_test(:,2),'b.');
 
 
 legend('Actual Normal points ','Actual Abnormal points','Predicted normal points','Predicted abnormal points');
-title('Results of C-SVDD on test data');
+title('Results of nu-SVDD on test data');
 
 
 
@@ -158,4 +158,24 @@ a = xlabel('$x_1$');
 b = ylabel('$x_2$');
 set(a,'Interpreter','latex');
 set(b,'Interpreter','latex');
-title('Decision region plot showing boundary between normal and abnormal classes');
+%title('Decision region plot showing boundary between normal and abnormal classes');
+
+% Plotting support vectors
+
+sv_indices = [model.sv_indices model.sv_coef];
+idx_vector = (sv_indices(:,2) == 1);
+bsv_indices = sv_indices(find(idx_vector)); % Find non-zero indices.
+ubsv_indices = sv_indices(find(~idx_vector));  % Find zero indices.
+
+
+scatter(train_unscaled(:,1),train_unscaled(:,2),'k.');
+hold on;
+scatter(train_unscaled(bsv_indices,1),train_unscaled(bsv_indices,2),'r.');
+hold on;
+
+scatter(train_unscaled(ubsv_indices,1),train_unscaled(ubsv_indices,2),'b.');
+hold on;
+
+title('Plot of bounded and unbounded support vectors');
+legend('Training data points','Bounded SV vectors','Unbounded SV vectors');
+

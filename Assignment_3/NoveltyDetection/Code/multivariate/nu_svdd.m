@@ -1,24 +1,24 @@
 load_data;           
 
 bestcv = 0;
-for log2c = -6:1:8,
-    for log2g = -6:1:8,
+for nu = 0.01:0.001:0.4,
+    for log2g = -6:1:6,
         
-        cmd = ['-q -s 5 -t 2 -c ',num2str(2^log2c),' -g ',num2str(2^log2g)];
+        cmd = ['-q -s 2 -t 2 -n ',num2str(nu),' -g ',num2str(2^log2g)];
         model = svmtrain(target_train,train,cmd);
         [pred ac decv] = svmpredict(target_val, val, model);
         
         ac = ac(1);
-        if (ac >= bestcv),
-          bestcv = ac; best_C = 2^log2c; best_g = 2^log2g; 
+        if (ac > bestcv),
+          bestcv = ac; best_nu = nu; best_g = 2^log2g; 
         end
-        fprintf('log2c=%g log2g=%g acc=%g (best C=%g, g=%g, acc=%g) \n', log2c, log2g, ac, best_C, best_g, bestcv);
+        fprintf('nu=%g log2g=%g acc=%g (best nu=%g, g=%g, acc=%g) \n', nu, log2g, ac, best_nu, best_g, bestcv);
     end
 end
 
-best_C,best_g,bestcv
+best_nu,best_g,bestcv
 % Final model train
-cmd = ['-s 5 -t 2 -c ',num2str(best_C),' -g ',num2str(best_g)];
+cmd = ['-s 2 -t 2 -n ',num2str(best_nu),' -g ',num2str(best_g)];
 model = svmtrain(target_train,train,cmd);
 
 
@@ -44,3 +44,4 @@ fprintf('Test confusion matrix')
 C_test
 
 % TODO : true postives, etc.
+
