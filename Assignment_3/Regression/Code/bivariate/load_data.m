@@ -35,4 +35,11 @@ target_test = test_data(:,3);
 %     test_scaled(:,i) = (test_scaled(:,i)-min_val)/(max_val-min_val);
 % end
 
+plot3(data_input(:,1),data_input(:,2),data_target,'b.');
 
+a = title('Data Plot');
+set(a,'Interpreter','latex');
+b = xlabel('x');
+ylabel('y');
+zlabel('f(x,y)')
+set(b,'Interpreter','latex');
