@@ -74,6 +74,12 @@ abnormal_points_train  = train_unscaled(pred_train == -1,:);
 figure,plot(normal_points_train(:,1),normal_points_train(:,2),'r.');
 hold on;
 plot(abnormal_points_train(:,1),abnormal_points_train(:,2),'b.');
+
+a = xlabel('$x_1$');
+b = ylabel('$x_2$');
+set(a,'Interpreter','latex');
+set(b,'Interpreter','latex');
+
 legend('Normal points','Abnormal points');
 title('Predictions made by C-SVDD on training data');
 
@@ -96,6 +102,10 @@ plot(normal_points_val(:,1),normal_points_val(:,2),'r.');
 hold on;
 plot(abnormal_points_val(:,1),abnormal_points_val(:,2),'b.');
 
+a = xlabel('$x_1$');
+b = ylabel('$x_2$');
+set(a,'Interpreter','latex');
+set(b,'Interpreter','latex');
 
 legend('Actual Normal points ','Actual Abnormal points','Predicted normal points','Predicted abnormal points');
 title('Results of C-SVDD on validation data');
@@ -118,6 +128,10 @@ hold on;
 plot(normal_points_test(:,1),normal_points_test(:,2),'r.');
 hold on;
 plot(abnormal_points_test(:,1),abnormal_points_test(:,2),'b.');
+a = xlabel('$x_1$');
+b = ylabel('$x_2$');
+set(a,'Interpreter','latex');
+set(b,'Interpreter','latex');
 
 
 legend('Actual Normal points ','Actual Abnormal points','Predicted normal points','Predicted abnormal points');
