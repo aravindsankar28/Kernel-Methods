@@ -75,7 +75,7 @@ set(b,'Interpreter','latex');
 
 for i = 1:2
     sv_indices = [model.models{i}.sv_indices model.models{i}.sv_coef];
-    idx_vector = (sv_indices(:,2) == -best_C) + (sv_indices(:,2) == best_C);
+    idx_vector = (sv_indices(:,2) == max(sv_indices(:,2))) + (sv_indices(:,2) == min(sv_indices(:,2)));
     bsv_indices = sv_indices(find(idx_vector)); % Find non-zero indices
     ubsv_indices = sv_indices(find(~idx_vector));  % Find zero indices
     
