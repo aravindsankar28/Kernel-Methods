@@ -114,3 +114,8 @@ for i = 1:2
     legend show;
 end
 title('Decision region plot');
+
+% Construct kernel matrix
+train_kernel = exp(-best_g*pdist2(train,train).^2);
+K = mat2gray(train_kernel);
+figure, imshow(K)

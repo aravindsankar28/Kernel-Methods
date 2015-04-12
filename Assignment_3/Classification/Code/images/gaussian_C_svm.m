@@ -40,3 +40,8 @@ C_val
 fprintf('Test confusion matrix')
 [C_test,order3] = confusionmat(target_test,pred_test);
 C_test
+
+% Construct kernel matrix
+train_kernel = exp(-best_g*pdist2(train,train).^2);
+K = mat2gray(train_kernel);
+figure, imshow(K)

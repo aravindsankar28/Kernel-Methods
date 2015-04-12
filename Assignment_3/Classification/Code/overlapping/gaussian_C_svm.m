@@ -116,3 +116,8 @@ for i = 1:4
     title(strcat('Support vectors for class ',num2str(i)));
     legend show;
 end
+
+% Construct kernel matrix
+train_kernel = exp(-best_g*pdist2(train,train).^2);
+K = mat2gray(train_kernel);
+figure, imshow(K)

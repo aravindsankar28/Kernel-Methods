@@ -15,7 +15,6 @@ for nu = 0.1:0.05:0.4,
     end
 end
 
-
 % Final model train
 cmd = ['-s 1 -t 2 -n ',num2str(best_nu),' -g ',num2str(best_g)];
 model = ovrtrain(target_train,train,cmd);
@@ -116,3 +115,8 @@ for i = 1:4
     title(strcat('Support vectors for class ',num2str(i)));
     legend show;
 end
+
+% Construct kernel matrix
+train_kernel = exp(-best_g*pdist2(train,train).^2);
+K = mat2gray(train_kernel);
+figure, imshow(K)
