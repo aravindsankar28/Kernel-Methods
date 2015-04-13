@@ -70,7 +70,7 @@ a = xlabel('$x_1$');
 b = ylabel('$x_2$');
 set(a,'Interpreter','latex');
 set(b,'Interpreter','latex');
-
+title('Decision region plot');
 % Plotting support vectors
 
 for i = 1:2
@@ -113,7 +113,7 @@ for i = 1:2
     title(strcat('Support vectors for class ',num2str(i)));
     legend show;
 end
-title('Decision region plot');
+
 
 % Construct kernel matrix
 train_kernel = exp(-best_g*pdist2(train,train).^2);

@@ -37,11 +37,530 @@ Classification using C-SVM with Linear, Polynomial ,Gaussian and Histogram Inter
 \item \textbf{Regression} \\[5pt]
 Regression using $\epsilon$ and $\nu$-SVR, both using Gaussian kernels, for univariate and bivariate datasets. \\[10pt]
 \item \textbf{Novelty Detection}\\[5pt] 
-Application of C-SVDD and $\nu$-SVDD for one class in the overlapping dataset and for Multivariate input data. \\[10pt]
+Application of C-SVDD and $\nu$-SVDD take any one class as positive, in the overlapping dataset and for Multivariate input data. \\[10pt]
 \end{itemize}
 
 
 \section{Classification Tasks}
+
+
+
+
+
+\subsection{Dataset 1a - Linearly Separable Data}
+
+
+
+\subsubsection{C-svm with Linear Kernel}
+
+Decision Region obtained was as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/1a/c_linear/dec}
+\end{center}
+
+
+The separating hyperplanes obtained were as follows (Support vectors as marked).
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1a/c_linear/hc1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1a/c_linear/hc2}
+  
+\end{subfigure}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1a/c_linear/hc3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1a/c_linear/hc4}
+  
+\end{subfigure}
+\end{figure}
+
+\subsubsection{C-svm with Polynomial Kernel}
+
+Decision Region obtained was as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/1a/c_poly/dec}
+\end{center}
+
+
+The support vectors obtained were as follows.
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1a/c_poly/sv1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1a/c_poly/sv2}
+  
+\end{subfigure}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1a/c_poly/sv3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1a/c_poly/sv4}
+  
+\end{subfigure}
+\end{figure}
+
+\subsubsection{C-svm with Gaussian Kernel}
+Decision Region obtained was as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/1a/c_g/dec}
+\end{center}
+Support Vector Plots classwise.
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1a/c_g/svc1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1a/c_g/svc2}
+  
+\end{subfigure}
+\end{figure}
+
+
+
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1a/c_g/svc3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1a/c_g/svc4}
+  
+\end{subfigure}
+\end{figure}
+Kernel Gram matrix for Gaussian Kernel is as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/1a/c_g/kgm}
+\end{center}
+\begin{flushleft}
+\textbf{Confusion Matrix Train Data\\[5pt]}
+\begin{tabular}{|c|c|}
+\hline
+250 & 0 & 0 & 0 \\
+\hline
+0 & 250 & 0 & 0 \\
+\hline
+0 & 0 & 250 & 0 \\
+\hline
+0 & 0 & 0 & 250 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Test Data \\[5pt]}
+\begin{tabular}{|c|c|}
+\hline
+60 & 0 \\
+\hline
+0 & 240\\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Validation Data \\[5pt]}
+\begin{tabular}{|c|c|}
+\hline
+90 & 0 \\
+\hline
+0 & 360\\
+\hline
+\end{tabular}
+\end{flushleft}
+
+
+\subsubsection{$\nu$-svm with Gaussian Kernel}
+Decision Region obtained was as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/1a/nu_g/dec}
+\end{center}
+Support Vector Plots classwise.
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1a/nu_g/sv1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1a/nu_g/sv2}
+  
+\end{subfigure}
+\end{figure}
+
+
+
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1a/nu_g/sv3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1a/nu_g/sv4}
+  
+\end{subfigure}
+\end{figure}
+Kernel Gram matrix for Gaussian Kernel is as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/1a/nu_g/kgm}
+\end{center}
+
+
+
+
+
+
+
+\subsection{Dataset 1b - Nonlinearly Separable Data}
+
+
+\subsubsection{C-svm with Polynomial Kernel}
+
+Decision Region obtained was as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/1b/c_poly/dec}
+\end{center}
+
+
+The support vectors obtained were as follows.
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1b/c_poly/sv1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1b/c_poly/sv2}
+  
+\end{subfigure}
+\end{figure}
+
+\begin{flushleft}
+\textbf{Confusion Matrix Train Data\\[5pt]}
+\begin{tabular}{|c|c|}
+\hline
+147 & 3 \\
+\hline
+99 & 501\\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Test Data \\[5pt]}
+\begin{tabular}{|c|c|}
+\hline
+59 & 1 \\
+\hline
+48 & 192\\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Validation Data \\[5pt]}
+\begin{tabular}{|c|c|}
+\hline
+88 & 2 \\
+\hline
+50 & 310\\
+\hline
+\end{tabular}
+\end{flushleft}
+
+
+\subsubsection{C-svm with Gaussian Kernel}
+Decision Region obtained was as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/1b/c_g/dec}
+\end{center}
+Support Vector Plots classwise.
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1b/c_g/sv1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1b/c_g/sv2}
+  
+\end{subfigure}
+\end{figure}
+
+
+Kernel Gram matrix for Gaussian Kernel is as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/1b/c_g/kgm}
+\end{center}
+
+\begin{flushleft}
+\textbf{Confusion Matrix Train Data\\[5pt]}
+\begin{tabular}{|c|c|}
+\hline
+150 & 0 \\
+\hline
+0 & 600\\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Test Data \\[5pt]}
+\begin{tabular}{|c|c|}
+\hline
+60 & 0 \\
+\hline
+0 & 240\\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Validation Data \\[5pt]}
+\begin{tabular}{|c|c|}
+\hline
+90 & 0 \\
+\hline
+0 & 360\\
+\hline
+\end{tabular}
+\end{flushleft}
+
+
+
+
+
+
+\subsubsection{$\nu$-svm with Gaussian Kernel}
+Decision Region obtained was as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/1b/nu_g/dec}
+\end{center}
+Support Vector Plots classwise.
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1b/nu_g/sv1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1b/nu_g/sv2}
+  
+\end{subfigure}
+\end{figure}
+
+Kernel Gram matrix for Gaussian Kernel is as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/1b/nu_g/kgm}
+\end{center}
+
+
+\begin{flushleft}
+\textbf{Confusion Matrix Train Data\\[5pt]}
+\begin{tabular}{|c|c|}
+\hline
+150 & 0 \\
+\hline
+0 & 600\\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Test Data \\[5pt]}
+\begin{tabular}{|c|c|}
+\hline
+60 & 0 \\
+\hline
+0 & 240\\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Validation Data \\[5pt]}
+\begin{tabular}{|c|c|}
+\hline
+90 & 0 \\
+\hline
+0 & 360\\
+\hline
+\end{tabular}
+\end{flushleft}
+
+
+
+
+
+
+
+
+\subsection{Dataset 1c - Overlapping Data}
+
+
+
+\subsubsection{C-svm with Linear Kernel}
+
+Decision Region obtained was as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/1c/c_linear/dec}
+\end{center}
+
+
+The separating hyperplanes obtained were as follows (Support vectors as marked).
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1c/c_linear/sv1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1c/c_linear/sv2}
+  
+\end{subfigure}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1c/c_linear/sv3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1c/c_linear/sv4}
+  
+\end{subfigure}
+\end{figure}
+
+\subsubsection{C-svm with Polynomial Kernel}
+
+Decision Region obtained was as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/1c/c_poly/dec}
+\end{center}
+
+
+The support vectors obtained were as follows.
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1c/c_poly/sv1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1c/c_poly/sv2}
+  
+\end{subfigure}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1c/c_poly/sv3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1c/c_poly/sv4}
+  
+\end{subfigure}
+\end{figure}
+
+\subsubsection{C-svm with Gaussian Kernel}
+Decision Region obtained was as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/1c/c_g/dec}
+\end{center}
+Support Vector Plots classwise.
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1c/c_g/sv1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1c/c_g/sv2}
+  
+\end{subfigure}
+\end{figure}
+
+
+
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1c/c_g/sv3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1c/c_g/sv4}
+  
+\end{subfigure}
+\end{figure}
+Kernel Gram matrix for Gaussian Kernel is as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/1c/c_g/kgm}
+\end{center}
+
+\subsubsection{$\nu$-svm with Gaussian Kernel}
+Decision Region obtained was as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/1c/nu_g/dec}
+\end{center}
+Support Vector Plots classwise.
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1c/nu_g/sv1}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1c/nu_g/sv2}
+  
+\end{subfigure}
+\end{figure}
+
+
+
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1c/nu_g/sv3}
+ 
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{Classification/1c/nu_g/sv4}
+  
+\end{subfigure}
+\end{figure}
+Kernel Gram matrix for Gaussian Kernel is as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/1c/nu_g/kgm}
+\end{center}
+
+
+
+
+
 
 \section{Regression Tasks}
 
@@ -51,7 +570,7 @@ Application of C-SVDD and $\nu$-SVDD for one class in the overlapping dataset an
 \end{center}
 Both $\epsilon$ and $\nu$-SVR with Gaussian Kernels were applied to this dataset.
 \subsubsection{$\epsilon$-SVR}
-The parameters of interest for $\epsilon$-SVR are $\epsilon$, The value of $\gamma$ in the radial basis function $e^{(-\gamma|u-v|^2)}$ and cost parameter c. They were obtained by narrowing down the ranges (on the log scale) based on experimentation changing one parameter and keeping others fixed, and finally performing cross validation to find the best set of values in the narrowed ranges. \\[5pt]
+The parameters of interest for $\epsilon$-SVR are $\epsilon$, The value of $\gamma$ in the radial basis function $e^{(-\gamma|u-v|^2)}$ and cost parameter c. They were obtained by performing a grid search on the log scale and changing/narrowing ranges when lowest MSEs were obtained at the borders.
 The best values obtained were $\epsilon$ = 0.0625, c = 4 and $\gamma$ = 16. Following are the corresponding plots.
 \begin{center}
 \includegraphics[scale=1]{Regression/mse}
@@ -109,6 +628,12 @@ The following are the scatter plots of target and model output. We can see that 
 \includegraphics[scale=0.6]{Regression/nu/scatter_val}
 \end{center}
 Based on the above 2 models, for the univariate data, the performances of the two models are very close and no appreciable difference is seen.
+
+\subsubsection{Performance comparison for Dataset 1}
+The following were the final MSEs obtained on Dataset 1 for the test Dataset (Using test data tells us how generalizable the model built is): \\[5pt]
+For the $\epsilon$-SVR method with the best parameters, MSE = 0.0092 \\
+For the $\nu$-SVR, again with best parameters, MSE = 0.0089 \\[5pt]
+Clearly, $\nu$-SVR is performing slightly better than $\epsilon$-SVR. This is because, it trades off model complexity with $\epsilon$ value. This avoids overfitting at the same time tries to balance this with the width of the $\epsilon$ tube.
 \subsection{Dataset 2: Bivariate data}
 \begin{center}
 \includegraphics[scale=1]{Regression/bivar/bivar}
@@ -179,4 +704,152 @@ The scatter plots corresponding to the above results are as follows.
 \begin{center}
 \includegraphics[scale=.6]{Regression/bivar/nu/scatter_val}
 \end{center}
+
+\subsubsection{Comparison of methods for Dataset 2}
+The following were the final MSEs obtained on Dataset 2, for the test Dataset: \\[5pt]
+For the $\epsilon$-SVR method with the best parameters, MSE = 32.1259 \\
+For the $\nu$-SVR, again with best parameters, MSE = 31.9789 \\[5pt]
+Again, $\nu$-SVR is performing slightly better than $\epsilon$-SVR. There is however one difference that we notice, in the case of univariate data, the $\nu$-SVR made $\epsilon$ slightly smaller that the $\epsilon$-SVR whereas here we observe the reverse trend. The larger $\epsilon$ margin here in $\nu$-SVR is actually improving generalizability due to the nature of the data distribution.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Novelty Detection Tasks}
+
+\subsection{Bivariate Dataset}
+\begin{center}
+\includegraphics[scale=.6]{SVDD/bivar}
+\end{center}
+The above shows the unnormalized data, we have normalized it using Min-Max normalization for using in SVDD. For Novelty Detection, Class 1 which is the Blue colored class in the above figure has been set as the positive class.
+
+
+
+\subsubsection{c-SVDD}
+
+The parameters of interest here are c, the cost associated with the $\zeta$s and $\gamma$, the inverse of the scale factor in the gaussians. We found them in a manner similar to SVRs using grid search on log scale and narrowing the range using cross validation. Following are the corresponding plots. \\[10pt]
+Plot of bounded and unbounded support vectors is as follows.
+\begin{center}
+\includegraphics[scale=1]{SVDD/c/SV}
+\end{center}
+The following plots show us the correctly and incorrectly classified points for train, test and val datasets.
+\begin{center}
+\includegraphics[scale=.8]{SVDD/c/train_plot}
+\end{center}
+\begin{center}
+\includegraphics[scale=.8]{SVDD/c/test_plot}
+\end{center}
+\begin{center}
+\includegraphics[scale=.8]{SVDD/c/val_plot}
+\end{center}
+The statistics are as follows:\\[5pt]
+\textbf{Train data\\}
+Total number of points = 250(all are points of +1 class of course) \\
+Number of false negatives = 17 (+1 but tagged as -1) = 17/250 = 6.8\% \\  
+Correctly classified as +1 = 233 = 93.2\%\\[10pt]
+\textbf{Test data\\}
+Total number of points = 400 \\
+Number of false positives (-1 but tagged as +1) = 48/400 = 12\%\\ 
+Number of false negatives (+1 but tagged as -1) = 8/400 = 2\% \\  
+Correctly classified = 86\%\\[10pt]
+\textbf{Val data\\}
+Total number of points = 600 \\
+Number of false positives (-1 but tagged as +1) = 46/600 = 7.67\%\\ 
+Number of false negatives (+1 but tagged as -1) = 15/600 = 2.5\% \\  
+Correctly classified = 89.83\%\\[10pt]
+
+We notice that the number of false positives is higher and false negatives are less. This means that the region built is covering almost all points of class 1 but as expected including some other class points also since the dataset has a lot of overlap.
+
+
+
+
+
+
+\subsubsection{$\nu$-SVDD}
+The parameters of interest here are $\nu$s and $\gamma$, the inverse of the scale factor in the gaussians. We have used a one class $\nu$-SVM to perform $\nu$-SVDD. The reason why we can do this is that the boundary that is obtained when a SMH is built over a normalized Gaussian Kernel, results in a linear decision boundary which is equivalent to that obtained by using one class $\nu$-SVM. \\[10pt]
+Plot of bounded and unbounded support vectors is as follows.
+\begin{center}
+\includegraphics[scale=1]{SVDD/nu/SV}
+\end{center}
+The following plots show us the correctly and incorrectly classified points for train, test and val datasets.
+\begin{center}
+\includegraphics[scale=.8]{SVDD/nu/train_plot}
+\end{center}
+\begin{center}
+\includegraphics[scale=.8]{SVDD/nu/test_plot}
+\end{center}
+\begin{center}
+\includegraphics[scale=.8]{SVDD/nu/val_plot}
+\end{center}
+The statistics are as follows:\\[5pt]
+\textbf{Train data\\}
+Total number of points = 250(all are points of +1 class of course) \\
+Number of false negatives = 41 (+1 but tagged as -1) = 41/250 = 16.4\% \\  
+Correctly classified as +1 = 209 = 83.6\%\\[10pt]
+\textbf{Test data\\}
+Total number of points = 400 \\
+Number of false positives (-1 but tagged as +1) = 31/400 = 7.75\%\\ 
+Number of false negatives (+1 but tagged as -1) = 21/400 = 5.25\% \\  
+Correctly classified = 87\%\\[10pt]
+\textbf{Val data\\}
+Total number of points = 600 \\
+Number of false positives (-1 but tagged as +1) = 29/600 = 7.25\%\\ 
+Number of false negatives (+1 but tagged as -1) = 29/600 = 7.25\% \\  
+Correctly classified = 89.83\%\\[10pt]
+
+
+\subsubsection{Comparison of c and $\nu$-SVDD for Bivariate Dataset}
+The final accuracy of both the methods is comparable (86\% and 87\% on the test data). However we notice that the percentage of false positives and false negatives is more balanced in the case of $\nu$-SVDD whereas false positives are significantly higher in case of c-SVDD. \\[5pt]$\nu$-SVDD does a better job of preventing overfitting to the training data. This can be seen from the fact that it does not do as well on the training data as c-SVDD but is slightly better everywhere else.
+
+\subsection{Multivariate Dataset}
+This dataset is 13 dimensional and has a total of 297 points which were split across train, test and validation datasets. 
+\subsubsection{c-SVDD} 
+The statistics are as follows:\\[5pt]
+\textbf{Train data\\}
+Total number of points = 96(all are points of +1 class of course) \\
+Number of false negatives = 23 (+1 but tagged as -1) = 23/96 = 23.95\% \\  
+Correctly classified as +1 = 209 = 76.05\%\\[10pt]
+\textbf{Test data\\}
+Total number of points = 161 \\
+Number of false positives (-1 but tagged as +1) = 10/161 = 6.2\%\\ 
+Number of false negatives (+1 but tagged as -1) = 29/161 = 18\% \\  
+Correctly classified = 75.8\%\\[10pt]
+\textbf{Val data\\}
+Total number of points = 81 \\
+Number of false positives (-1 but tagged as +1) = 4/81 = 4.9\%\\ 
+Number of false negatives (+1 but tagged as -1) = 19/81 = 23.4\% \\  
+Correctly classified = 71.7\%\\[10pt]
+
+\subsubsection{$\nu$-SVDD} 
+The statistics are as follows:\\[5pt]
+\textbf{Train data\\}
+Total number of points = 96(all are points of +1 class of course) \\
+Number of false negatives = 24 (+1 but tagged as -1) = 24/96 = 25\% \\  
+Correctly classified as +1 = 209 = 75\%\\[10pt]
+\textbf{Test data\\}
+Total number of points = 161 \\
+Number of false positives (-1 but tagged as +1) = 18/161 = 11.2\%\\ 
+Number of false negatives (+1 but tagged as -1) = 17/161 = 10.56\% \\  
+Correctly classified = 78.24\%\\[10pt]
+\textbf{Val data\\}
+Total number of points = 81 \\
+Number of false positives (-1 but tagged as +1) = 10/81 = 12.3\%\\ 
+Number of false negatives (+1 but tagged as -1) = 22/81 = 27.1\% \\  
+Correctly classified = 70.6\%\\[10pt]
+
+
+\subsubsection{Comparison of c and $\nu$-SVDD for Bivariate Dataset}
+Again $\nu$-SVDD is more balanced wrt FPs and FNs. But on the whole, There is no clear or appreciable difference here between the two models. $\nu$-SVDD performed better on the test data, but c-SVDD was slightly better on the validation data. 
 \end{document}

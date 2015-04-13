@@ -3,11 +3,11 @@
 class1_train = load('../../Data/nonlinearlySeparable/class1_train.txt');
 class2_train = load('../../Data/nonlinearlySeparable/class2_train.txt');
 
-class1_val = load('../../Data/linearlySeparable/class1_val.txt');
-class2_val = load('../../Data/linearlySeparable/class2_val.txt');
+class1_val = load('../../Data/nonlinearlySeparable/class1_val.txt');
+class2_val = load('../../Data/nonlinearlySeparable/class2_val.txt');
 
-class1_test = load('../../Data/linearlySeparable/class1_test.txt');
-class2_test = load('../../Data/linearlySeparable/class2_test.txt');
+class1_test = load('../../Data/nonlinearlySeparable/class1_test.txt');
+class2_test = load('../../Data/nonlinearlySeparable/class2_test.txt');
 
 train = [class1_train; class2_train];
 target_train = [ones(length(class1_train),1); ones(length(class2_train),1)*2];

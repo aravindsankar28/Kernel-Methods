@@ -26,6 +26,7 @@ test = [class1_test;    class2_test ; class3_test;  class4_test ];
 target_test = [ones(length(class1_test),1); ones(length(class2_test),1)*(-1); ones(length(class3_test),1)*(-1);ones(length(class4_test),1)*(-1);];
 
 
+
 train_unscaled = train;
 val_unscaled = val;
 test_unscaled = test;
@@ -46,4 +47,15 @@ for i=1:size(train,2)
     val(:,i) = (val(:,i)-min_val)/(max_val-min_val);
     test(:,i) = (test(:,i)-min_val)/(max_val-min_val);
 end
+class1 = [class1_train;class1_test;class1_val];
 
+class2 = [class2_train;class2_test;class2_val];
+
+class3 = [class3_train;class3_test;class3_val];
+
+class4 = [class4_train;class4_test;class4_val];
+
+plot(class1(:,1),class1(:,2),'b*',class2(:,1),class2(:,2),'r*',class3(:,1),class3(:,2),'m*',class4(:,1),class4(:,2),'g*');
+title('bivariate 4 class data');
+xlabel('x');
+ylabel('y');
