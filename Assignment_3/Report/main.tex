@@ -125,6 +125,8 @@ The separating hyperplanes obtained were as follows (Support vectors as marked).
 \end{flushleft}
 
 
+The parameter of interest for $C$-SVM with linear kernel is cost parameter $C$. It was obtained by performing a grid search on the log scale and modifying the range of search when lowest MSEs were obtained at the borders.
+The best value of $C$ obtained was $C=0.5$. 
 
 
 \subsubsection{C-svm with Polynomial Kernel}
@@ -199,6 +201,9 @@ The support vectors obtained were as follows.
 \hline
 \end{tabular}
 \end{flushleft}
+
+The parameters of interest for $C$-SVM with polynomial kernel are cost parameter $C$, $\gamma$, $degree$, $coef$ in the polynomial kernel function $(\gamma*u'*v+coef)^{degree}$. They were obtained by performing a coarse grid search and modifying the range of search when lowest MSEs were obtained at the borders.
+The best values obtained were $C=8$, $\gamma=8$, $degree=3$, $coef=0$.
 
 
 \subsubsection{C-svm with Gaussian Kernel}
@@ -278,6 +283,9 @@ Kernel Gram matrix for Gaussian Kernel is as follows.
 \end{tabular}
 \end{flushleft}
 
+The parameters of interest for $C$-SVM with gaussian kernel are cost parameter $C$, $\gamma$ in the gaussian kernel function $e^{(-\gamma|u-v|^{2})}$. They were obtained by performing a coarse grid search in log scale and modifying the range of search when lowest MSEs were obtained at the borders.
+The best values obtained were $C=8$, $\gamma=8$.
+
 
 \subsubsection{$\nu$-svm with Gaussian Kernel}
 Decision Region obtained was as follows.
@@ -313,10 +321,12 @@ Support Vector Plots classwise.
   
 \end{subfigure}
 \end{figure}
-Kernel Gram matrix for Gaussian Kernel is as follows.
-\begin{center}
-\includegraphics[scale=1]{Classification/1a/nu_g/kgm}
-\end{center}
+
+%Kernel Gram matrix for Gaussian Kernel is as follows.
+%\begin{center}
+%\includegraphics[scale=1]{Classification/1a/nu_g/kgm}
+%\end{center}
+
 \begin{flushleft}
 \textbf{Confusion Matrix Train Data\\[5pt]}
 \begin{tabular}{|c|c|c|c|}
@@ -357,8 +367,13 @@ Kernel Gram matrix for Gaussian Kernel is as follows.
 \end{flushleft}
 
 
+The parameters of interest for $\nu$-SVM with gaussian kernel are parameter $\nu$(representing the lower and upper bound on the number of examples that are support vectors and that lie on the wrong side of the hyperplane respectively), $\gamma$ in the gaussian kernel function $e^{(-\gamma|u-v|^{2})}$. They were obtained by performing a coarse grid search and modifying the range of search when lowest MSEs were obtained at the borders.
+The best values obtained were $\nu=0.4$, $\gamma=8$.
 
+\underline{Comparision}:\\
+We observe that the test accuracy obtained are 98.5\%, 99.75\%, 100\% and 100\% for the linear, polynomial, $C$-gaussian, $\nu$-gaussian respectively. 
 
+For the linearly separable dataset, we observe that we obtain a block diagonal kernel gram matrix for Gaussian kernel such that the blocks along the grayscale image are white and non-diagonal blocks are almost black. This implies that in the kernel space, distance between points belonging to the same class is almost 0 and between different classes is high.
 
 
 \subsection{Dataset 1b - Nonlinearly Separable Data}
@@ -412,6 +427,9 @@ The support vectors obtained were as follows.
 \hline
 \end{tabular}
 \end{flushleft}
+
+The parameters of interest for $C$-SVM with polynomial kernel are cost parameter $C$, $\gamma$, $degree$, $coef$ in the polynomial kernel function $(\gamma*u'*v+coef)^{degree}$. They were obtained by performing a coarse grid search and modifying the range of search when lowest MSEs were obtained at the borders.
+The best values obtained were $C=8$, $\gamma=8$, $degree=5$, $coef=0$.
 
 
 \subsubsection{C-svm with Gaussian Kernel}
@@ -467,6 +485,8 @@ Kernel Gram matrix for Gaussian Kernel is as follows.
 \end{flushleft}
 
 
+The parameters of interest for $C$-SVM with gaussian kernel are cost parameter $C$, $\gamma$ in the gaussian kernel function $e^{(-\gamma|u-v|^{2})}$. They were obtained by performing a coarse grid search in log scale and modifying the range of search when lowest MSEs were obtained at the borders.
+The best values obtained were $C=8$, $\gamma=8$.
 
 
 
@@ -490,10 +510,10 @@ Support Vector Plots classwise.
 \end{subfigure}
 \end{figure}
 
-Kernel Gram matrix for Gaussian Kernel is as follows.
-\begin{center}
-\includegraphics[scale=1]{Classification/1b/nu_g/kgm}
-\end{center}
+%Kernel Gram matrix for Gaussian Kernel is as follows.
+%\begin{center}
+%\includegraphics[scale=1]{Classification/1b/nu_g/kgm}
+%\end{center}
 
 
 \begin{flushleft}
@@ -525,9 +545,13 @@ Kernel Gram matrix for Gaussian Kernel is as follows.
 
 
 
+The parameters of interest for $\nu$-SVM with gaussian kernel are parameter $\nu$(representing the lower and upper bound on the number of examples that are support vectors and that lie on the wrong side of the hyperplane respectively), $\gamma$ in the gaussian kernel function $e^{(-\gamma|u-v|^{2})}$. They were obtained by performing a coarse grid search and modifying the range of search when lowest MSEs were obtained at the borders.
+The best values obtained were $\nu=0.35$, $\gamma=8$.
 
+\underline{Comparision}:\\
+We observe that the test accuracy obtained are 86\%, 100\% and 100\% for the polynomial, $C$-gaussian, $\nu$-gaussian respectively.
 
-
+For the non-linearly separable dataset, we observe that the blocks along the diagonal in the kernel gram matrix image for Gaussian kernel are relatively whiter than the non-diagonal blocks, implying greater separability in the kernel space.
 
 
 \subsection{Dataset 1c - Overlapping Data}
@@ -607,6 +631,11 @@ The separating hyperplanes obtained were as follows (Support vectors as marked).
 \end{tabular}
 \end{flushleft}
 
+
+The parameter of interest for $C$-SVM with linear kernel is cost parameter $C$. It was obtained by performing a grid search on the log scale and modifying the range of search when lowest MSEs were obtained at the borders.
+The best value of $C$ obtained was $C=8$. 
+
+
 \subsubsection{C-svm with Polynomial Kernel}
 
 Decision Region obtained was as follows.
@@ -680,6 +709,9 @@ The support vectors obtained were as follows.
 \end{tabular}
 \end{flushleft}
 
+
+The parameters of interest for $C$-SVM with polynomial kernel are cost parameter $C$, $\gamma$, $degree$, $coef$ in the polynomial kernel function $(\gamma*u'*v+coef)^{degree}$. They were obtained by performing a coarse grid search and modifying the range of search when lowest MSEs were obtained at the borders.
+The best values obtained were $C=4$, $\gamma=8$, $degree=3$, $coef=0$.
 
 
 \subsubsection{C-svm with Gaussian Kernel}
@@ -760,6 +792,11 @@ Kernel Gram matrix for Gaussian Kernel is as follows.
 \end{flushleft}
 
 
+The parameters of interest for $C$-SVM with gaussian kernel are cost parameter $C$, $\gamma$ in the gaussian kernel function $e^{(-\gamma|u-v|^{2})}$. They were obtained by performing a coarse grid search in log scale and modifying the range of search when lowest MSEs were obtained at the borders.
+The best values obtained were $C=8$, $\gamma=8$.
+
+
+
 
 \subsubsection{$\nu$-svm with Gaussian Kernel}
 Decision Region obtained was as follows.
@@ -795,10 +832,12 @@ Support Vector Plots classwise.
   
 \end{subfigure}
 \end{figure}
-Kernel Gram matrix for Gaussian Kernel is as follows.
-\begin{center}
-\includegraphics[scale=1]{Classification/1c/nu_g/kgm}
-\end{center}
+
+%Kernel Gram matrix for Gaussian Kernel is as follows.
+%\begin{center}
+%\includegraphics[scale=1]{Classification/1c/nu_g/kgm}
+%\end{center}
+
 \begin{flushleft}
 \textbf{Confusion Matrix Train Data\\[5pt]}
 \begin{tabular}{|c|c|c|c|}
@@ -839,8 +878,16 @@ Kernel Gram matrix for Gaussian Kernel is as follows.
 \end{flushleft}
 
 
+The parameters of interest for $\nu$-SVM with gaussian kernel are parameter $\nu$(representing the lower and upper bound on the number of examples that are support vectors and that lie on the wrong side of the hyperplane respectively), $\gamma$ in the gaussian kernel function $e^{(-\gamma|u-v|^{2})}$. They were obtained by performing a coarse grid search and modifying the range of search when lowest MSEs were obtained at the borders.
+The best values obtained were $\nu=0.1$, $\gamma=2$.
+
+\underline{Comparision}:\\
+We observe that the test accuracy obtained are 88.75\%, 88.75\%, 89\% and 87.75\% for the linear, polynomial, $C$-gaussian, $\nu$-gaussian respectively. 
+
+For the overlapping dataset, we do observe that non-diagonal blocks in the kernel gram matrix image are similar in intensity to diagonal blocks since distance between points belonging to different classes is not large due to overlap.
 
 \subsection{Dataset 2 - Image Data}
+
 \subsubsection{C-svm with Gaussian Kernel}
 Kernel Gram matrix for Gaussian Kernel is as follows.
 \begin{center}
@@ -891,11 +938,15 @@ Kernel Gram matrix for Gaussian Kernel is as follows.
 \end{tabular}
 \end{flushleft}
 
+The parameters of interest for $C$-SVM with gaussian kernel are cost parameter $C$, $\gamma$ in the gaussian kernel function $e^{(-\gamma|u-v|^{2})}$. They were obtained by performing a coarse grid search in log scale and modifying the range of search when lowest MSEs were obtained at the borders.
+The best values obtained were $C=32$, $\gamma=32$.
+
+
 \subsubsection{$\nu$-svm with Gaussian Kernel}
-Kernel Gram matrix for Gaussian Kernel is as follows.
-\begin{center}
-\includegraphics[scale=1]{Classification/2/nu_g/kgm}
-\end{center}
+%Kernel Gram matrix for Gaussian Kernel is as follows.
+%\begin{center}
+%\includegraphics[scale=1]{Classification/2/nu_g/kgm}
+%\end{center}
 \begin{flushleft}
 \textbf{Confusion Matrix Train Data\\[5pt]}
 \begin{tabular}{|c|c|c|c|c|}
@@ -942,6 +993,11 @@ Kernel Gram matrix for Gaussian Kernel is as follows.
 \end{flushleft}
 
 
+The parameters of interest for $\nu$-SVM with gaussian kernel are parameter $\nu$(representing the lower and upper bound on the number of examples that are support vectors and that lie on the wrong side of the hyperplane respectively), $\gamma$ in the gaussian kernel function $e^{(-\gamma|u-v|^{2})}$. They were obtained by performing a coarse grid search and modifying the range of search when lowest MSEs were obtained at the borders.
+The best values obtained were $\nu=0.11$, $\gamma=32$.
+
+\underline{Comparision}:\\
+We observe that the test accuracy obtained are 73.22\% , 76.15\% and 74.9\% for the histogram intersection, $C$-gaussian, $\nu$-gaussian SVMs respectively. 
 
 
 
