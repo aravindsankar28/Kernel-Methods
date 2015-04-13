@@ -55,7 +55,7 @@ Application of C-SVDD and $\nu$-SVDD, taking any one class as positive, in the o
 
 Decision Region obtained was as follows.
 \begin{center}
-\includegraphics[scale=1]{Classification/1a/c_linear/dec}
+\includegraphics[scale=0.9]{Classification/1a/c_linear/dec}
 \end{center}
 
 
@@ -128,12 +128,12 @@ The separating hyperplanes obtained were as follows (Support vectors as marked).
 The parameter of interest for $C$-SVM with linear kernel is cost parameter $C$. It was obtained by performing a grid search on the log scale and modifying the range of search when lowest MSEs were obtained at the borders.
 The best value of $C$ obtained was $C=0.5$. 
 
-
+\newpage
 \subsubsection{C-svm with Polynomial Kernel}
 
 Decision Region obtained was as follows.
 \begin{center}
-\includegraphics[scale=1]{Classification/1a/c_poly/dec}
+\includegraphics[scale=0.8]{Classification/1a/c_poly/dec}
 \end{center}
 
 
@@ -164,6 +164,7 @@ The support vectors obtained were as follows.
 \end{subfigure}
 \end{figure}
 \begin{flushleft}
+\newpage
 \textbf{Confusion Matrix Train Data\\[5pt]}
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -209,8 +210,9 @@ The best values obtained were $C=8$, $\gamma=8$, $degree=3$, $coef=0$.
 \subsubsection{C-svm with Gaussian Kernel}
 Decision Region obtained was as follows.
 \begin{center}
-\includegraphics[scale=1]{Classification/1a/c_g/dec}
+\includegraphics[scale=0.8]{Classification/1a/c_g/dec}
 \end{center}
+\newpage
 Support Vector Plots classwise.
 \begin{figure}
 \begin{subfigure}{.5\textwidth}
@@ -242,9 +244,10 @@ Support Vector Plots classwise.
 \end{figure}
 Kernel Gram matrix for Gaussian Kernel is as follows.
 \begin{center}
-\includegraphics[scale=1]{Classification/1a/c_g/kgm}
+\includegraphics[scale=0.6]{Classification/1a/c_g/kgm}
 \end{center}
 \begin{flushleft}
+\newpage
 \textbf{Confusion Matrix Train Data\\[5pt]}
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -322,12 +325,13 @@ Support Vector Plots classwise.
 \end{subfigure}
 \end{figure}
 
-%Kernel Gram matrix for Gaussian Kernel is as follows.
-%\begin{center}
-%\includegraphics[scale=1]{Classification/1a/nu_g/kgm}
-%\end{center}
+Kernel Gram matrix for Gaussian Kernel is as follows.
+\begin{center}
+\includegraphics[scale=0.6]{Classification/1a/nu_g/kgm}
+\end{center}
 
 \begin{flushleft}
+\newpage
 \textbf{Confusion Matrix Train Data\\[5pt]}
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -370,12 +374,12 @@ Support Vector Plots classwise.
 The parameters of interest for $\nu$-SVM with gaussian kernel are parameter $\nu$(representing the lower and upper bound on the number of examples that are support vectors and that lie on the wrong side of the hyperplane respectively), $\gamma$ in the gaussian kernel function $e^{(-\gamma|u-v|^{2})}$. They were obtained by performing a coarse grid search and modifying the range of search when lowest MSEs were obtained at the borders.
 The best values obtained were $\nu=0.4$, $\gamma=8$.
 
-\underline{Comparision}:\\
+\subsubsection{Comparision}
 We observe that the test accuracy obtained are 98.5\%, 99.75\%, 100\% and 100\% for the linear, polynomial, $C$-gaussian, $\nu$-gaussian respectively. 
 
 For the linearly separable dataset, we observe that we obtain a block diagonal kernel gram matrix for Gaussian kernel such that the blocks along the grayscale image are white and non-diagonal blocks are almost black. This implies that in the kernel space, distance between points belonging to the same class is almost 0 and between different classes is high.
 
-
+\newpage
 \subsection{Dataset 1b - Nonlinearly Separable Data}
 
 
@@ -454,7 +458,7 @@ Support Vector Plots classwise.
 
 Kernel Gram matrix for Gaussian Kernel is as follows.
 \begin{center}
-\includegraphics[scale=1]{Classification/1b/c_g/kgm}
+\includegraphics[scale=0.6]{Classification/1b/c_g/kgm}
 \end{center}
 
 \begin{flushleft}
@@ -489,7 +493,7 @@ The parameters of interest for $C$-SVM with gaussian kernel are cost parameter $
 The best values obtained were $C=8$, $\gamma=8$.
 
 
-
+\newpage
 
 \subsubsection{$\nu$-svm with Gaussian Kernel}
 Decision Region obtained was as follows.
@@ -509,11 +513,11 @@ Support Vector Plots classwise.
   
 \end{subfigure}
 \end{figure}
-
-%Kernel Gram matrix for Gaussian Kernel is as follows.
-%\begin{center}
-%\includegraphics[scale=1]{Classification/1b/nu_g/kgm}
-%\end{center}
+\newpage
+Kernel Gram matrix for Gaussian Kernel is as follows.
+\begin{center}
+\includegraphics[scale=0.6]{Classification/1b/nu_g/kgm}
+\end{center}
 
 
 \begin{flushleft}
@@ -548,11 +552,11 @@ Support Vector Plots classwise.
 The parameters of interest for $\nu$-SVM with gaussian kernel are parameter $\nu$(representing the lower and upper bound on the number of examples that are support vectors and that lie on the wrong side of the hyperplane respectively), $\gamma$ in the gaussian kernel function $e^{(-\gamma|u-v|^{2})}$. They were obtained by performing a coarse grid search and modifying the range of search when lowest MSEs were obtained at the borders.
 The best values obtained were $\nu=0.35$, $\gamma=8$.
 
-\underline{Comparision}:\\
+\subsubsection{Comparision}
 We observe that the test accuracy obtained are 86\%, 100\% and 100\% for the polynomial, $C$-gaussian, $\nu$-gaussian respectively.
 
 For the non-linearly separable dataset, we observe that the blocks along the diagonal in the kernel gram matrix image for Gaussian kernel are relatively whiter than the non-diagonal blocks, implying greater separability in the kernel space.
-
+\newpage
 
 \subsection{Dataset 1c - Overlapping Data}
 
@@ -562,7 +566,7 @@ For the non-linearly separable dataset, we observe that the blocks along the dia
 
 Decision Region obtained was as follows.
 \begin{center}
-\includegraphics[scale=1]{Classification/1c/c_linear/dec}
+\includegraphics[scale=0.8]{Classification/1c/c_linear/dec}
 \end{center}
 
 
@@ -643,7 +647,7 @@ Decision Region obtained was as follows.
 \includegraphics[scale=1]{Classification/1c/c_poly/dec}
 \end{center}
 
-
+\newpage
 The support vectors obtained were as follows.
 \begin{figure}
 \begin{subfigure}{.5\textwidth}
@@ -713,11 +717,11 @@ The support vectors obtained were as follows.
 The parameters of interest for $C$-SVM with polynomial kernel are cost parameter $C$, $\gamma$, $degree$, $coef$ in the polynomial kernel function $(\gamma*u'*v+coef)^{degree}$. They were obtained by performing a coarse grid search and modifying the range of search when lowest MSEs were obtained at the borders.
 The best values obtained were $C=4$, $\gamma=8$, $degree=3$, $coef=0$.
 
-
+\newpage
 \subsubsection{C-svm with Gaussian Kernel}
 Decision Region obtained was as follows.
 \begin{center}
-\includegraphics[scale=1]{Classification/1c/c_g/dec}
+\includegraphics[scale=0.8]{Classification/1c/c_g/dec}
 \end{center}
 Support Vector Plots classwise.
 \begin{figure}
@@ -748,9 +752,10 @@ Support Vector Plots classwise.
   
 \end{subfigure}
 \end{figure}
+\newpage
 Kernel Gram matrix for Gaussian Kernel is as follows.
 \begin{center}
-\includegraphics[scale=1]{Classification/1c/c_g/kgm}
+\includegraphics[scale=0.6]{Classification/1c/c_g/kgm}
 \end{center}
 \begin{flushleft}
 \textbf{Confusion Matrix Train Data\\[5pt]}
@@ -796,12 +801,12 @@ The parameters of interest for $C$-SVM with gaussian kernel are cost parameter $
 The best values obtained were $C=8$, $\gamma=8$.
 
 
-
+\newpage
 
 \subsubsection{$\nu$-svm with Gaussian Kernel}
 Decision Region obtained was as follows.
 \begin{center}
-\includegraphics[scale=1]{Classification/1c/nu_g/dec}
+\includegraphics[scale=.8]{Classification/1c/nu_g/dec}
 \end{center}
 Support Vector Plots classwise.
 \begin{figure}
@@ -832,11 +837,11 @@ Support Vector Plots classwise.
   
 \end{subfigure}
 \end{figure}
-
-%Kernel Gram matrix for Gaussian Kernel is as follows.
-%\begin{center}
-%\includegraphics[scale=1]{Classification/1c/nu_g/kgm}
-%\end{center}
+\newpage
+Kernel Gram matrix for Gaussian Kernel is as follows.
+\begin{center}
+\includegraphics[scale=.6]{Classification/1c/nu_g/kgm}
+\end{center}
 
 \begin{flushleft}
 \textbf{Confusion Matrix Train Data\\[5pt]}
@@ -881,7 +886,7 @@ Support Vector Plots classwise.
 The parameters of interest for $\nu$-SVM with gaussian kernel are parameter $\nu$(representing the lower and upper bound on the number of examples that are support vectors and that lie on the wrong side of the hyperplane respectively), $\gamma$ in the gaussian kernel function $e^{(-\gamma|u-v|^{2})}$. They were obtained by performing a coarse grid search and modifying the range of search when lowest MSEs were obtained at the borders.
 The best values obtained were $\nu=0.1$, $\gamma=2$.
 
-\underline{Comparision}:\\
+\subsubsection{Comparision}
 We observe that the test accuracy obtained are 88.75\%, 88.75\%, 89\% and 87.75\% for the linear, polynomial, $C$-gaussian, $\nu$-gaussian respectively. 
 
 For the overlapping dataset, we do observe that non-diagonal blocks in the kernel gram matrix image are similar in intensity to diagonal blocks since distance between points belonging to different classes is not large due to overlap.
@@ -891,7 +896,7 @@ For the overlapping dataset, we do observe that non-diagonal blocks in the kerne
 \subsubsection{C-svm with Gaussian Kernel}
 Kernel Gram matrix for Gaussian Kernel is as follows.
 \begin{center}
-\includegraphics[scale=1]{Classification/2/c_g/kgm}
+\includegraphics[scale=.6]{Classification/2/c_g/kgm}
 \end{center}
 \begin{flushleft}
 \textbf{Confusion Matrix Train Data\\[5pt]}
@@ -943,10 +948,10 @@ The best values obtained were $C=32$, $\gamma=32$.
 
 
 \subsubsection{$\nu$-svm with Gaussian Kernel}
-%Kernel Gram matrix for Gaussian Kernel is as follows.
-%\begin{center}
-%\includegraphics[scale=1]{Classification/2/nu_g/kgm}
-%\end{center}
+Kernel Gram matrix for Gaussian Kernel is as follows.
+\begin{center}
+\includegraphics[scale=.6]{Classification/2/nu_g/kgm}
+\end{center}
 \begin{flushleft}
 \textbf{Confusion Matrix Train Data\\[5pt]}
 \begin{tabular}{|c|c|c|c|c|}
@@ -992,12 +997,61 @@ The best values obtained were $C=32$, $\gamma=32$.
 \end{tabular}
 \end{flushleft}
 
-
 The parameters of interest for $\nu$-SVM with gaussian kernel are parameter $\nu$(representing the lower and upper bound on the number of examples that are support vectors and that lie on the wrong side of the hyperplane respectively), $\gamma$ in the gaussian kernel function $e^{(-\gamma|u-v|^{2})}$. They were obtained by performing a coarse grid search and modifying the range of search when lowest MSEs were obtained at the borders.
 The best values obtained were $\nu=0.11$, $\gamma=32$.
 
-\underline{Comparision}:\\
-We observe that the test accuracy obtained are 73.22\% , 76.15\% and 74.9\% for the histogram intersection, $C$-gaussian, $\nu$-gaussian SVMs respectively. 
+\subsubsection{c-svm with Histogram Intersection Kernel}
+
+\begin{flushleft}
+\textbf{Confusion Matrix Train Data\\[5pt]}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+93 & 2 & 6 & 4 & 9 \\
+\hline
+2 & 56 & 4 & 5 & 21 \\
+\hline
+10 & 19 & 86 & 4 & 23\\
+\hline
+0 & 0 & 0 & 114 & 0\\
+\hline
+1 & 0 & 1 & 0 & 259 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Test Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+11 & 4 & 6 & 5 & 11\\
+\hline
+1 & 23 & 0 & 3 & 3 \\
+\hline
+4 & 8 & 18 & 6 & 12 \\
+\hline
+0 & 0 & 0 & 37 & 0 \\
+\hline
+0 & 0 & 1 & 0 & 86 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Validation Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+18 & 6 & 7 & 1 & 7 \\
+\hline
+3 & 17 & 3 & 1 & 5 \\
+\hline
+5 & 7 & 17 & 10 & 9 \\
+\hline
+0 & 0 & 0 & 39 & 0 \\
+\hline
+0 & 1 & 9 & 0 & 77 \\
+\hline
+\end{tabular}
+\end{flushleft}
+
+
+
+
+\subsubsection{Comparision}
+We observe that the test accuracy obtained are 73.22\% , 76.15\% and 74.9\% for the histogram intersection, $C$-gaussian, $\nu$-gaussian SVMs respectively. Both the gaussian SVMs show similar performance. For the gaussian kernel, from the kernel gram matrix we can observe, that the within class similarity of classes 1 and 2 is very poor. This makes them slightly harder to classify. Classes 4 and 5 show a more distinct change in shade at their boundaries. It can be seen from the confusion matrices that these are easier to classify correctly.
 
 
 
@@ -1018,22 +1072,22 @@ We observe that the test accuracy obtained are 73.22\% , 76.15\% and 74.9\% for 
 
 \subsection{Dataset 1: 1 dimensional curve fitting data}
 \begin{center}
-\includegraphics[scale=1]{Regression/univar}
+\includegraphics[scale=0.6]{Regression/univar}
 \end{center}
 Both $\epsilon$ and $\nu$-SVR with Gaussian Kernels were applied to this dataset.
 \subsubsection{$\epsilon$-SVR}
 The parameters of interest for $\epsilon$-SVR are $\epsilon$, The value of $\gamma$ in the radial basis function $e^{(-\gamma|u-v|^2)}$ and cost parameter c. They were obtained by performing a grid search on the log scale and changing/narrowing ranges when lowest MSEs were obtained at the borders.
 The best values obtained were $\epsilon$ = 0.0625, c = 4 and $\gamma$ = 16. Following are the corresponding plots.
 \begin{center}
-\includegraphics[scale=1]{Regression/mse}
+\includegraphics[scale=0.6]{Regression/mse}
 \end{center}
 The MSE shows a low value for small values of $\epsilon$ and then goes up for larger values. Having a large value of $\epsilon$ hurts the MSE since we have a wider tube and do not penalize high errors. However the minimum at $\epsilon$ = 0.0625 can be explained as the value for which the tube is sufficiently large to accommodate noise and obtain a good fit, and at the same time not permitting excessive error.
 \begin{center}
-\includegraphics[scale=1]{Regression/Plot_1}
+\includegraphics[scale=0.7]{Regression/Plot_1}
 \end{center}
 Clearly, the approximated function is very close to the true function. The next plot shows the variation with the noisy target outputs.
 \begin{center}
-\includegraphics[scale=1]{Regression/Plot_2}
+\includegraphics[scale=0.7]{Regression/Plot_2}
 \end{center}
 The plot below shows the Unbounded support vectors (the blue points) which lie on the $\epsilon$ tube and the Bounded ones outside.
 \begin{center}
@@ -1050,16 +1104,16 @@ The following are the scatter plots of target and model output. We can see that 
 \includegraphics[scale=0.6]{Regression/scatter_val}
 \end{center}
 
-
+\newpage
 \subsubsection{$\nu$-SVR}
 In case of a $\nu$-SVR we need to find the parameters $\nu$, c and $\gamma$, latter two being same as in the previous case. Again parameters were found by cross validation in a manner similar to the previous case. \\[5pt]
 The best values obtained were $\nu$ = 0.61, c = 16 and $\gamma$ = 16, and using these, $\epsilon$ obtained = 0.0576 which is similar to the previous best value. The purpose of $\nu$ is to tradeoff model complexity vs $\epsilon$ value. Following are the corresponding plots.
 \begin{center}
-\includegraphics[scale=1]{Regression/nu/mse}
+\includegraphics[scale=.7]{Regression/nu/mse}
 \end{center}
 The MSE values here are quite small since the best $\epsilon$ corresponding to each $\nu$ is implicit. A very high value of $\nu$ is restrictive to $\epsilon$, however a very low or 0 $\nu$ allows a choice of relatively large $\epsilon$ without sufficient penalization. Thus both high and very low values of $\nu$ perform poorly.
 \begin{center}
-\includegraphics[scale=1]{Regression/nu/Plot_1}
+\includegraphics[scale=.7]{Regression/nu/Plot_1}
 \end{center}
 Clearly, the approximated function is very close to the true function. The next plot shows the variation with the noisy target outputs.
 \begin{center}
@@ -1125,14 +1179,15 @@ The scatter plots corresponding to the above results are as follows.
 \begin{center}
 \includegraphics[scale=.6]{Regression/bivar/eps/scatter_val}
 \end{center}
+\newpage
 \subsubsection{$\nu$-SVR}
 In case of $\nu$-SVR applied to this data, the best parameter values obtained were c = 256, g = 0.0039 and nu = 0.61. The corresponding value of $\epsilon$ was 2.897. Following are the plots corresponding to this.
 \begin{center}
-\includegraphics[scale=1]{Regression/bivar/nu/mse}
+\includegraphics[scale=0.7]{Regression/bivar/nu/mse}
 \end{center}
 The minima can be seen at $\nu$ = 0.61 which was the chosen value.
 \begin{center}
-\includegraphics[scale=1]{Regression/bivar/nu/fun}
+\includegraphics[scale=0.7]{Regression/bivar/nu/fun}
 \end{center}
 The above shows the approximated function at the min MSE parameter values.
 \\[10pt]
@@ -1146,6 +1201,7 @@ Following are the plots of target and obtained results over the training, test a
 \begin{center}
 \includegraphics[scale=.6]{Regression/bivar/nu/plot_val}
 \end{center}
+\newpage
 The scatter plots corresponding to the above results are as follows.
 \begin{center}
 \includegraphics[scale=.6]{Regression/bivar/nu/scatter_train}
@@ -1156,7 +1212,7 @@ The scatter plots corresponding to the above results are as follows.
 \begin{center}
 \includegraphics[scale=.6]{Regression/bivar/nu/scatter_val}
 \end{center}
-
+\newpage
 \subsubsection{Comparison of methods for Dataset 2}
 The following were the final MSEs obtained on Dataset 2, for the test Dataset: \\[5pt]
 For the $\epsilon$-SVR method with the best parameters, MSE = 32.1259 \\
@@ -1191,7 +1247,7 @@ The above shows the unnormalized data, we have normalized it using Min-Max norma
 
 \subsubsection{c-SVDD}
 
-The parameters of interest here are c, the cost associated with the $\zeta$s and $\gamma$, the inverse of the scale factor in the gaussians. We found them in a manner similar to SVRs using grid search on log scale and narrowing the range using cross validation. Following are the corresponding plots. \\[10pt]
+The parameters of interest here are c, the cost associated with the $\zeta$s and $\gamma$, the inverse of the scale factor in the gaussians. We found them in a manner similar to SVRs using grid search on log scale and narrowing the range using cross validation. Following are the corresponding plots. Best c was 0.0625 and best $\gamma$ was 16.\\[10pt]
 Plot of bounded and unbounded support vectors is as follows.
 \begin{center}
 \includegraphics[scale=1]{SVDD/c/SV}
@@ -1230,7 +1286,7 @@ We notice that the number of false positives is higher and false negatives are l
 
 
 \subsubsection{$\nu$-SVDD}
-The parameters of interest here are $\nu$s and $\gamma$, the inverse of the scale factor in the gaussians. We have used a one class $\nu$-SVM to perform $\nu$-SVDD. The reason why we can do this is that the boundary that is obtained when a SMH is built over a normalized Gaussian Kernel, results in a linear decision boundary which is equivalent to that obtained by using one class $\nu$-SVM. \\[10pt]
+The parameters of interest here are $\nu$s and $\gamma$, the inverse of the scale factor in the gaussians. We have used a one class $\nu$-SVM to perform $\nu$-SVDD. The reason why we can do this is that the boundary that is obtained when a SMH is built over a normalized Gaussian Kernel, results in a linear decision boundary which is equivalent to that obtained by using one class $\nu$-SVM. Best $\nu$ was 0.17 and best $\gamma$ was 8.\\[10pt]
 Plot of bounded and unbounded support vectors is as follows.
 \begin{center}
 \includegraphics[scale=1]{SVDD/nu/SV}
@@ -1264,7 +1320,7 @@ Correctly classified = 89.83\%\\[10pt]
 
 \subsubsection{Comparison of c and $\nu$-SVDD for Bivariate Dataset}
 The final accuracy of both the methods is comparable (86\% and 87\% on the test data). However we notice that the percentage of false positives and false negatives is more balanced in the case of $\nu$-SVDD whereas false positives are significantly higher in case of c-SVDD. \\[5pt]$\nu$-SVDD does a better job of preventing overfitting to the training data. This can be seen from the fact that it does not do as well on the training data as c-SVDD but is slightly better everywhere else.
-
+\newpage
 \subsection{Multivariate Dataset}
 This dataset is 13 dimensional and has a total of 297 points which were split across train, test and validation datasets. 
 \subsubsection{c-SVDD} 
