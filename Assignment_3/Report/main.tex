@@ -37,7 +37,7 @@ Classification using C-SVM with Linear, Polynomial ,Gaussian and Histogram Inter
 \item \textbf{Regression} \\[5pt]
 Regression using $\epsilon$ and $\nu$-SVR, both using Gaussian kernels, for univariate and bivariate datasets. \\[10pt]
 \item \textbf{Novelty Detection}\\[5pt] 
-Application of C-SVDD and $\nu$-SVDD take any one class as positive, in the overlapping dataset and for Multivariate input data. \\[10pt]
+Application of C-SVDD and $\nu$-SVDD, taking any one class as positive, in the overlapping dataset and for Multivariate input data. \\[10pt]
 \end{itemize}
 
 
@@ -85,6 +85,47 @@ The separating hyperplanes obtained were as follows (Support vectors as marked).
   
 \end{subfigure}
 \end{figure}
+\begin{flushleft}
+\textbf{Confusion Matrix Train Data\\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+237 & 2 & 0 & 11 \\
+\hline
+0 & 250 & 0 & 0 \\
+\hline
+0 & 0 & 250 & 0 \\
+\hline
+0 & 0 & 0 & 250 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Test Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+94 & 1 & 0 & 5 \\
+\hline
+0 & 100 & 0 & 0 \\
+\hline
+0 & 0 & 100 & 0 \\
+\hline
+0 & 0 & 0 & 100 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Validation Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+144 & 0 & 0 & 6 \\
+\hline
+0 & 150 & 0 & 0 \\
+\hline
+0 & 0 & 150 & 0 \\
+\hline
+0 & 0 & 0 & 150 \\
+\hline
+\end{tabular}
+\end{flushleft}
+
+
+
 
 \subsubsection{C-svm with Polynomial Kernel}
 
@@ -120,6 +161,45 @@ The support vectors obtained were as follows.
   
 \end{subfigure}
 \end{figure}
+\begin{flushleft}
+\textbf{Confusion Matrix Train Data\\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+250 & 0 & 0 & 0 \\
+\hline
+0 & 250 & 0 & 0 \\
+\hline
+0 & 0 & 250 & 0 \\
+\hline
+0 & 0 & 0 & 250 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Test Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+100 & 0 & 0 & 0 \\
+\hline
+1 & 99 & 0 & 0 \\
+\hline
+0 & 0 & 100 & 0 \\
+\hline
+0 & 0 & 0 & 100 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Validation Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+150 & 0 & 0 & 0 \\
+\hline
+0 & 150 & 0 & 0 \\
+\hline
+0 & 0 & 150 & 0 \\
+\hline
+0 & 0 & 0 & 150 \\
+\hline
+\end{tabular}
+\end{flushleft}
+
 
 \subsubsection{C-svm with Gaussian Kernel}
 Decision Region obtained was as follows.
@@ -161,7 +241,7 @@ Kernel Gram matrix for Gaussian Kernel is as follows.
 \end{center}
 \begin{flushleft}
 \textbf{Confusion Matrix Train Data\\[5pt]}
-\begin{tabular}{|c|c|}
+\begin{tabular}{|c|c|c|c|}
 \hline
 250 & 0 & 0 & 0 \\
 \hline
@@ -173,19 +253,27 @@ Kernel Gram matrix for Gaussian Kernel is as follows.
 \hline
 \end{tabular}
 \textbf{\\[10pt] Confusion Matrix Test Data \\[5pt]}
-\begin{tabular}{|c|c|}
+\begin{tabular}{|c|c|c|c|}
 \hline
-60 & 0 \\
+100 & 0 & 0 & 0 \\
 \hline
-0 & 240\\
+0 & 100 & 0 & 0 \\
+\hline
+0 & 0 & 100 & 0 \\
+\hline
+0 & 0 & 0 & 100 \\
 \hline
 \end{tabular}
 \textbf{\\[10pt] Confusion Matrix Validation Data \\[5pt]}
-\begin{tabular}{|c|c|}
+\begin{tabular}{|c|c|c|c|}
 \hline
-90 & 0 \\
+150 & 0 & 0 & 0 \\
 \hline
-0 & 360\\
+0 & 150 & 0 & 0 \\
+\hline
+0 & 0 & 150 & 0 \\
+\hline
+0 & 0 & 0 & 150 \\
 \hline
 \end{tabular}
 \end{flushleft}
@@ -229,7 +317,44 @@ Kernel Gram matrix for Gaussian Kernel is as follows.
 \begin{center}
 \includegraphics[scale=1]{Classification/1a/nu_g/kgm}
 \end{center}
-
+\begin{flushleft}
+\textbf{Confusion Matrix Train Data\\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+249 & 1 & 0 & 0 \\
+\hline
+0 & 250 & 0 & 0 \\
+\hline
+0 & 0 & 250 & 0 \\
+\hline
+0 & 0 & 0 & 250 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Test Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+100 & 0 & 0 & 0 \\
+\hline
+0 & 100 & 0 & 0 \\
+\hline
+0 & 0 & 100 & 0 \\
+\hline
+0 & 0 & 0 & 100 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Validation Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+150 & 0 & 0 & 0 \\
+\hline
+0 & 150 & 0 & 0 \\
+\hline
+0 & 0 & 150 & 0 \\
+\hline
+0 & 0 & 0 & 150 \\
+\hline
+\end{tabular}
+\end{flushleft}
 
 
 
@@ -443,6 +568,44 @@ The separating hyperplanes obtained were as follows (Support vectors as marked).
   
 \end{subfigure}
 \end{figure}
+\begin{flushleft}
+\textbf{Confusion Matrix Train Data\\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+209 & 7 & 7 & 17 \\
+\hline
+6 & 234 & 6 & 4 \\
+\hline
+27 & 3 & 220 & 0 \\
+\hline
+1 & 10 & 0 & 239 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Test Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+82 & 1 & 5 & 12 \\
+\hline
+5 & 88 & 4 & 3 \\
+\hline
+13 & 2 & 85 & 0 \\
+\hline
+0 & 0 & 0 & 100 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Validation Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+115 & 3 & 7 & 25 \\
+\hline
+5 & 133 & 8 & 4 \\
+\hline
+16 & 3 & 131 & 0 \\
+\hline
+0 & 5 & 0 & 145 \\
+\hline
+\end{tabular}
+\end{flushleft}
 
 \subsubsection{C-svm with Polynomial Kernel}
 
@@ -478,6 +641,46 @@ The support vectors obtained were as follows.
   
 \end{subfigure}
 \end{figure}
+\begin{flushleft}
+\textbf{Confusion Matrix Train Data\\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+221 & 9 & 13 & 7 \\
+\hline
+8 & 239 & 2 & 1 \\
+\hline
+28 & 3 & 219 & 0 \\
+\hline
+4 & 5 & 0 & 241 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Test Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+92 & 2 & 4 & 2 \\
+\hline
+9 & 86 & 4 & 1 \\
+\hline
+17 & 4 & 79 & 0 \\
+\hline
+2 & 0 & 0 & 98 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Validation Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+136 & 1 & 5 & 8 \\
+\hline
+8 & 137 & 3 & 2 \\
+\hline
+16 & 1 & 133 & 0 \\
+\hline
+8 & 2 & 0 & 140 \\
+\hline
+\end{tabular}
+\end{flushleft}
+
+
 
 \subsubsection{C-svm with Gaussian Kernel}
 Decision Region obtained was as follows.
@@ -517,6 +720,46 @@ Kernel Gram matrix for Gaussian Kernel is as follows.
 \begin{center}
 \includegraphics[scale=1]{Classification/1c/c_g/kgm}
 \end{center}
+\begin{flushleft}
+\textbf{Confusion Matrix Train Data\\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+216 & 9 & 18 & 7 \\
+\hline
+9 & 236 & 4 & 1 \\
+\hline
+24 & 1 & 225 & 0 \\
+\hline
+1 & 5 & 0 & 244 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Test Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+94 & 1 & 0 & 5 \\
+\hline
+0 & 100 & 0 & 0 \\
+\hline
+0 & 0 & 100 & 0 \\
+\hline
+0 & 0 & 0 & 100 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Validation Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+132 & 4 & 7 & 7 \\
+\hline
+7 & 139 & 2 & 2 \\
+\hline
+13 & 1 & 136 & 0 \\
+\hline
+4 & 5 & 0 & 141 \\
+\hline
+\end{tabular}
+\end{flushleft}
+
+
 
 \subsubsection{$\nu$-svm with Gaussian Kernel}
 Decision Region obtained was as follows.
@@ -556,6 +799,159 @@ Kernel Gram matrix for Gaussian Kernel is as follows.
 \begin{center}
 \includegraphics[scale=1]{Classification/1c/nu_g/kgm}
 \end{center}
+\begin{flushleft}
+\textbf{Confusion Matrix Train Data\\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+200 & 16 & 27 & 7 \\
+\hline
+5 & 243 & 1 & 1 \\
+\hline
+23 & 2 & 225 & 0 \\
+\hline
+5 & 8 & 0 & 237 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Test Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+78 & 5 & 11 & 6 \\
+\hline
+3 & 91 & 4 & 2 \\
+\hline
+13 & 4 & 83 & 0 \\
+\hline
+1 & 0 & 0 & 99 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Validation Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|}
+\hline
+117 & 12 & 13 & 8 \\
+\hline
+3 & 143 & 3 & 1 \\
+\hline
+11 & 1 & 138 & 0 \\
+\hline
+2 & 5 & 0 & 143 \\
+\hline
+\end{tabular}
+\end{flushleft}
+
+
+
+\subsection{Dataset 2 - Image Data}
+\subsubsection{C-svm with Gaussian Kernel}
+Kernel Gram matrix for Gaussian Kernel is as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/2/c_g/kgm}
+\end{center}
+\begin{flushleft}
+\textbf{Confusion Matrix Train Data\\[5pt]}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+113 & 0 & 1 & 0 & 0 \\
+\hline
+0 & 84 & 1 & 3 & 0 \\
+\hline
+1 & 4 & 137 & 0 & 0\\
+\hline
+0 & 0 & 0 & 114 & 0\\
+\hline
+0 & 0 & 0 & 0 & 261 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Test Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+22 & 5 & 4 & 1 & 5\\
+\hline
+1 & 22 & 6 & 1 & 0 \\
+\hline
+13 & 6 & 18 & 0 & 11 \\
+\hline
+0 & 0 & 0 & 37 & 0 \\
+\hline
+1 & 2 & 1 & 0 & 83 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Validation Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+27 & 3 & 7 & 0 & 2 \\
+\hline
+7 & 18 & 4 & 0 & 0 \\
+\hline
+12 & 1 & 27 & 3 & 5 \\
+\hline
+0 & 0 & 0 & 39 & 0 \\
+\hline
+0 & 2 & 8 & 0 & 77 \\
+\hline
+\end{tabular}
+\end{flushleft}
+
+\subsubsection{$\nu$-svm with Gaussian Kernel}
+Kernel Gram matrix for Gaussian Kernel is as follows.
+\begin{center}
+\includegraphics[scale=1]{Classification/2/nu_g/kgm}
+\end{center}
+\begin{flushleft}
+\textbf{Confusion Matrix Train Data\\[5pt]}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+111 & 0 & 0 & 3 & 0 \\
+\hline
+0 & 81 & 1 & 4 & 2 \\
+\hline
+1 & 6 & 133 & 0 & 2\\
+\hline
+0 & 0 & 0 & 114 & 0\\
+\hline
+0 & 0 & 0 & 0 & 261 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Test Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+21 & 2 & 5 & 3 & 6\\
+\hline
+2 & 21 & 4 & 2 & 1 \\
+\hline
+12 & 6 & 16 & 3 & 11 \\
+\hline
+0 & 0 & 0 & 37 & 0 \\
+\hline
+0 & 2 & 1 & 0 & 84 \\
+\hline
+\end{tabular}
+\textbf{\\[10pt] Confusion Matrix Validation Data \\[5pt]}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+25 & 3 & 7 & 1 & 3 \\
+\hline
+7 & 17 & 5 & 0 & 0 \\
+\hline
+11 & 0 & 25 & 5 & 7 \\
+\hline
+0 & 0 & 0 & 39 & 0 \\
+\hline
+1 & 0 & 6 & 0 & 80 \\
+\hline
+\end{tabular}
+\end{flushleft}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
