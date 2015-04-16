@@ -197,4 +197,4 @@ hold on;
 scatter(train_unscaled(ubsv_indices,1),train_unscaled(ubsv_indices,2),'b.');
 hold on;
 title('Plot of bounded and unbounded support vectors');
-legend('Training data points','Bounded SV vectors','Unbounded SV vectors');
+legend('Unbounded SV vectors','Training data points','Bounded SV vectors');

@@ -44,7 +44,7 @@ C_test
 % Decision region plot for training data
 xrange = [-2 2];
 yrange = [-2 2];
-inc = 0.1;
+inc = 0.05;
 [x, y] = meshgrid(xrange(1):inc:xrange(2), yrange(1):inc:yrange(2)); 
 image_size = size(x); 
 xy = [x(:) y(:)]; % make (x,y) pairs as a bunch of row vectors.
@@ -74,7 +74,7 @@ title('Decision region plot');
 
 % Plotting support vectors
 
-for i = 1:2
+for i = 1:1
     sv_indices = [model.models{i}.sv_indices model.models{i}.sv_coef];
     idx_vector = (sv_indices(:,2) == -best_C) + (sv_indices(:,2) == best_C);
     bsv_indices = sv_indices(find(idx_vector)); % Find non-zero indices

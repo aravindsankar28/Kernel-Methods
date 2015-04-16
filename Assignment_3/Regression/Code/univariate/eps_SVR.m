@@ -12,7 +12,7 @@ mse_val_eps = zeros(10,1);
 mse_test_eps = zeros(10,1);
 
 i = 1;
-for log2p = -8:1:1
+for log2p = -3:1:-3
     
     local_best_cv = Inf;
     local_best_C = 0;

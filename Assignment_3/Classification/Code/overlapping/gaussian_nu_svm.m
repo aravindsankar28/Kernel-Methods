@@ -3,12 +3,12 @@ load_data
 
 % Cross-validation to identify best C, g
 bestcv = 0;
-for nu = 0.05:0.05:0.5,
+for nu = 0.01:0.01:0.2,
     for log2g = -3:1:3,
         cmd = ['-q -s 1 -t 2 -n ',num2str(nu),' -g ',num2str(2^log2g)];
         model = ovrtrain(target_train,train,cmd);
         [pred ac decv] = ovrpredict(target_val, val, model);
-        if (ac >= bestcv),
+        if (ac > bestcv),
           bestcv = ac; best_nu = nu; best_g = 2^log2g; 
         end
         fprintf('nu=%g log2g=%g acc=%g (best nu=%g, g=%g, acc=%g)\n', nu, log2g, ac, best_nu, best_g, bestcv);

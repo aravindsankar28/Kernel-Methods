@@ -3,22 +3,24 @@ load_data
 
 % Cross-validation to identify best C, g, degree
 bestcv = 0;
-for degree = 6:1:8,
-   for log2c = -3:1:3,
-       for log2g = -3:1:3,
-           cmd = ['-q -s 0 -t 1 -c ',num2str(2^log2c),' -g ',num2str(2^log2g),' -d ',num2str(degree)];
-           model = ovrtrain(target_train,train,cmd);
-           [pred ac decv] = ovrpredict(target_val, val, model);
-           if (ac >= bestcv),
-             bestcv = ac; best_C = 2^log2c; best_degree = degree; best_g = 2^log2g; 
+for degree = 2:1:2
+   for r  = -1:1:10
+       for log2c = -3:1:3
+           for log2g = -3:1:3,
+               cmd = ['-q -s 0 -t 1 -c ',num2str(2^log2c),' -g ',num2str(2^log2g),' -d ',num2str(degree), ' -r ',num2str(r)];
+               model = ovrtrain(target_train,train,cmd);
+               [pred ac decv] = ovrpredict(target_val, val, model);
+               if (ac >= bestcv),
+                 bestcv = ac; best_C = 2^log2c; best_degree = degree; best_g = 2^log2g; best_r = r;
+               end
+               fprintf('deg=%g log2c=%g log2g=%g acc=%g (best degree=%g, C=%g, g=%g, acc=%g)\n', degree, log2c, log2g, ac, best_degree, best_C, best_g, bestcv);
            end
-           fprintf('deg=%g log2c=%g log2g=%g acc=%g (best degree=%g, C=%g, g=%g, acc=%g)\n', degree, log2c, log2g, ac, best_degree, best_C, best_g, bestcv);
        end
    end
 end
 
 % Final model train
-cmd = ['-s 0 -t 1 -c ',num2str(best_C),' -g ',num2str(best_g),' -d ',num2str(best_degree)];
+cmd = ['-s 0 -t 1 -c ',num2str(best_C),' -g ',num2str(best_g),' -d ',num2str(best_degree), ' -r ',num2str(best_r)];
 model = ovrtrain(target_train,train,cmd);
 
 % Testing
@@ -45,7 +47,7 @@ C_test
 % Decision region plot for training data
 xrange = [-2 2];
 yrange = [-2 2];
-inc = 0.1;
+inc = 0.05;
 [x, y] = meshgrid(xrange(1):inc:xrange(2), yrange(1):inc:yrange(2)); 
 image_size = size(x); 
 xy = [x(:) y(:)]; % make (x,y) pairs as a bunch of row vectors.
@@ -75,7 +77,7 @@ title('Decision region plot');
 
 % Plotting support vectors
 
-for i = 1:2
+for i = 1:1
     sv_indices = [model.models{i}.sv_indices model.models{i}.sv_coef];
     idx_vector = (sv_indices(:,2) == -best_C) + (sv_indices(:,2) == best_C);
     bsv_indices = sv_indices(find(idx_vector)); % Find non-zero indices

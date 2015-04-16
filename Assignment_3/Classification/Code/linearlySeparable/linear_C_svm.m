@@ -3,7 +3,7 @@ load_data
 
 % Cross-validation to identify best C
 bestcv = 0;
-for log2c = -1:2:3,
+for log2c = 4:1:6,
    cmd = ['-q -s 0 -t 0 -c ',num2str(2^log2c)];
    model = ovrtrain(target_train,train,cmd);
    [pred ac decv] = ovrpredict(target_val, val, model);
@@ -102,7 +102,7 @@ for i = 1:4
     positive_indices = remaining_indices(find(remaining_labels == i));
     negative_indices = remaining_indices(find(~(remaining_labels == i)));
     
-    plot(train(positive_indices,1),train(positive_indices,2),'b*');
+    plot(train(positive_indices,1),train(positive_indices,2),'y*');
     hold on;
    
     plot(train(negative_indices,1),train(negative_indices,2),'c*');
@@ -111,9 +111,9 @@ for i = 1:4
     plot(plot_x,plot_y,'k-','LineWidth',1);
     hold on;
     
-    plot(plot_x,plot_1,'y-','LineWidth',0.5);
+    plot(plot_x,plot_1,'m-','LineWidth',0.5);
     hold on;
-    plot(plot_x,plot_2,'y-','LineWidth',0.5);
+    plot(plot_x,plot_2,'m-','LineWidth',0.5);
     
     a = xlabel('$x_1$');
     b = ylabel('$x_2$');
